@@ -1,13 +1,13 @@
 # Wollok Game: Título de juego
 
-**Grupo:** Nombre de Grupo
+**Grupo:** Gordos compu
 
 **Integrantes:**
-- Nombre y Apellido
-- Nombre y Apellido
-- Nombre y Apellido
-- Nombre y Apellido
-- Nombre y Apellido
+- Matias Ferrari Mazzeo
+- Ramiro Agustin Albornoz 
+- Hanz Alex Winkler
+- Luca Salviani 
+- Ayelen Samarra
 
 ## Consignas
 
