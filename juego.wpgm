@@ -1,13 +1,7 @@
 import wollok.game.*
-import example.*
+import gameConfiguration.*
 
 program NombreDeJuego {
-	// TODO: Cambiar esto por lo que necesiten
-	game.title("Grupo: ... | Nombre de jueguito")
-	game.height(10)
-	game.width(10)
-
-	game.addVisual(player)
-
+	config.configurarJuego()
 	game.start()
 }
