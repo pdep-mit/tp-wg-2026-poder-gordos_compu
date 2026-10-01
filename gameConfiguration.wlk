@@ -10,14 +10,10 @@ import sarten.*
 import tablaDeCortar.*
 
 
-
-
-
-
 object config {
   method alturaMaxima() = 10 
   method anchoMaximo() = 10
-
+  
 method configurarJuego(){
 		self.configurarVentana()
         self.agregarVisuales()
@@ -30,6 +26,7 @@ method configurarJuego(){
 		game.height(self.alturaMaxima())
 		game.width(self.anchoMaximo())
 		game.boardGround("")
+    
 	}
 
     method agregarVisuales(){
