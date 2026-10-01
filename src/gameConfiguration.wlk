@@ -22,6 +22,7 @@ method configurarJuego(){
 		self.configurarVentana()
         self.agregarVisuales()
         self.configurarColisiones()
+        self.configurarParrilla()
         //agregar aca todo lo que sea necesario para iniciar el juego 
     }
 
@@ -33,12 +34,17 @@ method configurarJuego(){
 		game.boardGround("...")
 	}
 
-    method agregarVisuales(){
+  method agregarVisuales(){
     //agregar aca todo lo que sea visual y que tenga que estar visible 
     //sea la parrilla, el asador, etc. 
-    }
+  }
 
-    method configurarColisiones(){
+  method configurarColisiones(){
         //agregar coliciones del tipo, carne con parrilla, el asador con las esquinas, el asador con los items etc ...  
 	}
+
+  //le dice a la parrilla que cocine la carne cada 1 segundo 
+  method configurarParrilla(){
+    game.onTick(1000, "CocinarCarne", {parrilla.asar()})
+  }
 }
