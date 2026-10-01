@@ -31,10 +31,11 @@ method configurarJuego(){
 		game.height(self.alturaMaxima())
 		game.width(self.anchoMaximo())
     game.cellSize(48) //tamanio de las celdas 
-		game.boardGround("...")
+		//game.boardGround("nombreDeImagen.png") //descomentar cuando tengamos una imagen de fondo
 	}
 
   method agregarVisuales(){
+    game.addVisual(parrilla)
     //agregar aca todo lo que sea visual y que tenga que estar visible 
     //sea la parrilla, el asador, etc. 
   }
