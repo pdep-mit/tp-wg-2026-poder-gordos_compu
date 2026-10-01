@@ -21,3 +21,7 @@ class Hermanos {
 class Hermana{
     
 }
+
+class Amigo {
+    
+}
