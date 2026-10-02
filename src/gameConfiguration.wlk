@@ -11,9 +11,9 @@ import tablaDeCortar.*
 
 
 object config {
-  method alturaMaxima() = 10 
-  method anchoMaximo() = 10
-  
+  method alturaMaxima() = 960
+  method anchoMaximo() = 576
+
 method configurarJuego(){
 		self.configurarVentana()
         self.agregarVisuales()
@@ -22,11 +22,11 @@ method configurarJuego(){
     }
 
   method configurarVentana(){
-		game.title("Grupo: ... | Nombre de jueguito")
+		game.title("Grupo: GordosCompu | Nombre de jueguito")
 		game.height(self.alturaMaxima())
 		game.width(self.anchoMaximo())
-		game.boardGround("")
-    
+    game.cellSize(1) //tamanio de las celdas 
+		game.boardGround("image.png")
 	}
 
     method agregarVisuales(){
