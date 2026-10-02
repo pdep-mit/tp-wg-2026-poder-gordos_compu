@@ -5,18 +5,35 @@ import carnes.*
 object parrilla {
 const property position = game.at(2,2)
 
+//contador para la animacion de la parrilla
+var contador = 0 
+const cantidadFrames = 8
+
 //func: la parrilla solo puede tener una unica carne a la vez
 //el fuego puede tener tres estados, 0 apagado, 1, poca llama, 2 media y 3 fuerte (se hace mas rapido pero se puede quemar)
 //el fuego es un objeto que tiene un calor especifico 
-var property fuego = apagado 
+var property fuego = fuerte
 var property carneActual = noCarne 
 
 
-method image() = "parrilla_apagada.png"
+method image() = fuego.imagenParrilla(contador)
 
+//absolute cinema -- la parrilla "asa" cada 1 segundo pero dependiendo del fuego se cocinara mas lento o mas rapido 
 method asar() = carneActual.cocinar(fuego.calor())
 
+method ponerCarne(carne) {
+  carneActual = carne
+  //aca no estoy seguro si deberiamos tener un dibujo de cada tipo de carne en la parrilla, o si se puede literalmente apoyar la carne arriba 
+} 
 
+method sacarCarne(){
+  carneActual = noCarne
+}
+
+method siguienteAnimacion(){
+  //truquito para hacer un ciclo de 0 a 7 -- preguntar si se puede hacer mejor (en la documentacion no explica mucho)
+  contador = (contador + 1) % cantidadFrames
+}
 
 //... mas cosas
 }
@@ -24,16 +41,45 @@ method asar() = carneActual.cocinar(fuego.calor())
 //el calor son puntos de coccion 
 object apagado {
   method calor() = 0
+
+  method imagenParrilla(contador) = "parrilla_apagada.png"
+
+
+  method anterior() = self
+
+  method siguiente() = bajo 
+
 }
 
+//esto del contador seguro se puede mejorar o todo el sistema de fuego se puede mejorar -- preguntar en clase del miercoles 
 object bajo {
   method calor() = 1
+
+  method imagenParrilla(contador) = "parrilla_bajo_" + contador + ".png"
+
+  method anterior() = apagado
+  
+  method siguiente() = medio
+
 }
 
 object medio {
   method calor() = 2 
+
+  method imagenParrilla(contador) = "parrilla_medio_" + contador + ".png"
+
+  method anterior() = bajo
+  
+  method siguiente() = fuerte
 }
 
 object fuerte {
   method calor() = 3
+
+  method imagenParrilla(contador) = "parrilla_alto_" + contador + ".png" 
+
+   method anterior() = medio
+  
+  method siguiente() = self
+
 }

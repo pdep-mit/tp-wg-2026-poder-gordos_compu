@@ -10,19 +10,19 @@ import sarten.*
 import tablaDeCortar.*
 
 
-
-
-
-
 object config {
   method alturaMaxima() = 12 
   method anchoMaximo() = 20
+  //el tiempo que pasa para que el fuego cambie de estado (fuerte -> medio -> bajo) esta en 20s para mi es poco
+  method tiempoCambioFuego() = 20000
 
 method configurarJuego(){
 		self.configurarVentana()
         self.agregarVisuales()
         self.configurarColisiones()
         self.configurarParrilla()
+        self.configurarFuego()
+        self.configurarAnimacionParrilla()
         //agregar aca todo lo que sea necesario para iniciar el juego 
     }
 
@@ -46,6 +46,15 @@ method configurarJuego(){
 
   //le dice a la parrilla que cocine la carne cada 1 segundo 
   method configurarParrilla(){
-    game.onTick(1000, "CocinarCarne", {parrilla.asar()})
+    game.onTick(1000, "cocinarCarne", {parrilla.asar()})
+  }
+
+  //cada x segundos le dice a la parrilla que se apague un poco, va al fuego anterior
+  method configurarFuego() {
+    game.onTick( self.tiempoCambioFuego(),"cambioFuego", {parrilla.fuego(parrilla.fuego().anterior())})
+  }
+
+  method configurarAnimacionParrilla(){
+    game.onTick(300, "animacionFuego",{parrilla.siguienteAnimacion()})
   }
 }

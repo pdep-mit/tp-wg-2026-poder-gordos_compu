@@ -19,6 +19,10 @@ class Asado {
 
   //esto de las imagenes seguro que se puede mejorar -- preguntar en clase jeje
 
+
+  //seria el tiempo que le damos de chance para que evite que se queme 
+  method tiempoDeOnda() = 4
+
   method image() = imagenActual
 
   method imagenCocida() {
@@ -32,14 +36,17 @@ class Asado {
   }
 
   //da 4 puntos de coccion de chance para que la vayas a sacar (si el fuego esta fuerte seria un solo segundo - tal vez hay que dar un poco mas)
-  method seQuemo() = tiempoParrilla > tiempoCoccion + 4
+  method seQuemo() = tiempoParrilla > tiempoCoccion + self.tiempoDeOnda()
 
   method cocinar(calor) {
     tiempoParrilla += calor
 
+    //se podria agregar un objeto que sea como barra de coccion que tenga tres estados o algo asi para ver el progreso 
+
     if(tiempoParrilla >= tiempoCoccion) {
       cocido = true
       self.imagenCocida()
+      //deberia de avisar que se cocino y dar una alerta para que no c queme 
     }
     if(self.seQuemo()){
       self.imagenQuemada()
