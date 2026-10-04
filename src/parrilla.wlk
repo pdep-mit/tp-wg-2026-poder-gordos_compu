@@ -35,6 +35,13 @@ method siguienteAnimacion(){
   contador = (contador + 1) % cantidadFrames
 }
 
+//puede que este metodo le pertenezca al asadoe 
+method avivar(){
+  //deberia tardar un toque en avivar el fuego que no sea instantaneo tal vez resetear el contador
+  //tambien debeiria resetear el tiempo en el que se apaga el fuego un poco 
+  fuego = fuego.siguiente()
+}
+
 //... mas cosas
 }
 

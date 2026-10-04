@@ -1,4 +1,5 @@
 import wollok.game.*
+import asador.*
 
 /* class Carne {
   var property timpo 
@@ -11,16 +12,25 @@ import wollok.game.*
 
 class Asado {
   //el tiempo que pasa en la parrilla en puntos de coccion 
-  var  tiempoParrilla = 0 
-  const  tiempoCoccion = 16 // en puntos de coccion
-  var imagenActual = "imagen de la carne cruda"
+  var tiempoParrilla = 0 
+  const tiempoCoccion = 16 // en puntos de coccion
+  var imagenActual = "asado_crudo.png"
   //esto x ahora no tiene mucho sentido pero si hacemos que la carne tenga puntos de coccion va a importar
   var cocido = false 
+  //la posicion de la carne va a depender de la posicion del asador
+  var property position = game.at(2,2)
+
+  //deberia preguntarle al asador para donde esta mirando y luego devolver la posicion uno mas arriba, abajo, a la izquierda o derecha
+  //pero primero deberia de tener una posicion inicial de donde saca la carne, le deberia pregunar rambien al coso que suministra la carne a ver donde esta
+  //lo ultimo en caso de que no lo hayan agarrado 
+  method calcularPosicion(){
+    
+  }
 
   //esto de las imagenes seguro que se puede mejorar -- preguntar en clase jeje
 
 
-  //seria el tiempo que le damos de chance para que evite que se queme 
+  //seria el tiempo (o puntos de coccion) que le damos de chance para que evite que se queme 
   method tiempoDeOnda() = 4
 
   method image() = imagenActual
