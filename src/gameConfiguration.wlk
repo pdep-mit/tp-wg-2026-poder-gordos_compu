@@ -16,6 +16,10 @@ object config {
   //el tiempo que pasa para que el fuego cambie de estado (fuerte -> medio -> bajo) esta en 20s para mi es poco
   method tiempoCambioFuego() = 20000
 
+  //asado de prueba
+  const unAsado = new Asado()
+
+
 method configurarJuego(){
 		self.configurarVentana()
         self.agregarVisuales()
@@ -36,6 +40,7 @@ method configurarJuego(){
 
   method agregarVisuales(){
     game.addVisual(parrilla)
+    game.addVisual(unAsado)
     //agregar aca todo lo que sea visual y que tenga que estar visible 
     //sea la parrilla, el asador, etc. 
   }

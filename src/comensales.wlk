@@ -23,5 +23,5 @@ class Hermana{
 }
 
 class Amigo {
-    
+    //para este tengo un pedido que si le dan una carne quemada diga "uhhhhh una mantequita amigo, (sonidos de la carne mas dura q comiste en tu vida)"
 }
