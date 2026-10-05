@@ -76,7 +76,14 @@ class Lomo {
 }
 
 class Chorizo{
+    const property position = game.at(5,5)
+    var imagenActual = "Chori_Cocido_0.png"
 
+    method image() = imagenActual
+
+    method cortar() {
+      
+    }
 }
 
 class Morcilla {
