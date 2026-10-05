@@ -9,6 +9,8 @@ import cosoParaAgarrarMP.*
 import sarten.*
 import tablaDeCortar.*
 
+//Copiadisimo de hallowen
+import movimientos.*
 
 object config {
   method alturaMaxima() = 12 
@@ -19,6 +21,8 @@ object config {
   //asado de prueba
   const unAsado = new Asado()
   const unChori = new Chorizo()
+  // creamos una instancia del asador
+  const unAsador = new Asador()
 
 method configurarJuego(){
 		self.configurarVentana()
@@ -27,6 +31,7 @@ method configurarJuego(){
         self.configurarParrilla()
         self.configurarFuego()
         self.configurarAnimacionParrilla()
+        self.configurarAcciones()
         //agregar aca todo lo que sea necesario para iniciar el juego 
     }
 
@@ -42,9 +47,19 @@ method configurarJuego(){
     game.addVisual(parrilla)
     game.addVisual(unAsado)
     game.addVisual(unChori)
+    game.addVisual(unAsador)
     //agregar aca todo lo que sea visual y que tenga que estar visible 
     //sea la parrilla, el asador, etc. 
   }
+
+
+// aca estan las acciones que puede hacer el asador, cualqueir accion hecha con una tecla por el asador deberia estar aca
+  	method configurarAcciones(){
+		keyboard.up().onPressDo({ movimiento.mover(unAsador, haciaArriba) })
+		keyboard.down().onPressDo({ movimiento.mover(unAsador, haciaAbajo) })
+		keyboard.left().onPressDo({ movimiento.mover(unAsador, haciaLaIzquierda) })
+		keyboard.right().onPressDo({ movimiento.mover(unAsador, haciaLaDerecha) })
+	}
 
   method configurarColisiones(){
         //agregar coliciones del tipo, carne con parrilla, el asador con las esquinas, el asador con los items etc ...  

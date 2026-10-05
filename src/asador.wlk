@@ -1,7 +1,7 @@
 import wollok.game.*
 import parrilla.*
 
-object asador { 
-    //no estoy seguro de esto, para mi si 
-    var property aplausos = 0  
+class Asador { 
+  var property image = "Asador1.png"
+  var property position = game.at(1,1)
 }
