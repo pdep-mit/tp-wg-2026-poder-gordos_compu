@@ -114,4 +114,6 @@ object noCarne {
   method cocinar(calor){}
   method comoAndas() = 0
   method seQuemo() = false
+  method enLaParrilla(){}
+  method fueraDeParrilla(){}
 }
