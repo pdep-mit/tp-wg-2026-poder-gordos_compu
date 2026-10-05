@@ -1,5 +1,7 @@
 import wollok.game.*
 import asador.*
+import barrasAviso.*
+
 
 /* class Carne {
   var property timpo 
@@ -15,8 +17,12 @@ class Asado {
   var tiempoParrilla = 0 
   const tiempoCoccion = 16 // en puntos de coccion
   var imagenActual = "asado_crudo.png"
-  //esto x ahora no tiene mucho sentido pero si hacemos que la carne tenga puntos de coccion va a importar
-  var cocido = false 
+
+  //creamos la barra de progreso de la carne /
+  const barraProgreso = new BarraProgreso() 
+
+  //cocido luego podria pasar a ser un estadoCarne que tenga la referencia a un objeto que sean los diferentes estados (crudo, jugoso, cocido, etc), vinculado a la barra de progreso
+  var cocido = false
   //la posicion de la carne va a depender de la posicion del asador
   var property position = game.at(2,2)
 
@@ -35,9 +41,9 @@ class Asado {
 
   method image() = imagenActual
 
-  method imagenCocida() {
-    if(cocido) {
-      imagenActual = "imagen de la carne cocida"
+  method imagenCocida() {    
+   if(cocido){
+    imagenActual = "imagen de la carne cocida"
     }
   }
 
@@ -51,19 +57,32 @@ class Asado {
   method cocinar(calor) {
     tiempoParrilla += calor
 
-    //se podria agregar un objeto que sea como barra de coccion que tenga tres estados o algo asi para ver el progreso 
-
     if(tiempoParrilla >= tiempoCoccion) {
       cocido = true
       self.imagenCocida()
       //deberia de avisar que se cocino y dar una alerta para que no c queme 
+      //podemos generar una nueva instancia de alerta, en la posicion que tenga la carne en ese momento 
     }
     if(self.seQuemo()){
       self.imagenQuemada()
+      //podriamos a hacer que muestre una barra de que se quemo
+      //luego podriamos poner la imagen de la parrilla que sea quemada o que se prenda fuego 
     }
   }
 
+  //regla de tres simple para el porcentaje de la carne a ver como se encuentra
+  //tiempoCoccion -> 100%
+  //tiempoParrilla -> x 
+  method comoAndas() = (tiempoParrilla * 100) / tiempoCoccion
 
+  method enLaParrilla(){
+    barraProgreso.carneActual(self)
+    game.addVisual(barraProgreso)
+  }
+
+  method fueraDeParrilla() {
+    game.removeVisual(barraProgreso)
+  }
 
 }
 
@@ -77,7 +96,7 @@ class Lomo {
 
 class Chorizo{
     const property position = game.at(5,5)
-    var imagenActual = "Chori_Cocido_0.png"
+    const imagenActual = "chori_cocido_0.png"
 
     method image() = imagenActual
 
@@ -93,4 +112,8 @@ class Morcilla {
 //esto es lo que explico la profe que esta re piola para poner el objeto vacio 
 object noCarne {
   method cocinar(calor){}
+  method comoAndas() = 0
+  method seQuemo() = false
+  method enLaParrilla(){}
+  method fueraDeParrilla(){}
 }
