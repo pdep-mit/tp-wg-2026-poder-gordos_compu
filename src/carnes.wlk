@@ -1,6 +1,8 @@
 import wollok.game.*
 import asador.*
 import barrasAviso.*
+import estadosCoccion.*
+
 
 /* class Carne {
   var property timpo 
@@ -16,8 +18,9 @@ class Asado {
   var tiempoParrilla = 0 
   const tiempoCoccion = 16 // en puntos de coccion
   var imagenActual = "asado_crudo.png"
-  //esto x ahora no tiene mucho sentido pero si hacemos que la carne tenga puntos de coccion va a importar
-  var cocido = false 
+  
+  //ahora cocido representa el estado en el que se encutra la carne 
+  var estadoCarne = crudo
   //la posicion de la carne va a depender de la posicion del asador
   var property position = game.at(2,2)
 
@@ -35,11 +38,9 @@ class Asado {
   method tiempoDeOnda() = 4
 
   method image() = imagenActual
-
-  method imagenCocida() {
-    if(cocido) {
-      imagenActual = "imagen de la carne cocida"
-    }
+  
+  method imagenCocida() {    
+   imagenActual = "imagen de la carne cocida"
   }
 
   method imagenQuemada() {
@@ -55,7 +56,7 @@ class Asado {
     //se podria agregar un objeto que sea como barra de coccion que tenga tres estados o algo asi para ver el progreso 
 
     if(tiempoParrilla >= tiempoCoccion) {
-      cocido = true
+      estadoCarne = cocido
       self.imagenCocida()
       //deberia de avisar que se cocino y dar una alerta para que no c queme 
       //podemos generar una nueva instancia de alerta, en la posicion que tenga la carne en ese momento 
@@ -67,10 +68,7 @@ class Asado {
     }
   }
 
-  //regla de tres simples q me devuelve el % del estado de la carne 
-  //tiempoCoccion -> 100 
-  //tiempoParrilla -> x 
-  method comoAndas() = (tiempoParrilla * 100) / tiempoCoccion
+  method comoAndas() = estadoCarne
   
   
 
@@ -86,7 +84,7 @@ class Lomo {
 
 class Chorizo{
     const property position = game.at(5,5)
-    var imagenActual = "Chori_Cocido_0.png"
+    const imagenActual = "Chori_Cocido_0.png"
 
     method image() = imagenActual
 
@@ -102,4 +100,5 @@ class Morcilla {
 //esto es lo que explico la profe que esta re piola para poner el objeto vacio 
 object noCarne {
   method cocinar(calor){}
+  method comoAndas() = -1 
 }
