@@ -46,7 +46,11 @@ method configurarJuego(){
   }
 
   method configurarColisiones(){
-        //agregar coliciones del tipo, carne con parrilla, el asador con las esquinas, el asador con los items etc ...  
+
+    //deberia permitir al asador que al apretar ciertas teclas, le permikta poner la carne en la parrilla, sacarla, avivar el fuego etc
+    game.onCollideDo(parrilla,{})
+
+    //agregar coliciones del tipo, carne con parrilla, el asador con las esquinas, el asador con los items etc ...  
 	}
 
   //le dice a la parrilla que cocine la carne cada 1 segundo 

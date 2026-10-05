@@ -1,5 +1,6 @@
 import wollok.game.*
 import asador.*
+import barrasAviso.*
 
 /* class Carne {
   var property timpo 
@@ -57,13 +58,21 @@ class Asado {
       cocido = true
       self.imagenCocida()
       //deberia de avisar que se cocino y dar una alerta para que no c queme 
+      //podemos generar una nueva instancia de alerta, en la posicion que tenga la carne en ese momento 
     }
     if(self.seQuemo()){
       self.imagenQuemada()
+      //podriamos a hacer que muestre una barra de que se quemo
+      //luego podriamos poner la imagen de la parrilla que sea quemada o que se prenda fuego 
     }
   }
 
-
+  //regla de tres simples q me devuelve el % del estado de la carne 
+  //tiempoCoccion -> 100 
+  //tiempoParrilla -> x 
+  method comoAndas() = (tiempoParrilla * 100) / tiempoCoccion
+  
+  
 
 }
 
