@@ -23,10 +23,12 @@ method asar() = carneActual.cocinar(fuego.calor())
 
 method ponerCarne(carne) {
   carneActual = carne
+  carne.enLaParrilla()
   //aca no estoy seguro si deberiamos tener un dibujo de cada tipo de carne en la parrilla, o si se puede literalmente apoyar la carne arriba 
 } 
 
 method sacarCarne(){
+  carneActual.fueraDeParrilla()
   carneActual = noCarne
 }
 
