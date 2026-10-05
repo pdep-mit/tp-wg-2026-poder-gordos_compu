@@ -19,7 +19,7 @@ object movimiento {
 
 object haciaArriba {
 	// TODO: no se puede subir más arriba del cielo
-    method posicionSiguiente(posicion) = game.at(posicion.x(),config.alturaMaxima().min(posicion.up(1).y()))
+    method posicionSiguiente(posicion) = game.at(posicion.x(),(config.alturaMaxima()-2).min(posicion.up(1).y()))
 }
 
 object haciaAbajo {
