@@ -17,13 +17,14 @@ class Asado {
   var tiempoParrilla = 0 
   const tiempoCoccion = 16 // en puntos de coccion
   var imagenActual = "asado_crudo.png"
-  
+
+  //creamos la barra de progreso de la carne /
+  const barraProgreso = new BarraProgreso() 
+
   //cocido luego podria pasar a ser un estadoCarne que tenga la referencia a un objeto que sean los diferentes estados (crudo, jugoso, cocido, etc), vinculado a la barra de progreso
   var cocido = false
   //la posicion de la carne va a depender de la posicion del asador
   var property position = game.at(2,2)
-
-  const barraProgreso = new BarraProgreso() 
 
   //deberia preguntarle al asador para donde esta mirando y luego devolver la posicion uno mas arriba, abajo, a la izquierda o derecha
   //pero primero deberia de tener una posicion inicial de donde saca la carne, le deberia pregunar rambien al coso que suministra la carne a ver donde esta
@@ -75,7 +76,12 @@ class Asado {
   method comoAndas() = (tiempoParrilla * 100) / tiempoCoccion
 
   method enLaParrilla(){
+    barraProgreso.carneActual(self)
     game.addVisual(barraProgreso)
+  }
+
+  method fueraDeParrilla() {
+    game.removeVisual(barraProgreso)
   }
 
 }
