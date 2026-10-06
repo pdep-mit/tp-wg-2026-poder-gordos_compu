@@ -96,12 +96,18 @@ class Lomo {
 
 class Chorizo{
     const property position = game.at(5,5)
-    const imagenActual = "chori_cocido_0.png"
+    //esto del contador es temporal -- unicamente para ver la animacion del chori cocido
+    var contador = 0  
+    method imagenActual() = "chori_cocido_" + contador + ".png"
 
-    method image() = imagenActual
+    method image() = self.imagenActual()
 
     method cortar() {
       
+    }
+
+    method siguienteAnimacion(){
+      contador = (contador + 1) % 8
     }
 }
 

@@ -22,16 +22,20 @@ object config {
   const unChori = new Chorizo()
 
 
-method configurarJuego(){
+  method configurarJuego(){
 		self.configurarVentana()
-        self.agregarVisuales()
-        self.configurarColisiones()
-        self.configurarParrilla()
-        self.configurarFuego()
-        self.configurarAnimacionParrilla()
-        self.configurarAcciones()
-        //agregar aca todo lo que sea necesario para iniciar el juego 
-    }
+    self.agregarVisuales()
+    self.configurarColisiones()
+    self.configurarParrilla()
+    self.configurarFuego()
+    self.configurarAnimacionParrilla()
+    self.configurarAcciones()
+    self.configurarAnimacionChori()  
+    //agregar aca todo lo que sea necesario para iniciar el juego
+
+    //adicion temporal
+      
+  }
 
   method configurarVentana(){
 		game.title("Grupo: GordosCompu | Nombre de jueguito")
@@ -52,17 +56,23 @@ method configurarJuego(){
 
 
     // aca estan las acciones que puede hacer el asador, cualqueir accion hecha con una tecla por el asador deberia estar aca
-  	method configurarAcciones(){
-		keyboard.up().onPressDo({ movimiento.mover(asador, haciaArriba) asador.cambiarDireccion(3) })
+  method configurarAcciones(){
+		
+    //movimiento 
+    keyboard.up().onPressDo({ movimiento.mover(asador, haciaArriba) asador.cambiarDireccion(3) })
 		keyboard.down().onPressDo({ movimiento.mover(asador, haciaAbajo) asador.cambiarDireccion(0) })
 		keyboard.left().onPressDo({ movimiento.mover(asador, haciaLaIzquierda) asador.cambiarDireccion(1) })
 		keyboard.right().onPressDo({ movimiento.mover(asador, haciaLaDerecha) asador.cambiarDireccion(2) })
+
+    //agarrar cosas
+
+    //dejar cosas
 	}
 
   method configurarColisiones(){
 
     //deberia permitir al asador que al apretar ciertas teclas, le permikta poner la carne en la parrilla, sacarla, avivar el fuego etc
-    game.onCollideDo(parrilla,{})
+    //game.onCollideDo(parrilla,{})
 
     //agregar coliciones del tipo, carne con parrilla, el asador con las esquinas, el asador con los items etc ...  
 	}
@@ -79,5 +89,10 @@ method configurarJuego(){
 
   method configurarAnimacionParrilla(){
     game.onTick(300, "animacionFuego",{parrilla.siguienteAnimacion()})
+  }
+
+  //esto lo podriamos modificar si tenemos mas animaciones x carne x ahora solo el chori (tmb es un monton para todas las carnes xd)
+  method configurarAnimacionChori() {
+    game.onTick(300,"animacionChori",{unChori.siguienteAnimacion()})
   }
 }
