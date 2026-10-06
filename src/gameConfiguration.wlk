@@ -53,15 +53,10 @@ method configurarJuego(){
 
     // aca estan las acciones que puede hacer el asador, cualqueir accion hecha con una tecla por el asador deberia estar aca
   	method configurarAcciones(){
-		keyboard.up().onPressDo({ movimiento.mover(asador, haciaArriba) })
-		keyboard.down().onPressDo({ movimiento.mover(asador, haciaAbajo) })
-		keyboard.left().onPressDo({ movimiento.mover(asador, haciaLaIzquierda) })
-		keyboard.right().onPressDo({ movimiento.mover(asador, haciaLaDerecha) })
-    // cambio animacion segun la direccion hacia la que se mueva el asador
-    keyboard.up().onPressDo({asador.cambiarDireccion("asador_3.png")})
-    keyboard.down().onPressDo({asador.cambiarDireccion("asador_0.png")})
-    keyboard.left().onPressDo({asador.cambiarDireccion("asador_1.png")})
-    keyboard.right().onPressDo({asador.cambiarDireccion("asador_2.png")})
+		keyboard.up().onPressDo({ movimiento.mover(asador, haciaArriba) asador.cambiarDireccion(3) })
+		keyboard.down().onPressDo({ movimiento.mover(asador, haciaAbajo) asador.cambiarDireccion(0) })
+		keyboard.left().onPressDo({ movimiento.mover(asador, haciaLaIzquierda) asador.cambiarDireccion(1) })
+		keyboard.right().onPressDo({ movimiento.mover(asador, haciaLaDerecha) asador.cambiarDireccion(2) })
 	}
 
   method configurarColisiones(){
