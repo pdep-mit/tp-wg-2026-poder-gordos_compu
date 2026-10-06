@@ -106,11 +106,13 @@ class Chorizo{
     const property nombre = "chori" 
     var contador = 0 
 
-    //esto del contador es temporal -- unicamente para ver la animacion del chori cocido
+    // esto del contador es temporal -- unicamente para ver la animacion del chori cocido
     
     method imagenActual() = "Chori_Cocido_" + contador + ".png"
 
     method image() = self.imagenActual()
+    // volvimos a la posicion un metodo para que siempre valide y actualice su ubicacion a medida que se mueve su portador
+    // soltar lo desvincula y actualiza su ubicacion inicial a la actual
     method position() =
       if (portador == sinPortador){
         posicionInicial
@@ -127,6 +129,11 @@ class Chorizo{
       portador = sinPortador
     }
     
+    // metodo para entregar el plato al comensal
+    method entregarA(comensal)
+    {
+      comensal.recibirPedido(self)
+    }
 
     method cortar() {
       

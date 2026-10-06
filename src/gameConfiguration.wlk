@@ -20,6 +20,8 @@ object config {
   const unAsado = new Asado()
   //chori de prueba
   const unChori = new Chorizo()
+  //comensal de prueba
+  const unTio = new Tio()
 
 
   method configurarJuego(){
@@ -32,7 +34,7 @@ object config {
     self.configurarAcciones()
     self.configurarAnimacionChori()  
     //agregar aca todo lo que sea necesario para iniciar el juego
-
+    self.configurarPedidosComensales()
     //adicion temporal
       
   }
@@ -50,6 +52,7 @@ object config {
     game.addVisual(unAsado)
     game.addVisual(unChori)
     game.addVisual(asador)
+    game.addVisual(unTio)
     //agregar aca todo lo que sea visual y que tenga que estar visible 
     //sea la parrilla, el asador, etc. 
   }
@@ -63,7 +66,7 @@ object config {
 		keyboard.down().onPressDo({ movimiento.mover(asador, haciaAbajo) asador.cambiarDireccion(0) })
 		keyboard.left().onPressDo({ movimiento.mover(asador, haciaLaIzquierda) asador.cambiarDireccion(1) })
 		keyboard.right().onPressDo({ movimiento.mover(asador, haciaLaDerecha) asador.cambiarDireccion(2) })
-    // acciones del asador
+    // acciones del asador agarrar y soltar
     keyboard.e().onPressDo({ asador.agarrar() })
     keyboard.q().onPressDo({ asador.soltar()})
 	}
@@ -74,6 +77,10 @@ object config {
     //game.onCollideDo(parrilla,{})
 
     //agregar coliciones del tipo, carne con parrilla, el asador con las esquinas, el asador con los items etc ...  
+
+    // colisiones de comensales al recibir los platos (por ahora solo el tio)
+    game.onCollideDo(unTio, {plato => plato.entregarA(unTio)})
+    
 	}
 
   //le dice a la parrilla que cocine la carne cada 1 segundo 
@@ -93,5 +100,10 @@ object config {
   //esto lo podriamos modificar si tenemos mas animaciones x carne x ahora solo el chori (tmb es un monton para todas las carnes xd)
   method configurarAnimacionChori() {
     game.onTick(300,"animacionChori",{unChori.siguienteAnimacion()})
+  }
+
+  // arrancan a pedir los comensales (por ahora 1)
+  method configurarPedidosComensales(){
+    unTio.pedir()
   }
 }
