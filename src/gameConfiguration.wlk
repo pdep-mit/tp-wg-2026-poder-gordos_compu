@@ -57,6 +57,11 @@ method configurarJuego(){
 		keyboard.down().onPressDo({ movimiento.mover(asador, haciaAbajo) })
 		keyboard.left().onPressDo({ movimiento.mover(asador, haciaLaIzquierda) })
 		keyboard.right().onPressDo({ movimiento.mover(asador, haciaLaDerecha) })
+    // cambio animacion segun la direccion hacia la que se mueva el asador
+    keyboard.up().onPressDo({asador.cambiarDireccion("asador_3.png")})
+    keyboard.down().onPressDo({asador.cambiarDireccion("asador_0.png")})
+    keyboard.left().onPressDo({asador.cambiarDireccion("asador_1.png")})
+    keyboard.right().onPressDo({asador.cambiarDireccion("asador_2.png")})
 	}
 
   method configurarColisiones(){
