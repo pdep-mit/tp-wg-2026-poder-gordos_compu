@@ -12,7 +12,13 @@ import barrasAviso.*
 
 //todas las carnes deben de entender el mensaje cocinar()
 
+// creamos objeto sin portador para que todos puedan calcular sus posiciones
+object sinPortador{
+  
+}
+
 class Asado {
+  const property nombre = "asado"
   //el tiempo que pasa en la parrilla en puntos de coccion 
   var tiempoParrilla = 0 
   const tiempoCoccion = 16 // en puntos de coccion
@@ -87,26 +93,44 @@ class Asado {
 }
 
 class Vacio {
-  
+  const property nombre = "vacio"
 }
 
 class Lomo {
-  
+  const property nombre = "lomo"
 }
 
 class Chorizo{
-    const property position = game.at(5,5)
-    const imagenActual = "chori_cocido_0.png"
+    var property posicionInicial = game.at(5,5) 
+    var property portador = sinPortador 
+    const property nombre = "chori" 
+    const imagenActual = "Chori_Cocido_0.png"
 
     method image() = imagenActual
-
+    
+    method position() =
+      if (portador == sinPortador){
+        posicionInicial
+      }
+      else{
+        portador.position().left(1).up(1)
+      
+    }
+    method llevadoPor(alguien){
+      portador = alguien
+    }
+    method soltar() {
+      posicionInicial = self.position()
+      portador = sinPortador
+    }
+    
     method cortar() {
       
     }
 }
 
 class Morcilla {
-  
+  const property nombre = "morcilla"
 }
 
 //esto es lo que explico la profe que esta re piola para poner el objeto vacio 

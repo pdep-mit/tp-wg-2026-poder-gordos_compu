@@ -57,6 +57,9 @@ method configurarJuego(){
 		keyboard.down().onPressDo({ movimiento.mover(asador, haciaAbajo) asador.cambiarDireccion(0) })
 		keyboard.left().onPressDo({ movimiento.mover(asador, haciaLaIzquierda) asador.cambiarDireccion(1) })
 		keyboard.right().onPressDo({ movimiento.mover(asador, haciaLaDerecha) asador.cambiarDireccion(2) })
+    // acciones del asador
+    keyboard.e().onPressDo({ asador.agarrar() })
+    keyboard.q().onPressDo({ asador.soltar()})
 	}
 
   method configurarColisiones(){
