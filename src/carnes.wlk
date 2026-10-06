@@ -104,10 +104,13 @@ class Chorizo{
     var property posicionInicial = game.at(5,5) 
     var property portador = sinPortador 
     const property nombre = "chori" 
-    const imagenActual = "Chori_Cocido_0.png"
+    var contador = 0 
 
-    method image() = imagenActual
+    //esto del contador es temporal -- unicamente para ver la animacion del chori cocido
     
+    method imagenActual() = "Chori_Cocido_" + contador + ".png"
+
+    method image() = self.imagenActual()
     method position() =
       if (portador == sinPortador){
         posicionInicial
@@ -124,8 +127,13 @@ class Chorizo{
       portador = sinPortador
     }
     
+
     method cortar() {
       
+    }
+
+    method siguienteAnimacion(){
+      contador = (contador + 1) % 8
     }
 }
 
