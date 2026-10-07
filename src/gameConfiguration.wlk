@@ -63,14 +63,17 @@ object config {
   method configurarAcciones(){
 		
     //movimiento 
-    keyboard.up().onPressDo({ movimiento.mover(asador, haciaArriba) asador.cambiarDireccion(3) })
-		keyboard.down().onPressDo({ movimiento.mover(asador, haciaAbajo) asador.cambiarDireccion(0) })
-		keyboard.left().onPressDo({ movimiento.mover(asador, haciaLaIzquierda) asador.cambiarDireccion(1) })
-		keyboard.right().onPressDo({ movimiento.mover(asador, haciaLaDerecha) asador.cambiarDireccion(2) })
+    keyboard.up().onPressDo({asador.direccion(haciaArriba) movimiento.mover(asador, haciaArriba) asador.cambiarDireccion(3) })
+		keyboard.down().onPressDo({asador.direccion(haciaAbajo) movimiento.mover(asador, haciaAbajo) asador.cambiarDireccion(0) })
+		keyboard.left().onPressDo({asador.direccion(haciaLaIzquierda) movimiento.mover(asador, haciaLaIzquierda) asador.cambiarDireccion(1) })
+		keyboard.right().onPressDo({asador.direccion(haciaLaDerecha) movimiento.mover(asador, haciaLaDerecha) asador.cambiarDireccion(2) })
     
     // acciones del asador agarrar y soltar
     keyboard.e().onPressDo({ asador.agarrar() })
     keyboard.q().onPressDo({ asador.soltar()})
+
+    //acciones del asador para poner una carne en la parrilla 
+    keyboard.c().onPressDo({ asador.ponerCarne()})
 	}
 
   method configurarColisiones(){

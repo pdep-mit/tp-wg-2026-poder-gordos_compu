@@ -25,7 +25,7 @@ class Asado {
   //cocido luego podria pasar a ser un estadoCarne que tenga la referencia a un objeto que sean los diferentes estados (crudo, jugoso, cocido, etc), vinculado a la barra de progreso
   var cocido = false
   //la posicion de la carne va a depender de la posicion del asador
-  var property position = game.at(2,2)
+  var property position = game.at(5,5)
 
   //deberia preguntarle al asador para donde esta mirando y luego devolver la posicion uno mas arriba, abajo, a la izquierda o derecha
   //pero primero deberia de tener una posicion inicial de donde saca la carne, le deberia pregunar rambien al coso que suministra la carne a ver donde esta
@@ -85,6 +85,8 @@ class Asado {
     game.removeVisual(barraProgreso)
   }
 
+  method esCarne() = true
+
 }
 
 class Vacio {
@@ -96,7 +98,7 @@ class Lomo {
 }
 
 class Chorizo{
-    var property posicionInicial = game.at(5,5) 
+    var property posicionInicial = game.at(2,2) 
     var property portador = sinPortador 
     const property nombre = "chori" 
     var contador = 0 
@@ -108,11 +110,16 @@ class Chorizo{
     method image() = self.imagenActual()
     // volvimos a la posicion un metodo para que siempre valide y actualice su ubicacion a medida que se mueve su portador
     // soltar lo desvincula y actualiza su ubicacion inicial a la actual
-    method position() = portador.posicionDeLoQueLlevo()
+    method position() = 
+    if(portador == sinPortador){
+      posicionInicial
+    } else {
+      portador.posicionDeLoQueLlevo()
+    }
          
       
-    method llevadoPor(asador){
-      portador = asador
+    method llevadoPor(algo){
+      portador = algo
     }
     method soltar() {
       posicionInicial = self.position()
@@ -131,6 +138,8 @@ class Chorizo{
     method siguienteAnimacion(){
       contador = (contador + 1) % 8
     }
+
+    method esCarne() = true
 }
 
 class Morcilla {
@@ -144,4 +153,5 @@ object noCarne {
   method seQuemo() = false
   method enLaParrilla(){}
   method fueraDeParrilla(){}
+  method esCarne() = false
 }

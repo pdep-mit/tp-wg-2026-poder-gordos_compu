@@ -24,7 +24,6 @@ method asar() = carneActual.cocinar(fuego.calor())
 method ponerCarne(carne) {
   carneActual = carne
   carne.enLaParrilla()
-  //aca no estoy seguro si deberiamos tener un dibujo de cada tipo de carne en la parrilla, o si se puede literalmente apoyar la carne arriba 
 } 
 
 method sacarCarne(){
@@ -43,6 +42,11 @@ method avivar(){
   //tambien debeiria resetear el tiempo en el que se apaga el fuego un poco 
   fuego = fuego.siguiente()
 }
+
+method posicionDeLoQueLlevo() = position
+
+//le preguntamos a la parrilla si esta libre para que le pongan una carne
+method estaOcupada() = carneActual.esCarne()
 
 //... mas cosas
 }

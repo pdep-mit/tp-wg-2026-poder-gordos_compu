@@ -1,9 +1,11 @@
 import carnes.*
 import wollok.game.*
 import parrilla.*
+import movimientos.*
 
 object sinCarga {
   method soltar(){}
+  method esCarne() = false
 }
 
 // agregamos la logica para que pueda agarrar al contacto cualquier cosa que tenga implementado el metodo llevadoPor
@@ -12,10 +14,18 @@ object asador {
   var property image = "asador_0.png"
   var property position = game.at(1,1)
   var carga = sinCarga
+  var property direccion = haciaAbajo
+
   var property pedidos = []
+  
   method cambiarDireccion(numero) {
     image = "asador_" + numero + ".png"  
   }
+
+  // la celda que tiene justo adelante, según para dónde mira
+  method celdaDeEnfrente() = direccion.siguiente(position)
+
+  method estaFrenteA(algo) = self.celdaDeEnfrente() == algo.position()
 
   method agarrar() {
     const alcanzables = game.colliders(self)
@@ -41,9 +51,20 @@ object asador {
   {
     
   }
+
+  method ponerCarne(){
+    if(carga.esCarne() && not(parrilla.estaOcupada())&& self.estaFrenteA(parrilla)){
+      parrilla.ponerCarne(carga)
+      carga.llevadoPor(parrilla)
+      carga = sinCarga
+    } 
+  }
+  
+  method posicionDeLoQueLlevo() = position.up(1).left(1)
+
 }
 
 // creamos objeto sin portador para que todos puedan calcular sus posiciones
-object sinPortador{
-  
+object sinPortador {
+  method posicionDeLoQueLlevo(){}
 }
