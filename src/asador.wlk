@@ -28,7 +28,8 @@ object asador {
   method estaFrenteA(algo) = self.celdaDeEnfrente() == algo.position()
 
   method agarrar() {
-    const alcanzables = game.colliders(self)
+    // solucion temporal para que no falle al intentar agarrar ciertos objetos por sobre otros
+    const alcanzables = game.colliders(self).filter({plato => plato.esCarne()})
     if(!alcanzables.isEmpty())
     {
       self.soltar()

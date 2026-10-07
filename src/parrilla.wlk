@@ -4,6 +4,8 @@ import carnes.*
 //la parrila tmb puede ser una clase ya que podemos tener mas de una parrilla 
 object parrilla {
 const property position = game.at(2,2)
+// variable temporal, cambiar implementacion en proximas entregas
+const property esCarne = false
 
 //contador para la animacion de la parrilla
 var contador = 0 
