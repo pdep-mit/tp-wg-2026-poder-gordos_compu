@@ -10,8 +10,8 @@ class Pedido {
 }
 
 class Tio {
-    //const imagenActual = "comensalEjemplo.png"
-    //method image() = imagenActual
+    const imagenActual = "comensalEjemplo.png"
+    method image() = imagenActual
     var property position = game.at(7, 7)
     const property pedidoComensal = new Pedido(nombre = "chori",tiempo = 15)
     

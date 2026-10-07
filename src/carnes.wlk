@@ -25,14 +25,14 @@ class Asado {
   //cocido luego podria pasar a ser un estadoCarne que tenga la referencia a un objeto que sean los diferentes estados (crudo, jugoso, cocido, etc), vinculado a la barra de progreso
   var cocido = false
   //la posicion de la carne va a depender de la posicion del asador
-  var property position = game.at(5,5)
+  
 
   //deberia preguntarle al asador para donde esta mirando y luego devolver la posicion uno mas arriba, abajo, a la izquierda o derecha
   //pero primero deberia de tener una posicion inicial de donde saca la carne, le deberia pregunar rambien al coso que suministra la carne a ver donde esta
   //lo ultimo en caso de que no lo hayan agarrado 
-  method calcularPosicion(){
+  /*method calcularPosicion(){
     
-  }
+  }*/
 
   //esto de las imagenes seguro que se puede mejorar -- preguntar en clase jeje
 
@@ -87,7 +87,30 @@ class Asado {
 
   method esCarne() = true
 
+  //metodos y variables necesarias para ser agarrado por el asador
+  var property portador = sinPortador
+  var property posicionInicial = game.at(5,5)
+  method position() = 
+    if(portador.esPortador()){
+      portador.posicionDeLoQueLlevo()
+    } else {
+      posicionInicial
+    }
+  method llevadoPor(algo){
+      portador = algo
+    }
+    method soltar() {
+      posicionInicial = self.position()
+      portador = sinPortador
+    }
+    
+    // metodo para entregar el plato al comensal
+    method entregarA(comensal) {
+      comensal.recibirPedido(self)
+    }
 }
+
+
 
 class Vacio {
   const property nombre = "vacio"
@@ -98,14 +121,14 @@ class Lomo {
 }
 
 class Chorizo{
-    var property posicionInicial = game.at(2,2) 
+    var property posicionInicial = game.at(3,3) 
     var property portador = sinPortador 
     const property nombre = "chori" 
     var contador = 0 
 
     // esto del contador es temporal -- unicamente para ver la animacion del chori cocido
     
-    method imagenActual() = "chori_cocido_" + contador + ".png"
+    method imagenActual() = "Chori_Cocido_" + contador + ".png"
 
     method image() = self.imagenActual()
     // volvimos a la posicion un metodo para que siempre valide y actualice su ubicacion a medida que se mueve su portador
