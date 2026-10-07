@@ -12,11 +12,6 @@ import barrasAviso.*
 
 //todas las carnes deben de entender el mensaje cocinar()
 
-// creamos objeto sin portador para que todos puedan calcular sus posiciones
-object sinPortador{
-  
-}
-
 class Asado {
   const property nombre = "asado"
   //el tiempo que pasa en la parrilla en puntos de coccion 
@@ -108,21 +103,16 @@ class Chorizo{
 
     // esto del contador es temporal -- unicamente para ver la animacion del chori cocido
     
-    method imagenActual() = "Chori_Cocido_" + contador + ".png"
+    method imagenActual() = "chori_cocido_" + contador + ".png"
 
     method image() = self.imagenActual()
     // volvimos a la posicion un metodo para que siempre valide y actualice su ubicacion a medida que se mueve su portador
     // soltar lo desvincula y actualiza su ubicacion inicial a la actual
-    method position() =
-      if (portador == sinPortador){
-        posicionInicial
-      }
-      else{
-        portador.position().left(1).up(1)
+    method position() = portador.posicionDeLoQueLlevo()
+         
       
-    }
-    method llevadoPor(alguien){
-      portador = alguien
+    method llevadoPor(asador){
+      portador = asador
     }
     method soltar() {
       posicionInicial = self.position()
@@ -130,8 +120,7 @@ class Chorizo{
     }
     
     // metodo para entregar el plato al comensal
-    method entregarA(comensal)
-    {
+    method entregarA(comensal) {
       comensal.recibirPedido(self)
     }
 

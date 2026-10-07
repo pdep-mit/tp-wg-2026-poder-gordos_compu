@@ -32,11 +32,12 @@ object config {
     self.configurarFuego()
     self.configurarAnimacionParrilla()
     self.configurarAcciones()
-    self.configurarAnimacionChori()  
-    //agregar aca todo lo que sea necesario para iniciar el juego
-    self.configurarPedidosComensales()
+    
     //adicion temporal
-      
+    self.configurarAnimacionChori()  
+    self.configurarPedidosComensales()
+    
+    //agregar aca todo lo que sea necesario para iniciar el juego
   }
 
   method configurarVentana(){
@@ -58,7 +59,7 @@ object config {
   }
 
 
-    // aca estan las acciones que puede hacer el asador, cualqueir accion hecha con una tecla por el asador deberia estar aca
+  // aca estan las acciones que puede hacer el asador, cualqueir accion hecha con una tecla por el asador deberia estar aca
   method configurarAcciones(){
 		
     //movimiento 
@@ -66,6 +67,7 @@ object config {
 		keyboard.down().onPressDo({ movimiento.mover(asador, haciaAbajo) asador.cambiarDireccion(0) })
 		keyboard.left().onPressDo({ movimiento.mover(asador, haciaLaIzquierda) asador.cambiarDireccion(1) })
 		keyboard.right().onPressDo({ movimiento.mover(asador, haciaLaDerecha) asador.cambiarDireccion(2) })
+    
     // acciones del asador agarrar y soltar
     keyboard.e().onPressDo({ asador.agarrar() })
     keyboard.q().onPressDo({ asador.soltar()})

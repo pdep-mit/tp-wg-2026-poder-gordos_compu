@@ -1,15 +1,11 @@
-import src.carnes.*
+import carnes.*
 import wollok.game.*
 import parrilla.*
 
 object sinCarga {
   method soltar(){}
 }
-class Pedido {
-  var property nombre
-  const property tiempo
-  var property entregado = false
-}
+
 // agregamos la logica para que pueda agarrar al contacto cualquier cosa que tenga implementado el metodo llevadoPor
 // tambien el metodo para soltar, lo cual asigna como su nueva posicion la actual y se desvincula del gordo 
 object asador { 
@@ -45,4 +41,9 @@ object asador {
   {
     
   }
+}
+
+// creamos objeto sin portador para que todos puedan calcular sus posiciones
+object sinPortador{
+  
 }
