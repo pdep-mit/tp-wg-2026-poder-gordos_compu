@@ -60,11 +60,15 @@ object asador {
     } 
   }
   
+  //se puede modificar 
   method posicionDeLoQueLlevo() = position.up(1).left(1)
+
+  method esPortador() = true
 
 }
 
 // creamos objeto sin portador para que todos puedan calcular sus posiciones
 object sinPortador {
   method posicionDeLoQueLlevo(){}
+  method esPortador() = false
 }

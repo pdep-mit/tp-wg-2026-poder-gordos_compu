@@ -48,6 +48,8 @@ method posicionDeLoQueLlevo() = position
 //le preguntamos a la parrilla si esta libre para que le pongan una carne
 method estaOcupada() = carneActual.esCarne()
 
+method esPortador() = true
+
 //... mas cosas
 }
 

@@ -111,10 +111,10 @@ class Chorizo{
     // volvimos a la posicion un metodo para que siempre valide y actualice su ubicacion a medida que se mueve su portador
     // soltar lo desvincula y actualiza su ubicacion inicial a la actual
     method position() = 
-    if(portador == sinPortador){
-      posicionInicial
-    } else {
+    if(portador.esPortador()){
       portador.posicionDeLoQueLlevo()
+    } else {
+      posicionInicial
     }
          
       

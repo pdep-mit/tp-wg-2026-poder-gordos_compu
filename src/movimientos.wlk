@@ -20,11 +20,15 @@ object movimiento {
 object haciaArriba {
 	// TODO: no se puede subir más arriba del cielo
     method posicionSiguiente(posicion) = game.at(posicion.x(),(config.alturaMaxima()-2).min(posicion.up(1).y()))
+
+    method siguiente(posicion) =  posicion.up(1)
 }
 
 object haciaAbajo {
 	// TODO: no se puede bajar más allá del y = 0 - hecho
 	method posicionSiguiente(posicion) = game.at(posicion.x(),0.max(posicion.down(1).y()))
+
+    method siguiente(posicion) =  posicion.down(1)
 }
 
 object haciaLaDerecha {
@@ -37,6 +41,8 @@ object haciaLaDerecha {
             return posicion.right(1)
         }
     }
+
+    method siguiente(posicion) =  posicion.right(1)
 }
 
 object haciaLaIzquierda {
@@ -48,4 +54,6 @@ object haciaLaIzquierda {
             return posicion.left(1)
         }
     }
+
+    method siguiente(posicion) =  posicion.left(1)
 }
