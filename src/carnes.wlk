@@ -128,7 +128,7 @@ class Chorizo{
 
     // esto del contador es temporal -- unicamente para ver la animacion del chori cocido
     
-    method imagenActual() = "Chori_Cocido_" + contador + ".png"
+    method imagenActual() = "chori_cocido_" + contador + ".png"
 
     method image() = self.imagenActual()
     // volvimos a la posicion un metodo para que siempre valide y actualice su ubicacion a medida que se mueve su portador
