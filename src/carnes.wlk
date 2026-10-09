@@ -2,15 +2,12 @@ import wollok.game.*
 import asador.*
 import barrasAviso.*
 
-
-/* class Carne {
+//super clase carne
+class Carne {
   var property timpo 
+} 
 
-  la carne deberia ser una clase que tenga lo de siempre, y cuando veamos herencia podemos hacer cosas mas especificas pero x ahora 
-  podemos hacer una clase x tipo de carne  
-} */
 
-//todas las carnes deben de entender el mensaje cocinar()
 
 class Asado {
   const property nombre = "asado"

@@ -16,6 +16,10 @@ object config {
   //el tiempo que pasa para que el fuego cambie de estado (fuerte -> medio -> bajo) esta en 20s para mi es poco
   method tiempoCambioFuego() = 20000
 
+  //para hacer polimorfismo con para la animacion, podemos guardar en un set (para variar) los elementos que tengan animacion y luego
+  //tener un metodo onTick que le mande a cada elemento de esa coleccion el aviso de siguiente coleccion 
+  const setAnimables = #{parrilla, unChori}
+
   //asado de prueba
   const unAsado = new Asado()
   //chori de prueba
@@ -30,11 +34,10 @@ object config {
     self.configurarColisiones()
     self.configurarParrilla()
     self.configurarFuego()
-    self.configurarAnimacionParrilla()
+    self.configurarAnimacion()
     self.configurarAcciones()
     
-    //adicion temporal
-    self.configurarAnimacionChori()  
+  
     self.configurarPedidosComensales()
     
     //agregar aca todo lo que sea necesario para iniciar el juego
@@ -98,13 +101,9 @@ object config {
     game.onTick( self.tiempoCambioFuego(),"cambioFuego", {parrilla.fuego(parrilla.fuego().anterior())})
   }
 
-  method configurarAnimacionParrilla(){
-    game.onTick(300, "animacionFuego",{parrilla.siguienteAnimacion()})
-  }
-
-  //esto lo podriamos modificar si tenemos mas animaciones x carne x ahora solo el chori (tmb es un monton para todas las carnes xd)
-  method configurarAnimacionChori() {
-    game.onTick(300,"animacionChori",{unChori.siguienteAnimacion()})
+  method configurarAnimacion(){
+    game.onTick(300, "animacionFuego",
+    {setAnimables.forEach({animables => animables.siguienteAnimacion()})})
   }
 
   // arrancan a pedir los comensales (por ahora 1)
