@@ -10,19 +10,24 @@ class Carne {
 
 
 class Asado {
+  //esto no va
   const property nombre = "asado"
   //el tiempo que pasa en la parrilla en puntos de coccion 
   var tiempoParrilla = 0 
   const tiempoCoccion = 16 // en puntos de coccion
+  //delegar a un objeto animacion 
   var imagenActual = "asado_crudo.png"
 
-  //creamos la barra de progreso de la carne /
+  //creamos la barra de progreso de la carne 
   const barraProgreso = new BarraProgreso() 
 
   //cocido luego podria pasar a ser un estadoCarne que tenga la referencia a un objeto que sean los diferentes estados (crudo, jugoso, cocido, etc), vinculado a la barra de progreso
   var cocido = false
   //la posicion de la carne va a depender de la posicion del asador
   
+  //metodos y variables necesarias para ser agarrado por el asador
+  var property portador = sinPortador
+  var property posicionInicial = game.at(5,5)
 
   //deberia preguntarle al asador para donde esta mirando y luego devolver la posicion uno mas arriba, abajo, a la izquierda o derecha
   //pero primero deberia de tener una posicion inicial de donde saca la carne, le deberia pregunar rambien al coso que suministra la carne a ver donde esta
@@ -84,9 +89,7 @@ class Asado {
 
   method esCarne() = true
 
-  //metodos y variables necesarias para ser agarrado por el asador
-  var property portador = sinPortador
-  var property posicionInicial = game.at(5,5)
+ 
   method position() = 
     if(portador.esPortador()){
       portador.posicionDeLoQueLlevo()

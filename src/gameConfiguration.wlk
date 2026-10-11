@@ -77,6 +77,9 @@ object config {
 
     //acciones del asador para poner una carne en la parrilla 
     keyboard.c().onPressDo({ asador.ponerCarne()})
+
+    //acion del asador para avivar el fuego
+    
 	}
 
   method configurarColisiones(){
@@ -101,12 +104,13 @@ object config {
     game.onTick( self.tiempoCambioFuego(),"cambioFuego", {parrilla.fuego(parrilla.fuego().anterior())})
   }
 
+  //aca hay polimorfismo
   method configurarAnimacion(){
-    game.onTick(300, "animacionFuego",
+    game.onTick(300, "animaciones",
     {setAnimables.forEach({animables => animables.siguienteAnimacion()})})
   }
 
-  // arrancan a pedir los comensales (por ahora 1)
+  //arrancan a pedir los comensales (por ahora 1)
   method configurarPedidosComensales(){
     unTio.pedir()
   }

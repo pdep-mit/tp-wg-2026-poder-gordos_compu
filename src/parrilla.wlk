@@ -14,7 +14,7 @@ const cantidadFrames = 8
 //func: la parrilla solo puede tener una unica carne a la vez
 //el fuego puede tener tres estados, 0 apagado, 1, poca llama, 2 media y 3 fuerte (se hace mas rapido pero se puede quemar)
 //el fuego es un objeto que tiene un calor especifico 
-var property fuego = fuerte
+var property fuego = apagado
 var property carneActual = noCarne 
 
 
@@ -38,7 +38,7 @@ method siguienteAnimacion(){
   contador = (contador + 1) % cantidadFrames
 }
 
-//puede que este metodo le pertenezca al asadoe 
+//puede que este metodo le pertenezca al asador 
 method avivar(){
   //deberia tardar un toque en avivar el fuego que no sea instantaneo tal vez resetear el contador
   //tambien debeiria resetear el tiempo en el que se apaga el fuego un poco 
