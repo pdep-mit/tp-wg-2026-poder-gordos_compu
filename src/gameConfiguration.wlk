@@ -4,7 +4,6 @@ import wollok.game.*
 import parrilla.*
 import asador.*
 import carnes.*
-import comensales.*
 import cosoParaAgarrarMP.*
 import sarten.*
 import tablaDeCortar.*
@@ -24,8 +23,8 @@ object config {
   const unAsado = new Asado()
   //chori de prueba
   const unChori = new Chorizo()
-  //comensal de prueba
-  const unTio = new Tio()
+  
+  
 
 
   method configurarJuego(){
@@ -37,8 +36,6 @@ object config {
     self.configurarAnimacion()
     self.configurarAcciones()
     
-  
-    self.configurarPedidosComensales()
     
     //agregar aca todo lo que sea necesario para iniciar el juego
   }
@@ -56,7 +53,6 @@ object config {
     game.addVisual(unAsado)
     game.addVisual(unChori)
     game.addVisual(asador)
-    game.addVisual(unTio)
     //agregar aca todo lo que sea visual y que tenga que estar visible 
     //sea la parrilla, el asador, etc. 
   }
@@ -90,7 +86,6 @@ object config {
     //agregar coliciones del tipo, carne con parrilla, el asador con las esquinas, el asador con los items etc ...  
 
     // colisiones de comensales al recibir los platos (por ahora solo el tio)
-    game.onCollideDo(unTio, {plato => plato.entregarA(unTio)})
     
 	}
 
@@ -107,10 +102,5 @@ object config {
   //aca hay polimorfismo -> animaciones de 8 frames
   method configurarAnimacion(){
     game.onTick(300, "animaciones",{animaciones.aumentarContador(8)})
-  }
-
-  //arrancan a pedir los comensales (por ahora 1)
-  method configurarPedidosComensales(){
-    unTio.pedir()
   }
 }
