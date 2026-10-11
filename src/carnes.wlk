@@ -1,17 +1,10 @@
 import wollok.game.*
 import asador.*
 import barrasAviso.*
+import animaciones.*
 
 //super clase carne
 class Carne {
-  var property timpo 
-} 
-
-
-
-class Asado {
-  //esto no va
-  const property nombre = "asado"
   //el tiempo que pasa en la parrilla en puntos de coccion 
   var tiempoParrilla = 0 
   const tiempoCoccion = 16 // en puntos de coccion
@@ -86,28 +79,37 @@ class Asado {
   method fueraDeParrilla() {
     game.removeVisual(barraProgreso)
   }
-
+  
+  //revisar 
   method esCarne() = true
 
- 
+  //revisar ...
+
   method position() = 
     if(portador.esPortador()){
       portador.posicionDeLoQueLlevo()
     } else {
       posicionInicial
     }
+  
   method llevadoPor(algo){
       portador = algo
-    }
-    method soltar() {
+  }
+  method soltar() {
       posicionInicial = self.position()
       portador = sinPortador
-    }
+  }
     
-    // metodo para entregar el plato al comensal
-    method entregarA(comensal) {
+  // metodo para entregar el plato al comensal
+  method entregarA(comensal) {
       comensal.recibirPedido(self)
-    }
+  } 
+} 
+
+
+
+class Asado inherits Carne {
+
 }
 
 
@@ -128,7 +130,7 @@ class Chorizo{
 
     // esto del contador es temporal -- unicamente para ver la animacion del chori cocido
     
-    method imagenActual() = "chori_cocido_" + contador + ".png"
+    method imagenActual() = "chori_cocido_" + animaciones.contador() + ".png"
 
     method image() = self.imagenActual()
     // volvimos a la posicion un metodo para que siempre valide y actualice su ubicacion a medida que se mueve su portador
@@ -149,11 +151,6 @@ class Chorizo{
       portador = sinPortador
     }
     
-    // metodo para entregar el plato al comensal
-    method entregarA(comensal) {
-      comensal.recibirPedido(self)
-    }
-
     method cortar() {
       
     }
