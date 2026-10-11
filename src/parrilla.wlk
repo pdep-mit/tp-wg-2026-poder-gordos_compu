@@ -16,7 +16,7 @@ var property fuego = fuerte
 var property carneActual = noCarne 
 
 
-method image() = fuego.imagenParrilla(animaciones.contador())
+method image() = fuego.imagenParrilla()
 
 //absolute cinema -- la parrilla "asa" cada 1 segundo pero dependiendo del fuego se cocinara mas lento o mas rapido 
 method asar() = carneActual.cocinar(fuego.calor())
@@ -52,7 +52,7 @@ method esPortador() = true
 object apagado {
   method calor() = 0
 
-  method imagenParrilla(contador) = "parrilla_apagada.png"
+  method imagenParrilla() = "parrilla_apagada.png"
 
 
   method anterior() = self
@@ -61,11 +61,11 @@ object apagado {
 
 }
 
-//esto del contador seguro se puede mejorar o todo el sistema de fuego se puede mejorar -- preguntar en clase del miercoles 
+
 object bajo {
   method calor() = 1
 
-  method imagenParrilla(contador) = "parrilla_bajo_" + contador + ".png"
+  method imagenParrilla() = "parrilla_bajo_" + animaciones.siguienteFrame(8) + ".png"
 
   method anterior() = apagado
   
@@ -76,7 +76,7 @@ object bajo {
 object medio {
   method calor() = 2 
 
-  method imagenParrilla(contador) = "parrilla_medio_" + contador + ".png"
+  method imagenParrilla() = "parrilla_medio_" + animaciones.siguienteFrame(8) + ".png"
 
   method anterior() = bajo
   
@@ -86,7 +86,7 @@ object medio {
 object fuerte {
   method calor() = 3
 
-  method imagenParrilla(contador) = "parrilla_alto_" + contador + ".png" 
+  method imagenParrilla() = "parrilla_alto_" + animaciones.siguienteFrame(8) + ".png" 
 
    method anterior() = medio
   

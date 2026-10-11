@@ -7,7 +7,7 @@ import animaciones.*
 class Carne {
   //el tiempo que pasa en la parrilla en puntos de coccion 
   var tiempoParrilla = 0 
-  const tiempoCoccion = 16 // en puntos de coccion
+  const tiempoCoccion = 16 
   //delegar a un objeto animacion 
   var imagenActual = "asado_crudo.png"
 
@@ -114,23 +114,23 @@ class Asado inherits Carne {
 
 
 
-class Vacio {
+class Vacio inherits Carne {
   const property nombre = "vacio"
 }
 
-class Lomo {
+class Lomo inherits Carne {
   const property nombre = "lomo"
 }
 
-class Chorizo{
+class Chorizo {
     var property posicionInicial = game.at(3,3) 
     var property portador = sinPortador 
     const property nombre = "chori" 
-    var contador = 0 
+    
 
     // esto del contador es temporal -- unicamente para ver la animacion del chori cocido
     
-    method imagenActual() = "chori_cocido_" + animaciones.contador() + ".png"
+    method imagenActual() = "chori_cocido_" + animaciones.siguienteFrame(8) + ".png"
 
     method image() = self.imagenActual()
     // volvimos a la posicion un metodo para que siempre valide y actualice su ubicacion a medida que se mueve su portador
@@ -155,9 +155,7 @@ class Chorizo{
       
     }
 
-    method siguienteAnimacion(){
-      contador = (contador + 1) % 8
-    }
+   
 
     method esCarne() = true
 }

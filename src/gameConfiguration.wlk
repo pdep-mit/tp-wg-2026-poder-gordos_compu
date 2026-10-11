@@ -101,6 +101,6 @@ object config {
 
   //aca hay polimorfismo -> animaciones de 8 frames
   method configurarAnimacion(){
-    game.onTick(300, "animaciones",{animaciones.aumentarContador(8)})
+    game.onTick(300, "animaciones",{animaciones.aumentarContador()})
   }
 }

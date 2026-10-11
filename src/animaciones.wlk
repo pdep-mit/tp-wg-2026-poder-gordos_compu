@@ -1,8 +1,10 @@
 
 object animaciones {
-    var property contador = 0 
+    var contador = 0 
     
-    method aumentarContador(contidadFrames) {
-        contador = (contador + 1) % contidadFrames 
+    method siguienteFrame(cantidadFrames) = contador % cantidadFrames 
+
+    method aumentarContador() {
+        contador += 1        
     }
 }
