@@ -10,15 +10,15 @@ import sarten.*
 import tablaDeCortar.*
 import movimientos.*
 
+//dependencia utils
+import animaciones.*
+
+
 object config {
   method alturaMaxima() = 12 
   method anchoMaximo() = 20
   //el tiempo que pasa para que el fuego cambie de estado (fuerte -> medio -> bajo) esta en 20s para mi es poco
   method tiempoCambioFuego() = 20000
-
-  //para hacer polimorfismo con para la animacion, podemos guardar en un set (para variar) los elementos que tengan animacion y luego
-  //tener un metodo onTick que le mande a cada elemento de esa coleccion el aviso de siguiente coleccion 
-  const setAnimables = #{parrilla, unChori}
 
   //asado de prueba
   const unAsado = new Asado()
@@ -104,10 +104,9 @@ object config {
     game.onTick( self.tiempoCambioFuego(),"cambioFuego", {parrilla.fuego(parrilla.fuego().anterior())})
   }
 
-  //aca hay polimorfismo
+  //aca hay polimorfismo -> animaciones de 8 frames
   method configurarAnimacion(){
-    game.onTick(300, "animaciones",
-    {setAnimables.forEach({animables => animables.siguienteAnimacion()})})
+    game.onTick(300, "animaciones",{animaciones.aumentarContador()})
   }
 
   //arrancan a pedir los comensales (por ahora 1)

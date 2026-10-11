@@ -1,5 +1,7 @@
 import wollok.game.*
 import carnes.*
+import animaciones.*
+
 
 //la parrila tmb puede ser una clase ya que podemos tener mas de una parrilla 
 object parrilla {
@@ -7,18 +9,14 @@ const property position = game.at(2,2)
 // variable temporal, cambiar implementacion en proximas entregas
 const property esCarne = false
 
-//contador para la animacion de la parrilla
-var contador = 0 
-const cantidadFrames = 8
-
 //func: la parrilla solo puede tener una unica carne a la vez
 //el fuego puede tener tres estados, 0 apagado, 1, poca llama, 2 media y 3 fuerte (se hace mas rapido pero se puede quemar)
 //el fuego es un objeto que tiene un calor especifico 
-var property fuego = apagado
+var property fuego = fuerte
 var property carneActual = noCarne 
 
 
-method image() = fuego.imagenParrilla(contador)
+method image() = fuego.imagenParrilla(animaciones.contador())
 
 //absolute cinema -- la parrilla "asa" cada 1 segundo pero dependiendo del fuego se cocinara mas lento o mas rapido 
 method asar() = carneActual.cocinar(fuego.calor())
@@ -31,11 +29,6 @@ method ponerCarne(carne) {
 method sacarCarne(){
   carneActual.fueraDeParrilla()
   carneActual = noCarne
-}
-
-method siguienteAnimacion(){
-  //truquito para hacer un ciclo de 0 a 7 -- preguntar si se puede hacer mejor (en la documentacion no explica mucho)
-  contador = (contador + 1) % cantidadFrames
 }
 
 //puede que este metodo le pertenezca al asador 
