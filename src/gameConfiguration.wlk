@@ -48,7 +48,7 @@ object config {
 		game.height(self.alturaMaxima())
 		game.width(self.anchoMaximo())
     game.cellSize(48) //tamanio de las celdas 
-		//game.boardGround("nombreDeImagen.png") //descomentar cuando tengamos una imagen de fondo
+		//game.boardGround("image.png") //descomentar cuando tengamos una imagen de fondo
 	}
 
   method agregarVisuales(){
@@ -65,10 +65,10 @@ object config {
   method configurarAcciones(){
 		
     //movimiento 
-    keyboard.up().onPressDo({asador.direccion(haciaArriba) movimiento.mover(asador, haciaArriba) asador.cambiarOrientacionImagen(3) })
-		keyboard.down().onPressDo({asador.direccion(haciaAbajo) movimiento.mover(asador, haciaAbajo) asador.cambiarOrientacionImagen(0) })
-		keyboard.left().onPressDo({asador.direccion(haciaLaIzquierda) movimiento.mover(asador, haciaLaIzquierda) asador.cambiarOrientacionImagen(1) })
-		keyboard.right().onPressDo({asador.direccion(haciaLaDerecha) movimiento.mover(asador, haciaLaDerecha) asador.cambiarOrientacionImagen(2) })
+    keyboard.up().onPressDo({asador.direccion(haciaArriba) movimiento.mover(asador, haciaArriba)})
+		keyboard.down().onPressDo({asador.direccion(haciaAbajo) movimiento.mover(asador, haciaAbajo) })
+		keyboard.left().onPressDo({asador.direccion(haciaLaIzquierda) movimiento.mover(asador, haciaLaIzquierda) })
+		keyboard.right().onPressDo({asador.direccion(haciaLaDerecha) movimiento.mover(asador, haciaLaDerecha) })
     
     // acciones del asador agarrar y soltar
     keyboard.e().onPressDo({ asador.agarrar() })
