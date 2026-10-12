@@ -1,13 +1,8 @@
 import asador.*
 import wollok.game.*
-
+import src.mesaDeEntrega.*
 //lo mismo que con las carnes, podriamos usar herencia pero ni idea pa asi que hacemos clases para los comensales
 
-class Pedido {
-  var property nombre
-  const property tiempo
-  var property entregado = false
-}
 
 class Tio {
     const imagenActual = "comensalEjemplo.png"

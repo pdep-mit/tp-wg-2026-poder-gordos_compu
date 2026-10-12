@@ -8,9 +8,12 @@ import cosoParaAgarrarMP.*
 import sarten.*
 import tablaDeCortar.*
 import movimientos.*
+import mesaDeEntrega.*
+
 
 //dependencia utils
 import animaciones.*
+import azar.* 
 
 
 object config {
@@ -102,5 +105,30 @@ object config {
   //aca hay polimorfismo -> animaciones de 8 frames
   method configurarAnimacion(){
     game.onTick(300, "animaciones",{animaciones.aumentarContador()})
+  }
+}
+
+//clase abstracta 
+class Nivel {
+  //metodo abstracto -- que deberia contener una lista de los posibles pedidos
+  method listaPedidosPosibles() 
+
+  //la frecuencia con la que los pedidos se agregan a la lista
+  method frecuenciaPedidos()
+
+  //tiene que agarrar un nuevo pedido al azar de la lisra de pedidos 
+  method siguientePedido() = self.listaPedidosPosibles().get(azar.numeroEntre(0, self.listaPedidosPosibles().size() -1))
+  
+
+  //agrega el pedido elegido al azar a la lista de pedidos 
+  method agregarPedidoAListaDePedidos(){
+    listadoPedidos.tomarPedido(self.siguientePedido())
+  }
+    
+  
+
+  //configura la velocidad con la que los pedidos se agregan a la lista
+  method configurarFrecuenciaPedidos(){
+    game.onTick(self.frecuenciaPedidos(),"configurarFrecuenciaPedidos", {self.agregarPedidoAListaDePedidos()})
   }
 }
