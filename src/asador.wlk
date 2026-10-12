@@ -11,18 +11,14 @@ object sinCarga {
 // agregamos la logica para que pueda agarrar al contacto cualquier cosa que tenga implementado el metodo llevadoPor
 // tambien el metodo para soltar, lo cual asigna como su nueva posicion la actual y se desvincula del gordo 
 object asador { 
-  //var property image = "asador_0.png"
   var property position = game.at(1,1)
   var carga = sinCarga
   var property direccion = haciaAbajo
 
+  //Capaz quedo viejo(?)
   var property pedidos = []
 
   method image() = "asador_" + direccion.toString() + ".png"  
-  // REVISAR ESTO, sera que se puede simplificar direccion con cambiarOrientacionImagen en 1 solo mensaje? Estan bien las responsabilidades?  
-  //method cambiarOrientacionImagen(numero) {
-  // image = "asador_" + numero + ".png"  
-  //}
 
   // la celda que tiene justo adelante, según para dónde mira
   method celdaDeEnfrente() = direccion.siguiente(position)
@@ -71,6 +67,12 @@ object asador {
   //podria cambiar
   method dejarDeLlevar(algo){
     carga = sinCarga
+  }
+
+
+  method avivarFuego(){
+    parrilla.fuego(parrilla.fuego().siguiente())
+    
   }
 }
 

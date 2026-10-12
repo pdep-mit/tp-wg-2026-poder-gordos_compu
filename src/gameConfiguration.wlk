@@ -78,6 +78,7 @@ object config {
     keyboard.c().onPressDo({ asador.ponerCarne()})
 
     //acion del asador para avivar el fuego
+    keyboard.a().onPressDo({asador.avivarFuego()})
     
 	}
 
