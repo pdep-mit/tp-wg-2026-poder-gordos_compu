@@ -62,10 +62,10 @@ object config {
   method configurarAcciones(){
 		
     //movimiento 
-    keyboard.up().onPressDo({asador.direccion(haciaArriba) movimiento.mover(asador, haciaArriba) asador.cambiarDireccion(3) })
-		keyboard.down().onPressDo({asador.direccion(haciaAbajo) movimiento.mover(asador, haciaAbajo) asador.cambiarDireccion(0) })
-		keyboard.left().onPressDo({asador.direccion(haciaLaIzquierda) movimiento.mover(asador, haciaLaIzquierda) asador.cambiarDireccion(1) })
-		keyboard.right().onPressDo({asador.direccion(haciaLaDerecha) movimiento.mover(asador, haciaLaDerecha) asador.cambiarDireccion(2) })
+    keyboard.up().onPressDo({asador.direccion(haciaArriba) movimiento.mover(asador, haciaArriba) asador.cambiarOrientacionImagen(3) })
+		keyboard.down().onPressDo({asador.direccion(haciaAbajo) movimiento.mover(asador, haciaAbajo) asador.cambiarOrientacionImagen(0) })
+		keyboard.left().onPressDo({asador.direccion(haciaLaIzquierda) movimiento.mover(asador, haciaLaIzquierda) asador.cambiarOrientacionImagen(1) })
+		keyboard.right().onPressDo({asador.direccion(haciaLaDerecha) movimiento.mover(asador, haciaLaDerecha) asador.cambiarOrientacionImagen(2) })
     
     // acciones del asador agarrar y soltar
     keyboard.e().onPressDo({ asador.agarrar() })

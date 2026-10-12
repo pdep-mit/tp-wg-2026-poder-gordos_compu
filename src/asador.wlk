@@ -17,8 +17,9 @@ object asador {
   var property direccion = haciaAbajo
 
   var property pedidos = []
-  
-  method cambiarDireccion(numero) {
+
+  // REVISAR ESTO, sera que se puede simplificar direccion con cambiarOrientacionImagen en 1 solo mensaje? Estan bien las responsabilidades?  
+  method cambiarOrientacionImagen(numero) {
     image = "asador_" + numero + ".png"  
   }
 
