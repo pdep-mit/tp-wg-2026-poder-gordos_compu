@@ -45,6 +45,10 @@ method estaOcupada() = carneActual.esCarne()
 
 method esPortador() = true
 
+//podria cambiar
+method dejarDeLlevar(carne){
+  self.sacarCarne()
+}
 //... mas cosas
 }
 

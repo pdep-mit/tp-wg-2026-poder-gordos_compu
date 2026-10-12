@@ -66,10 +66,15 @@ object asador {
 
   method esPortador() = true
 
+  //podria cambiar
+  method dejarDeLlevar(algo){
+    carga = sinCarga
+  }
 }
 
 // creamos objeto sin portador para que todos puedan calcular sus posiciones
 object sinPortador {
   method posicionDeLoQueLlevo(){}
   method esPortador() = false
+  method dejarDeLlevar(algo){}
 }

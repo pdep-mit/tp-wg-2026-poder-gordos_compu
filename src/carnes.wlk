@@ -2,21 +2,24 @@ import wollok.game.*
 import asador.*
 import barrasAviso.*
 import animaciones.*
+import estadoCarne.*
 
-//super clase carne
+//super clase carne abstracta 
 class Carne {
   //el tiempo que pasa en la parrilla en puntos de coccion 
   var tiempoParrilla = 0 
-  const tiempoCoccion = 16 
-  //delegar a un objeto animacion 
-  var imagenActual = "asado_crudo.png"
+  
+  //pasa a ser un metodo sin cuerpo
+  method tiempoCoccion()
+  
+  //sirve para armar la imagen de la carne
+  method nombre()
 
   //creamos la barra de progreso de la carne 
   const barraProgreso = new BarraProgreso() 
 
-  //cocido luego podria pasar a ser un estadoCarne que tenga la referencia a un objeto que sean los diferentes estados (crudo, jugoso, cocido, etc), vinculado a la barra de progreso
-  var cocido = false
-  //la posicion de la carne va a depender de la posicion del asador
+  //el estado de la carne
+  var estado = crudo
   
   //metodos y variables necesarias para ser agarrado por el asador
   var property portador = sinPortador
@@ -29,47 +32,30 @@ class Carne {
     
   }*/
 
-  //esto de las imagenes seguro que se puede mejorar -- preguntar en clase jeje
-
-
-  //seria el tiempo (o puntos de coccion) que le damos de chance para que evite que se queme 
+  //seria el tiempo (o puntos de coccion) que le damos de chance para que evite que se queme -- maybe abstracto
   method tiempoDeOnda() = 4
 
-  method image() = imagenActual
+  //es el rango q le damos al jugador para hasta que la carne se queme
+  method limiteDeQuemado() = self.tiempoCoccion() + self.tiempoDeOnda()
 
-  method imagenCocida() {    
-   if(cocido){
-    imagenActual = "imagen de la carne cocida"
-    }
-  }
+  //la imagen se calcula a partir del estado de la carne
+  method image() = self.nombre() + "_" + estado.estado() + ".png"
 
-  method imagenQuemada() {
-    imagenActual = "imagen de la carne quemada"
-  }
+  //da 4 puntos de coccion de chance para que la vayas a sacar 
+  method seQuemo() = tiempoParrilla > self.limiteDeQuemado()
 
-  //da 4 puntos de coccion de chance para que la vayas a sacar (si el fuego esta fuerte seria un solo segundo - tal vez hay que dar un poco mas)
-  method seQuemo() = tiempoParrilla > tiempoCoccion + self.tiempoDeOnda()
+  //indica si la carne esta dentro del rango de "cocida"
+  method estaCocida()  = tiempoParrilla.between(self.tiempoCoccion(), self.limiteDeQuemado())
 
   method cocinar(calor) {
     tiempoParrilla += calor
-
-    if(tiempoParrilla >= tiempoCoccion) {
-      cocido = true
-      self.imagenCocida()
-      //deberia de avisar que se cocino y dar una alerta para que no c queme 
-      //podemos generar una nueva instancia de alerta, en la posicion que tenga la carne en ese momento 
-    }
-    if(self.seQuemo()){
-      self.imagenQuemada()
-      //podriamos a hacer que muestre una barra de que se quemo
-      //luego podriamos poner la imagen de la parrilla que sea quemada o que se prenda fuego 
-    }
+    estado = estado.siguienteEstado(self)
   }
 
   //regla de tres simple para el porcentaje de la carne a ver como se encuentra
   //tiempoCoccion -> 100%
   //tiempoParrilla -> x 
-  method comoAndas() = (tiempoParrilla * 100) / tiempoCoccion
+  method comoAndas() = (tiempoParrilla * 100) / self.tiempoCoccion()
 
   method enLaParrilla(){
     barraProgreso.carneActual(self)
@@ -78,7 +64,8 @@ class Carne {
 
   method fueraDeParrilla() {
     game.removeVisual(barraProgreso)
-  }
+  } 
+
   
   //revisar 
   method esCarne() = true
@@ -93,6 +80,7 @@ class Carne {
     }
   
   method llevadoPor(algo){
+      portador.dejarDeLlevar(algo)
       portador = algo
   }
   method soltar() {
@@ -100,7 +88,7 @@ class Carne {
       portador = sinPortador
   }
     
-  // metodo para entregar el plato al comensal
+  // metodo para entregar el plato al comensal -- creo q deberia estar en asador
   method entregarA(comensal) {
       comensal.recibirPedido(self)
   } 
@@ -109,58 +97,36 @@ class Carne {
 
 
 class Asado inherits Carne {
-
+  override method tiempoCoccion() = 16
+  override method nombre() = "asado"
+  
 }
 
 
 
 class Vacio inherits Carne {
-  const property nombre = "vacio"
+  
 }
 
 class Lomo inherits Carne {
-  const property nombre = "lomo"
+  
 }
 
-class Chorizo {
-    var property posicionInicial = game.at(3,3) 
-    var property portador = sinPortador 
-    const property nombre = "chori" 
-    
+class Chorizo inherits Carne {
+  override method tiempoCoccion() = 12
+  override method nombre() = "chori"
 
-    // esto del contador es temporal -- unicamente para ver la animacion del chori cocido
-    
-    method imagenActual() = "chori_cocido_" + animaciones.siguienteFrame(8) + ".png"
-
-    method image() = self.imagenActual()
-    // volvimos a la posicion un metodo para que siempre valide y actualice su ubicacion a medida que se mueve su portador
-    // soltar lo desvincula y actualiza su ubicacion inicial a la actual
-    method position() = 
-    if(portador.esPortador()){
-      portador.posicionDeLoQueLlevo()
-    } else {
-      posicionInicial
-    }
-         
-      
-    method llevadoPor(algo){
-      portador = algo
-    }
-    method soltar() {
-      posicionInicial = self.position()
-      portador = sinPortador
-    }
-    
-    method cortar() {
-      
-    }
-
-   
-
-    method esCarne() = true
+  //al tener animacion -- si hacemos asado cocido con animacion tmb lo tenemos q hacer
+  override method image() {
+    if(self.estaCocida()) {
+      return "chori_cocido_" + animaciones.siguienteFrame(8) + ".png"
+    }   
+    //cosas de herencia cheta
+    return super()
+  }
 }
 
-class Morcilla {
+class Morcilla inherits Carne{
   const property nombre = "morcilla"
 }
 

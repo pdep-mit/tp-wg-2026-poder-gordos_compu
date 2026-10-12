@@ -1,0 +1,18 @@
+import src.carnes.*
+import src.parrilla.*
+import src.asador.*
+
+
+describe "Las carnes se cocinan en la parrilla y cambian su estado" {
+
+  //como en los test no pasa el tiempo podemos usar times para que se repita la accion varias veces 
+
+  const unAsado = new Asado()
+
+  test "un asado se cocina a fuego fuerte" {
+    parrilla.fuego(fuerte)
+    parrilla.carneActual(unAsado)
+    6.times({i => parrilla.asar()})
+    assert.that(unAsado.estaCocida())
+  }
+}
