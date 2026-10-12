@@ -25,6 +25,14 @@ object asador {
 
   method estaFrenteA(algo) = self.celdaDeEnfrente() == algo.position()
 
+   method ponerCarne(){
+    if(carga.esCarne() && not(parrilla.estaOcupada())&& (self.estaFrenteA(parrilla) || self.estaFrenteA(parrilla1))){
+      parrilla.ponerCarne(carga)
+      carga.llevadoPor(parrilla)
+      carga = sinCarga
+    } 
+  }
+
   method agarrar() {
     // solucion temporal para que no falle al intentar agarrar ciertos objetos por sobre otros
     const alcanzables = game.colliders(self).filter({plato => plato.esCarne()})
@@ -51,13 +59,7 @@ object asador {
     
   }
 
-  method ponerCarne(){
-    if(carga.esCarne() && not(parrilla.estaOcupada())&& self.estaFrenteA(parrilla)){
-      parrilla.ponerCarne(carga)
-      carga.llevadoPor(parrilla)
-      carga = sinCarga
-    } 
-  }
+ 
   
   //se puede modificar 
   method posicionDeLoQueLlevo() = position.up(1).left(1)
@@ -72,7 +74,6 @@ object asador {
 
   method avivarFuego(){
     parrilla.fuego(parrilla.fuego().siguiente())
-    
   }
 }
 
