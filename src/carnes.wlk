@@ -6,6 +6,10 @@ import estadoCarne.*
 import itemFrame.*
 //super clase carne abstracta 
 class Carne {
+  
+  //super temporal -- borrar 
+  method esAgarrable() = true
+
   //el tiempo que pasa en la parrilla en puntos de coccion 
   var tiempoParrilla = 0 
   
@@ -119,9 +123,48 @@ class Asado inherits Carne {
 
 class TiraAsado {
   const property image = "tira_asado.png" 
-  var property position 
 
-  method esCarne() = true
+  var property portador = sinPortador
+  var property posicionInicial = game.at(8,8)
+
+  //super temporal -- borrar 
+  method esAgarrable() = true
+
+  method esCarne() = false
+
+  //para no repetir todoa esta logica podemos crear una clase sobre cosa que se pueda llevar y que la herede carne y esto
+
+  method position() = 
+    if(portador.esPortador()){
+      portador.posicionDeLoQueLlevo()
+    } else {
+      posicionInicial
+    }
+  
+  method llevadoPor(algo){
+   if (algo.muestraItemFrame()) {
+        if (!game.hasVisual(itemFrame)) game.addVisual(itemFrame)
+    } else {
+        if (game.hasVisual(itemFrame)) game.removeVisual(itemFrame)
+    } // <--- agrega el item frame solo lo si no estaba
+      portador.dejarDeLlevar(algo)
+      portador = algo
+  }
+  method soltar() {
+      if (game.hasVisual(itemFrame)) game.removeVisual(itemFrame) // <-- Remueve el item frame
+      posicionInicial = self.position()
+      portador = sinPortador
+  }
+    
+  // metodo para entregar el plato al comensal -- creo q deberia estar en asador
+  method entregarA(comensal) {
+    if (game.hasVisual(itemFrame)) game.removeVisual(itemFrame)// <-- cuando entregue lo que tenga debera remover el visual, recuerden esto
+      comensal.recibirPedido(self)
+  } 
+
+  method cocinar(calor){}
+
+  method enLaParrilla(){}
 }
 
 class Vacio inherits Carne {

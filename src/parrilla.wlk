@@ -8,7 +8,7 @@ object parrilla {
 method muestraItemFrame() = false
 const property position = game.at(2,2)
 // variable temporal, cambiar implementacion en proximas entregas
-const property esCarne = false
+method esAgarrable() = false
 
 //func: la parrilla solo puede tener una unica carne a la vez
 //el fuego puede tener tres estados, 0 apagado, 1, poca llama, 2 media y 3 fuerte (se hace mas rapido pero se puede quemar)

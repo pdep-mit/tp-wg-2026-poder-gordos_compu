@@ -6,7 +6,7 @@ import movimientos.*
 
 object sinCarga {
   method soltar(){}
-  method esCarne() = false
+  method esAgarrable() = false
 }
 
 // agregamos la logica para que pueda agarrar al contacto cualquier cosa que tenga implementado el metodo llevadoPor
@@ -38,7 +38,7 @@ object asador {
 
   method agarrar() {
     // solucion temporal para que no falle al intentar agarrar ciertos objetos por sobre otros
-    const alcanzables = game.colliders(self).filter({plato => plato.esCarne()})
+    const alcanzables = game.colliders(self).filter({plato => plato.esAgarrable()})
     if(!alcanzables.isEmpty())
     {
       self.soltar()

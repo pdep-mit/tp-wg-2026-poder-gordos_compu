@@ -11,3 +11,10 @@ object lluvia{
 
 }
 
+object viento{
+
+}
+
+object tio {
+  
+}

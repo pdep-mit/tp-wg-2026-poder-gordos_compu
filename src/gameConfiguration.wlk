@@ -26,7 +26,8 @@ object config {
   const unAsado = new Asado()
   //chori de prueba
   const unChori = new Chorizo()
-  
+  //tira de asado de prueba
+  const unaTira = new TiraAsado()
   
 
 
@@ -55,6 +56,7 @@ object config {
     game.addVisual(parrilla)
     game.addVisual(unAsado)
     game.addVisual(unChori)
+    game.addVisual(unaTira)
     game.addVisual(asador)
     //agregar aca todo lo que sea visual y que tenga que estar visible 
     //sea la parrilla, el asador, etc. 
