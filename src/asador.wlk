@@ -73,7 +73,10 @@ object asador {
 
 
   method avivarFuego(){
-    parrilla.fuego(parrilla.fuego().siguiente())
+    if(self.estaFrenteA(parrilla) || self.estaFrenteA(parrilla1))
+    {
+      parrilla.fuego(parrilla.fuego().siguiente())
+    }  
   }
 }
 

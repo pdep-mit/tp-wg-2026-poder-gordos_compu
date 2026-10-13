@@ -1,5 +1,5 @@
 import gameConfiguration.*
-
+import parrilla.*
 /*
 * Acá se define cómo se mueven los personajes cuando se usan las flechitas.
 * Las posiciones son objetos inmutables, pero los personajes controlados pueden
@@ -11,11 +11,19 @@ import gameConfiguration.*
 // El metodo movimiento es encarga de seleccionar que tipo de movimiento se va a hacer, y basandose en el mensaje que recibe "direccion" se va a ejecutar el metodo
 // correspendiente a la direccion establecida, detallados mas abajo
 object movimiento {
-	method mover(personajeLibre, direccion){
-		const nuevaPosicion = direccion.posicionSiguiente(personajeLibre.position())
-		personajeLibre.position(nuevaPosicion)
-	}
+    
+	method mover(personajeLibre, direccion)
+    {   
+        
+        const nuevaPosicion = direccion.posicionSiguiente(personajeLibre.position())
+         // Si la nueva posición coincide con la parrilla, no se mueve
+         //NO HACE FALTA USAR ON COLIDE PARA ESTO, ON COLDIDE sirve para otra cosa! Generar efecto atraves de levantar un flag! Para esto es pesimo (creanme lo intente).
+    if (nuevaPosicion != parrilla.position() && nuevaPosicion != parrilla1.position()) {
+      personajeLibre.position(nuevaPosicion)
+        }
+    }
 }
+
 
 object haciaArriba {
     method posicionSiguiente(posicion) = game.at(posicion.x(),(config.alturaMaxima()-2).min(posicion.up(1).y()))

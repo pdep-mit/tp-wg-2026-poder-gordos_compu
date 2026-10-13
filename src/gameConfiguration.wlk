@@ -84,13 +84,13 @@ object config {
 
   method configurarColisiones(){
 
-    //deberia permitir al asador que al apretar ciertas teclas, le permikta poner la carne en la parrilla, sacarla, avivar el fuego etc
-    //game.onCollideDo(parrilla,{})
+    //deberia permitir al asador que al apretar ciertas teclas, le permita poner la carne en la parrilla, sacarla, avivar el fuego etc
+    
+    //Solo colisiones cuando necesitas producir un efecto que levanta un flag, ojo que no es onColideDo() y luego cuando ya no esta colisionando unDo
+    // las bolas la flag queda levantada
 
     //agregar coliciones del tipo, carne con parrilla, el asador con las esquinas, el asador con los items etc ...  
 
-    // colisiones de comensales al recibir los platos (por ahora solo el tio)
-    
 	}
 
   //le dice a la parrilla que cocine la carne cada 1 segundo 
