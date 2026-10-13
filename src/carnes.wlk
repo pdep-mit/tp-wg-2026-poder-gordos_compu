@@ -80,18 +80,23 @@ class Carne {
     }
   
   method llevadoPor(algo){
-    if (!game.hasVisual(itemFrame)) game.addVisual(itemFrame) // <--- solo lo agrega si no estaba
+   if (algo.muestraItemFrame()) {
+        if (!game.hasVisual(itemFrame)) game.addVisual(itemFrame)
+    } else {
+        if (game.hasVisual(itemFrame)) game.removeVisual(itemFrame)
+    } // <--- agrega el item frame solo lo si no estaba
       portador.dejarDeLlevar(algo)
       portador = algo
   }
   method soltar() {
-      if (game.hasVisual(itemFrame)) game.removeVisual(itemFrame) // <-- Remueve el frame
+      if (game.hasVisual(itemFrame)) game.removeVisual(itemFrame) // <-- Remueve el item frame
       posicionInicial = self.position()
       portador = sinPortador
   }
     
   // metodo para entregar el plato al comensal -- creo q deberia estar en asador
   method entregarA(comensal) {
+    if (game.hasVisual(itemFrame)) game.removeVisual(itemFrame)// <-- cuando entregue lo que tenga debera remover el visual, recuerden esto
       comensal.recibirPedido(self)
   } 
 } 

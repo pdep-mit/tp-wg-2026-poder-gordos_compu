@@ -5,6 +5,7 @@ import animaciones.*
 
 //la parrila tmb puede ser una clase ya que podemos tener mas de una parrilla 
 object parrilla {
+  method muestraItemFrame() = false
 const property position = game.at(2,2)
 // variable temporal, cambiar implementacion en proximas entregas
 const property esCarne = false
@@ -44,6 +45,12 @@ method dejarDeLlevar(carne){
   self.sacarCarne()
 }
 //... mas cosas
+}
+
+//Este es el objeto invisible que acompania a la parrilla para las colisiones y para poder cocinar
+object parrilla1{
+  method muestraItemFrame() = false
+  const property position = parrilla.position().right(1)
 }
 
 //el calor son puntos de coccion 
@@ -92,10 +99,3 @@ object fuerte {
 
 }
 
-//Este es el objeto invisible que acompania a la parrilla para las colisiones y para poder cocinar
-object parrilla1{
-  
-  const property position = parrilla.position().right(1)
-
-
-}
