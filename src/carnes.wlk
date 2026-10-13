@@ -3,7 +3,7 @@ import asador.*
 import barrasAviso.*
 import animaciones.*
 import estadoCarne.*
-
+import itemFrame.*
 //super clase carne abstracta 
 class Carne {
   //el tiempo que pasa en la parrilla en puntos de coccion 
@@ -80,10 +80,12 @@ class Carne {
     }
   
   method llevadoPor(algo){
+    if (!game.hasVisual(itemFrame)) game.addVisual(itemFrame) // <--- solo lo agrega si no estaba
       portador.dejarDeLlevar(algo)
       portador = algo
   }
   method soltar() {
+      if (game.hasVisual(itemFrame)) game.removeVisual(itemFrame) // <-- Remueve el frame
       posicionInicial = self.position()
       portador = sinPortador
   }

@@ -12,7 +12,7 @@ object sinCarga {
 // tambien el metodo para soltar, lo cual asigna como su nueva posicion la actual y se desvincula del gordo 
 object asador { 
   var property position = game.at(1,1)
-  var carga = sinCarga
+  var property carga = sinCarga
   var property direccion = haciaAbajo
 
   //Capaz quedo viejo(?)
@@ -42,8 +42,8 @@ object asador {
       carga = alcanzables.first()
       carga.llevadoPor(self)
     }
-    
   }
+
   method soltar() {
     carga.soltar()
     carga = sinCarga
@@ -62,7 +62,7 @@ object asador {
  
   
   //se puede modificar 
-  method posicionDeLoQueLlevo() = position.up(1).left(1)
+  method posicionDeLoQueLlevo() = position.up(2).right(1)
 
   method esPortador() = true
 
@@ -80,6 +80,8 @@ object asador {
   }
 }
 
+
+// RAMA PORFAVOR REVISA ESTO ME ARDEN LOS OJOS AHHHH LLORO SANGRE
 // creamos objeto sin portador para que todos puedan calcular sus posiciones
 object sinPortador {
   method posicionDeLoQueLlevo(){}
