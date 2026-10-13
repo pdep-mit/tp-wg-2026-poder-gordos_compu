@@ -100,6 +100,14 @@ class Asado inherits Carne {
   override method tiempoCoccion() = 16
   override method nombre() = "asado"
   
+  //al tener animacion -- si hacemos asado cocido con animacion tmb lo tenemos q hacer
+  override method image() {
+    if(self.estaCocida()) {
+      return "asado_cocido_" + animaciones.siguienteFrame(8) + ".png"
+    }   
+    //cosas de herencia cheta
+    return super()
+  }
 }
 
 

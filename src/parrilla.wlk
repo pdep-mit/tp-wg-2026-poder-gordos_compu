@@ -94,8 +94,5 @@ object fuerte {
 
 //Este es el objeto invisible que acompania a la parrilla para las colisiones y para poder cocinar
 object parrilla1{
-  
   const property position = parrilla.position().right(1)
-
-
 }
