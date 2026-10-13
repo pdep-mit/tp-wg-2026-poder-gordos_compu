@@ -5,7 +5,7 @@ import animaciones.*
 
 //la parrila tmb puede ser una clase ya que podemos tener mas de una parrilla 
 object parrilla {
-  method muestraItemFrame() = false
+method muestraItemFrame() = false
 const property position = game.at(2,2)
 // variable temporal, cambiar implementacion en proximas entregas
 const property esCarne = false
@@ -99,7 +99,14 @@ object fuerte {
 
 }
 
-//Este es el objeto invisible que acompania a la parrilla para las colisiones y para poder cocinar
-object parrilla1{
-  const property position = parrilla.position().right(1)
+//agregamos un tipo de fuego que sea mojado 
+object mojado {
+  //tal vez podriamos hacer que la parrilla mojada le reste tiempo de parrila a la carne 
+  method calor() = 0
+
+  method imagenParrilla() = "parrilla_mojada.png"
+
+  method anterior() = self
+  
+  method siguiente() = apagado
 }

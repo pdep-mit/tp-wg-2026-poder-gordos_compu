@@ -28,6 +28,7 @@ class BarraProgreso {
 
         //devuelve la cantidad de porcentajes que ya paso la carne
         return listaPorcentajeReal.size()
+
     } 
 }
 

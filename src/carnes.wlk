@@ -117,7 +117,12 @@ class Asado inherits Carne {
   }
 }
 
+class TiraAsado {
+  const property image = "tira_asado.png" 
+  var property position 
 
+  method esCarne() = true
+}
 
 class Vacio inherits Carne {
   
