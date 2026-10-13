@@ -8,11 +8,34 @@ describe "Las carnes se cocinan en la parrilla y cambian su estado" {
   //como en los test no pasa el tiempo podemos usar times para que se repita la accion varias veces 
 
   const unAsado = new Asado()
+  
+  const unaTira = new TiraAsado()
 
   test "un asado se cocina a fuego fuerte" {
     parrilla.fuego(fuerte)
     parrilla.carneActual(unAsado)
     6.times({i => parrilla.asar()})
+    assert.that(unAsado.estaCocida())
+  }
+
+  test "un asado se quema a fuego fuerte" {
+    parrilla.fuego(fuerte)
+    parrilla.carneActual(unAsado)
+    8.times({i => parrilla.asar()})
+    assert.that(unAsado.seQuemo())
+  }
+
+  test "no se puede cocinar una tira de asado" {
+    asador.carga(unaTira)
+    //al hacer la accion de la derecha deberia saltar el msg de la izq. 
+    assert.throwsExceptionWithMessage("primero me tenes que cortar", { asador.ponerCarne() })
+  }
+
+  //revisar si hay mejores...
+  test "un asado se cocina a fuego bajo " {
+    parrilla.fuego(bajo)
+    parrilla.carneActual(unAsado)
+    16.times({i => parrilla.asar()})
     assert.that(unAsado.estaCocida())
   }
 }

@@ -6,15 +6,27 @@ object lluvia{
         parrilla.fuego(mojado) 
     } 
 
+    //nubes de lluvia 
     //podriamos hacer una imagen que caiga por toda la pantalla simulando la lluvia
-    //cuando pase que la parrila se quede mojada
-
+    //cuando pase que la parrila se quede mojada y te cuesta mas prenderla -- ver avivar 
+    //hacer charcos en el piso 
+    //ver -> capaz que afecta a la carne de alguna forma 
 }
 
 object viento{
-
+    //sonido de viento -- que haya un molino y arranque 
+    //aumenta la frecuencia con la que se apaga el fuego 
 }
 
 object tio {
-  
+    //medio falopa 
 }
+
+object neblina {
+    //te invierte los controles y aparece un leve asset de algo que te haga dar cuenta de que hay neblina 
+}
+
+//opcional 
+/* object meteorito {
+  
+} */

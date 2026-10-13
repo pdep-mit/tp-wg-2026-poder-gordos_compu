@@ -34,6 +34,7 @@ object asador {
       carga.llevadoPor(parrilla)
       carga = sinCarga
     } 
+    carga.noSePuedeCocinar()
   }
 
   method agarrar() {

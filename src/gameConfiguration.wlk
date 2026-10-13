@@ -114,7 +114,7 @@ object config {
 //clase abstracta 
 class Nivel {
   //metodo abstracto -- que deberia contener una lista de los posibles pedidos
-  method listaPedidosPosibles() 
+  method listaPedidosPosibles()
 
   //la frecuencia con la que los pedidos se agregan a la lista
   method frecuenciaPedidos()

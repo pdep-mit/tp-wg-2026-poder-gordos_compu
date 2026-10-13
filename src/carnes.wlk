@@ -4,6 +4,7 @@ import barrasAviso.*
 import animaciones.*
 import estadoCarne.*
 import itemFrame.*
+
 //super clase carne abstracta 
 class Carne {
   
@@ -165,6 +166,10 @@ class TiraAsado {
   method cocinar(calor){}
 
   method enLaParrilla(){}
+
+  method noSePuedeCocinar() {
+    self.error("primero me tenes que cortar")
+  }
 }
 
 class Vacio inherits Carne {
