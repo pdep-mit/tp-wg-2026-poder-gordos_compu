@@ -8,3 +8,6 @@ log
 
 # Dependencies
 node_modules
+
+#cosa molesta de mac 
+.DS_Store
