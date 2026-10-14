@@ -4,13 +4,10 @@ import barrasAviso.*
 import animaciones.*
 import estadoCarne.*
 import itemFrame.*
+import items.*
 
 //super clase carne abstracta 
-class Carne {
-  
-  //super temporal -- borrar 
-  method esAgarrable() = true
-
+class Carne inherits ElementoAgarrable {
   //el tiempo que pasa en la parrilla en puntos de coccion 
   var tiempoParrilla = 0 
   
@@ -25,17 +22,6 @@ class Carne {
 
   //el estado de la carne
   var estado = crudo
-  
-  //metodos y variables necesarias para ser agarrado por el asador
-  var property portador = sinPortador
-  var property posicionInicial = game.at(5,5)
-
-  //deberia preguntarle al asador para donde esta mirando y luego devolver la posicion uno mas arriba, abajo, a la izquierda o derecha
-  //pero primero deberia de tener una posicion inicial de donde saca la carne, le deberia pregunar rambien al coso que suministra la carne a ver donde esta
-  //lo ultimo en caso de que no lo hayan agarrado 
-  /*method calcularPosicion(){
-    
-  }*/
 
   //seria el tiempo (o puntos de coccion) que le damos de chance para que evite que se queme -- maybe abstracto
   method tiempoDeOnda() = 4
@@ -50,7 +36,7 @@ class Carne {
   method seQuemo() = tiempoParrilla > self.limiteDeQuemado()
 
   //indica si la carne esta dentro del rango de "cocida"
-  method estaCocida()  = tiempoParrilla.between(self.tiempoCoccion(), self.limiteDeQuemado())
+  method estaCocida() = tiempoParrilla.between(self.tiempoCoccion(), self.limiteDeQuemado())
 
   method cocinar(calor) {
     tiempoParrilla += calor
@@ -71,42 +57,8 @@ class Carne {
     game.removeVisual(barraProgreso)
   } 
 
-  
-  //revisar 
   method esCarne() = true
-
-  //revisar ...
-
-  method position() = 
-    if(portador.esPortador()){
-      portador.posicionDeLoQueLlevo()
-    } else {
-      posicionInicial
-    }
-  
-  method llevadoPor(algo){
-   if (algo.muestraItemFrame()) {
-        if (!game.hasVisual(itemFrame)) game.addVisual(itemFrame)
-    } else {
-        if (game.hasVisual(itemFrame)) game.removeVisual(itemFrame)
-    } // <--- agrega el item frame solo lo si no estaba
-      portador.dejarDeLlevar(algo)
-      portador = algo
-  }
-  method soltar() {
-      if (game.hasVisual(itemFrame)) game.removeVisual(itemFrame) // <-- Remueve el item frame
-      posicionInicial = self.position()
-      portador = sinPortador
-  }
-    
-  // metodo para entregar el plato al comensal -- creo q deberia estar en asador
-  method entregarA(comensal) {
-    if (game.hasVisual(itemFrame)) game.removeVisual(itemFrame)// <-- cuando entregue lo que tenga debera remover el visual, recuerden esto
-      comensal.recibirPedido(self)
-  } 
 } 
-
-
 
 class Asado inherits Carne {
   override method tiempoCoccion() = 16
@@ -122,46 +74,14 @@ class Asado inherits Carne {
   }
 }
 
-class TiraAsado {
+class TiraAsado inherits ElementoAgarrable {
   const property image = "tira_asado.png" 
 
-  var property portador = sinPortador
-  var property posicionInicial = game.at(8,8)
-
-  //super temporal -- borrar 
-  method esAgarrable() = true
+  override method initialize() {
+    posicionEnSuelo = game.at(8,8)
+  }
 
   method esCarne() = false
-
-  //para no repetir todoa esta logica podemos crear una clase sobre cosa que se pueda llevar y que la herede carne y esto
-
-  method position() = 
-    if(portador.esPortador()){
-      portador.posicionDeLoQueLlevo()
-    } else {
-      posicionInicial
-    }
-  
-  method llevadoPor(algo){
-   if (algo.muestraItemFrame()) {
-        if (!game.hasVisual(itemFrame)) game.addVisual(itemFrame)
-    } else {
-        if (game.hasVisual(itemFrame)) game.removeVisual(itemFrame)
-    } // <--- agrega el item frame solo lo si no estaba
-      portador.dejarDeLlevar(algo)
-      portador = algo
-  }
-  method soltar() {
-      if (game.hasVisual(itemFrame)) game.removeVisual(itemFrame) // <-- Remueve el item frame
-      posicionInicial = self.position()
-      portador = sinPortador
-  }
-    
-  // metodo para entregar el plato al comensal -- creo q deberia estar en asador
-  method entregarA(comensal) {
-    if (game.hasVisual(itemFrame)) game.removeVisual(itemFrame)// <-- cuando entregue lo que tenga debera remover el visual, recuerden esto
-      comensal.recibirPedido(self)
-  } 
 
   method cocinar(calor){}
 

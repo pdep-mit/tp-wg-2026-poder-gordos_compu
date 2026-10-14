@@ -9,6 +9,9 @@ class BarraProgreso {
 
     //la posicion depende de la de la carne (se puede modificar para que aparezca la barra luego)
     method position () = carneActual.position().down(1) 
+    
+    method esAgarrable() = false
+    method esParrilla() = false
 
     method image() = "barra_progreso_" + self.calcularProgreso() + ".png"
 

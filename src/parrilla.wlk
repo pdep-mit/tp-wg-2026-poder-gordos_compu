@@ -2,55 +2,75 @@ import wollok.game.*
 import carnes.*
 import animaciones.*
 
-
 //la parrila tmb puede ser una clase ya que podemos tener mas de una parrilla 
 object parrilla {
-method muestraItemFrame() = false
-const property position = game.at(2,2)
-// variable temporal, cambiar implementacion en proximas entregas
-method esAgarrable() = false
+  method muestraItemFrame() = false
+  const property position = game.at(2,2)
+  // variable temporal, cambiar implementacion en proximas entregas
+  method esAgarrable() = false
 
-//func: la parrilla solo puede tener una unica carne a la vez
-//el fuego puede tener tres estados, 0 apagado, 1, poca llama, 2 media y 3 fuerte (se hace mas rapido pero se puede quemar)
-//el fuego es un objeto que tiene un calor especifico 
-var property fuego = fuerte
-var property carneActual = noCarne 
+  //Autoinicializa su propia otra parte, esto es fundamental para que agarrar pueda encontrar al objeto parrilla1 y que parrilla1 pueda delegar en la parrilla origianl
+  method initialize() {
+    game.addVisual(parrilla1)
+  }
+  //func: la parrilla solo puede tener una unica carne a la vez
+  //el fuego puede tener tres estados, 0 apagado, 1, poca llama, 2 media y 3 fuerte (se hace mas rapido pero se puede quemar)
+  //el fuego es un objeto que tiene un calor especifico 
+  var property fuego = fuerte
+  var property carneActual = noCarne 
 
+  method image() = fuego.imagenParrilla()
 
-method image() = fuego.imagenParrilla()
+  //absolute cinema -- la parrilla "asa" cada 1 segundo pero dependiendo del fuego se cocinara mas lento o mas rapido 
+  method asar() = carneActual.cocinar(fuego.calor())
 
-//absolute cinema -- la parrilla "asa" cada 1 segundo pero dependiendo del fuego se cocinara mas lento o mas rapido 
-method asar() = carneActual.cocinar(fuego.calor())
+  method ponerCarne(carne) {
+    carneActual = carne
+    carne.enLaParrilla()
+  } 
 
-method ponerCarne(carne) {
-  carneActual = carne
-  carne.enLaParrilla()
-} 
+  method sacarCarne(){
+    carneActual.fueraDeParrilla()
+    carneActual = noCarne
+  }
 
-method sacarCarne(){
-  carneActual.fueraDeParrilla()
-  carneActual = noCarne
-}
+  // Polimorfismo con asador y sinPortador para ubicar el ítem
+  method posicionPara(item) = position
 
-method posicionDeLoQueLlevo() = position
+  //le preguntamos a la parrilla si esta libre para que le pongan una carne
+  method estaOcupada() = carneActual.esCarne()
 
-//le preguntamos a la parrilla si esta libre para que le pongan una carne
-method estaOcupada() = carneActual.esCarne()
+  //podria cambiar
+  method dejarDeLlevar(carne){
+    self.sacarCarne()
+  }
 
-method esPortador() = true
+  method esParrilla() = true
 
+  method aceptaCarne() = not self.estaOcupada()
 
-//podria cambiar
-method dejarDeLlevar(carne){
-  self.sacarCarne()
-}
-//... mas cosas
+  method recibirCarne(carne) {
+    self.ponerCarne(carne)
+    carne.llevadoPor(self)
+  }
+  //... mas cosas
 }
 
 //Este es el objeto invisible que acompania a la parrilla para las colisiones y para poder cocinar
-object parrilla1{
+object parrilla1 {
   method muestraItemFrame() = false
+  method esAgarrable() = false
   const property position = parrilla.position().right(1)
+
+  method esParrilla() = true
+
+  // Imagen transparente de 1x1 o vacía
+  method image() = "imagenInvisible.png" 
+
+  // Delegaciones a la parrilla real
+  method estaOcupada() = parrilla.estaOcupada()
+  method aceptaCarne() = parrilla.aceptaCarne()
+  method recibirCarne(carne) { parrilla.recibirCarne(carne) }
 }
 
 //el calor son puntos de coccion 
@@ -59,13 +79,10 @@ object apagado {
 
   method imagenParrilla() = "parrilla_apagada.png"
 
-
   method anterior() = self
 
   method siguiente() = bajo 
-
 }
-
 
 object bajo {
   method calor() = 1
@@ -75,7 +92,6 @@ object bajo {
   method anterior() = apagado
   
   method siguiente() = medio
-
 }
 
 object medio {
@@ -93,10 +109,9 @@ object fuerte {
 
   method imagenParrilla() = "parrilla_alto_" + animaciones.siguienteFrame(8) + ".png" 
 
-   method anterior() = medio
+  method anterior() = medio
   
   method siguiente() = self
-
 }
 
 //agregamos un tipo de fuego que sea mojado 
