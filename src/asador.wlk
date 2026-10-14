@@ -46,26 +46,6 @@ object asador {
     }
   }
 
-  // method agarrar() {
-  //   const cosasEnfrente = game.getObjectsIn(self.celdaDeEnfrente())
-  //   const cosasEnMisPies = game.getObjectsIn(position)
-  //   const cosasCerca = cosasEnfrente + cosasEnMisPies
-
-  //   // 1. Si hay una parrilla ocupada cerca, su carne también cuenta como cosa cerca
-  //   const parrillasCerca = cosasCerca.filter({ obj => obj.esParrilla() && obj.estaOcupada() })
-  //   const carnesEnParrilla = parrillasCerca.map({ p => parrilla.carneActual() })
-
-  //   // 2. Buscamos cualquier cosa agarrable (sea del piso o de la parrilla)
-  //   const candidatos = cosasCerca + carnesEnParrilla
-  //   const agarrables = candidatos.filter({ obj => obj != self && obj.esAgarrable() })
-
-  //   if (!agarrables.isEmpty()) {
-  //     self.soltar()
-  //     carga = agarrables.first()
-  //     carga.llevadoPor(self)
-  //   }
-  // }
-
 
 method agarrar() {
     const cosasEnfrente = game.getObjectsIn(self.celdaDeEnfrente())
