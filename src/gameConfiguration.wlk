@@ -112,7 +112,7 @@ object config {
 }
 
 //clase abstracta 
-class Nivel {
+class Nivel { 
   //metodo abstracto -- que deberia contener una lista de los posibles pedidos
   method listaPedidosPosibles()
 

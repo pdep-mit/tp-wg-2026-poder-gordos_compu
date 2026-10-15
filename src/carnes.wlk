@@ -29,7 +29,8 @@ class Carne inherits ElementoAgarrable {
   //es el rango q le damos al jugador para hasta que la carne se queme
   method limiteDeQuemado() = self.tiempoCoccion() + self.tiempoDeOnda()
 
-  //la imagen se calcula a partir del estado de la carne
+  //la imagen se calcula a partir del estado de la carne 
+  //aca hay polimorfismo
   method image() = self.nombre() + "_" + estado.estado() + ".png"
 
   //da 4 puntos de coccion de chance para que la vayas a sacar 

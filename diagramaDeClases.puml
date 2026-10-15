@@ -1,0 +1,53 @@
+@startuml diagrama de clases "nombre del juego"
+
+class Carne{
+
+}
+
+object asador <<object>>{
+
+}
+
+object parrilla <<object>>{
+
+}
+
+interface Fuego{
+    +calor()
+    +imagenParrilla()
+    +siguiente()
+    'podriamos tener mas metodos pero creo con estos dos basta para entender la intefaz'
+}
+
+object apagado <<object>> {
+    +calor()
+    +imagenParrilla()
+    +siguiente()
+}
+
+object bajo <<object>> {
+    +calor()
+    +imagenParrilla()
+    +siguiente()
+}
+
+object medio <<object>> {
+    +calor()
+    +imagenParrilla()
+    +siguiente()
+}
+
+object fuerte <<object>> {
+    +calor()
+    +imagenParrilla()
+    +siguiente()
+}
+'relaciones con el fuego'
+apagado ..|> Fuego 
+bajo ..|> Fuego
+medio ..|> Fuego
+fuerte ..|> Fuego
+
+'relaciones con la parrilla'
+parrilla --> Fuego
+@enduml
