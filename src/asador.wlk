@@ -9,7 +9,7 @@ object sinCarga {
   method esCarne() = false
 }
 
-// agregamos la logica para que pueda agarrar al contacto cualquier cosa que tenga implementado el metodo llevadoPor
+// agregamos la logica para que pueda agarrar al contacto cualquier cosa que tenga implementado el metodo asignarA
 // tambien el metodo para soltar, lo cual asigna como su nueva posicion la actual y se desvincula del gordo 
 object asador { 
   var property position = game.at(1,1)
@@ -60,14 +60,14 @@ method agarrar() {
     if (hayParrillaOcupada) {
       self.soltar()
       carga = parrilla.carneActual()
-      carga.llevadoPor(self)
+      carga.asignarA(self)
     } else {
       // 2. Si no hay parrilla con carne cerca, buscamos ítems sueltos en el piso o mesa
       const agarrables = cosasCerca.filter({ obj => obj.esAgarrable() })
       if (!agarrables.isEmpty()) {
         self.soltar()
         carga = agarrables.first()
-        carga.llevadoPor(self)
+        carga.asignarA(self)
       }
     }
   }
@@ -88,11 +88,11 @@ method agarrar() {
     
   }
 
-  // Posición polimórfica para el ítem que lleva sostenido
+  // Posición polimórfica para el ítem que esta en el item frame, o sea en el inventario del asador
   method posicionPara(item) = position.up(2).right(1)
 
   //podria cambiar
-  method dejarDeLlevar(algo){
+  method remover(algo){
     carga = sinCarga
   }
 

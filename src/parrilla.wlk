@@ -34,14 +34,13 @@ object parrilla {
     carneActual = noCarne
   }
 
-  // Polimorfismo con asador y sinPortador para ubicar el ítem
+  // Polimorfismo con los contenedores para ubicar el item
   method posicionPara(item) = position
 
   //le preguntamos a la parrilla si esta libre para que le pongan una carne
   method estaOcupada() = carneActual.esCarne()
 
-  //podria cambiar
-  method dejarDeLlevar(carne){
+  method remover(carne){
     self.sacarCarne()
   }
 
@@ -51,7 +50,7 @@ object parrilla {
 
   method recibirCarne(carne) {
     self.ponerCarne(carne)
-    carne.llevadoPor(self)
+    carne.asignarA(self)
   }
   //... mas cosas
 }
