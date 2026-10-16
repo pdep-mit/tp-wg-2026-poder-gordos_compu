@@ -24,11 +24,19 @@ Recuerden que para cada checkpoint hay [expectativas mínimas](https://docs.goog
 
 ## Objetivo
 
-TODO
+Sos el asador mas legendario de buenos aires, sera tu deber deleitar a los comensales siguiendo sus exigentes pedidos dentro de un entorno completamente descabellado, en tiempo record, para asi demostrar de una vez por todas que como vos, gordo parrillero legendario, no hay ninguno.
 
 ## Controles
+Movimiento del parrillero:
+&larr; &rarr; &uarr; &darr;
+Agarrar objetos: <kbd>e</kbd>
+Soltar objetos: <kbd>q</kbd>
 
-TODO
+Interacciones con la parrilla: (Deben pararse frente a ella)
+Cocinar la carne : <kbd>c</kbd> 
+Avivar el fuego: <kbd>a</kbd>
+
+
 
 # Explicaciones
 
