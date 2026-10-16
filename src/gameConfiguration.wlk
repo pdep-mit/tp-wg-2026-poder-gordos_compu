@@ -30,6 +30,7 @@ object config {
   //tira de asado de prueba
   const unaTira = new TiraAsado()
   
+  
 
 
   method configurarJuego(){
@@ -60,6 +61,7 @@ object config {
     game.addVisual(unaTira)
     game.addVisual(asador)
     game.addVisual(listadoPedidos)
+    game.addVisual(mesaEntrega)
     //agregar aca todo lo que sea visual y que tenga que estar visible 
     //sea la parrilla, el asador, etc. 
   }
