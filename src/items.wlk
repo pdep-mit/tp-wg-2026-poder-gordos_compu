@@ -42,10 +42,10 @@ class ElementoAgarrable {
   posicionEnSuelo = self.position()
   self.asignarA(sinContenedor)
 }
-    
+
   // metodo para entregar el plato al comensal -- creo q deberia estar en asador
   method entregarA(comensal) {
     if (game.hasVisual(itemFrame)) game.removeVisual(itemFrame)
     comensal.recibirPedido(self)
-  } 
+  }
 }

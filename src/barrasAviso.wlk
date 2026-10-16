@@ -40,9 +40,12 @@ class BarraPedido
 {
     const listaPorcentajes = [0, 25, 50, 75, 100]
     const elementoActual
+    var property segundosTranscurridos = 0
+    const nombreEvento = "calcularProgreso" + self.identity()
+
     method duracionInicial() = elementoActual.tiempo()
+
     method duracionActual() = self.duracionInicial() - segundosTranscurridos
-    var property segundosTranscurridos = 0 
 
     method calcularProgreso() {
         return listaPorcentajes.count({porcentaje => self.porcentajeTiempo() >= porcentaje})
@@ -51,12 +54,12 @@ class BarraPedido
     method position() = elementoActual.position().down(1)
 
     method acortarTiempo(){
-            game.onTick(1000, "calcularProgreso", {self.aniadirSegundos()})
+            game.onTick(1000, nombreEvento, {self.aniadirSegundos()})
         }
 
     method aniadirSegundos() {
         segundosTranscurridos = (segundosTranscurridos + 1).min(self.duracionInicial())
-    }
+    }   
     
     method image() = "barra_progreso_" + self.calcularProgreso() + ".png"
     
@@ -65,6 +68,10 @@ class BarraPedido
         return ( self.duracionActual()* 100) / self.duracionInicial()
     }
 
-// ---------- nuevo trabajo ----------
+    // freno el timer individual de cada elemento por separado usando el
+    // self.identity() en el nombre de calcularProgreso
+    method detener() {
+		game.removeTickEvent(nombreEvento)
+	}
     
 }

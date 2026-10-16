@@ -16,11 +16,20 @@ object asador {
   var property carga = sinCarga
   var property direccion = haciaAbajo
 
+  // introducimos los puntos (a mejorar)
+  var property puntos = 0
+
+  method sumarPuntos(cantidad)
+  {
+    puntos += cantidad
+  }
+
+  method restarPuntos(cantidad)
+  {
+    puntos -= cantidad  
+  }
   //Claramente el asador no es una parrilla, no?
   method esParrilla() = false
-  
-  //Capaz quedo viejo(?)
-  var property pedidos = []
 
   method muestraItemFrame() = true
 
@@ -76,16 +85,6 @@ method agarrar() {
   method soltar() {
     carga.soltar()
     carga = sinCarga
-  }
-  
-  method tomarPedido(pedido) {
-    self.pedidos().add(pedido)
-  }
-
-  // entregar plato
-  method entregarA(comensal)
-  {
-    
   }
 
   // Posición polimórfica para el ítem que esta en el item frame, o sea en el inventario del asador
