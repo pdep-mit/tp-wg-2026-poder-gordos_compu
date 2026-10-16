@@ -1,3 +1,4 @@
+import src.barrasAviso.*
 import wollok.game.*
 
 //dependecias relacionadas al juego en si (se pueden separar mas qsy)
@@ -58,6 +59,7 @@ object config {
     game.addVisual(unChori)
     game.addVisual(unaTira)
     game.addVisual(asador)
+    game.addVisual(listadoPedidos)
     //agregar aca todo lo que sea visual y que tenga que estar visible 
     //sea la parrilla, el asador, etc. 
   }
@@ -111,8 +113,24 @@ object config {
   }
 }
 
+
+//otra clase abstracta del pedido
+class Pedido {
+  const property plato
+  method nombre(){
+    plato.nombre()
+  }
+  method tiempo(){
+    plato.tiempoCoccion() + 40
+  }
+}
 //clase abstracta 
 class Nivel { 
+  
+  // declaro todos los posibles platos a pedir por los niveles
+  
+  const chorizo = new Pedido(plato = new Chorizo())
+  const asado = new Pedido(plato = new Asado())
   //metodo abstracto -- que deberia contener una lista de los posibles pedidos
   method listaPedidosPosibles()
 
@@ -127,7 +145,7 @@ class Nivel {
   method agregarPedidoAListaDePedidos(){
     listadoPedidos.tomarPedido(self.siguientePedido())
   }
-    
+  
   
 
   //configura la velocidad con la que los pedidos se agregan a la lista

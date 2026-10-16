@@ -64,4 +64,7 @@ class BarraPedido
     {
         return ( self.duracionActual()* 100) / self.duracionInicial()
     }
+
+// ---------- nuevo trabajo ----------
+    
 }

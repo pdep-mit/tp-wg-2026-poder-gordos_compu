@@ -116,7 +116,7 @@ class Chorizo inherits Carne {
 }
 
 class Morcilla inherits Carne{
-  const property nombre = "morcilla"
+  override method nombre() = "morcilla"
 }
 
 //esto es lo que explico la profe que esta re piola para poner el objeto vacio 
