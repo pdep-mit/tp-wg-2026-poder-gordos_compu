@@ -6,7 +6,7 @@ class BarraProgreso {
     var property carneActual = noCarne
     method esAgarrable() = false
     method esParrilla() = false
-    method esMesaDeEntrega() = true
+    
 
     //serian los puntos que debe de superar la carne para cambiar de barra de progreso 
     const listaPorcentajes = [1, 50, 75, 100]
