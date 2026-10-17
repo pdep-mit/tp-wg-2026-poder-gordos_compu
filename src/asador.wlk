@@ -1,5 +1,3 @@
-import src.gameConfiguration.*
-import src.mesaDeEntrega.*
 import carnes.*
 import wollok.game.*
 import parrilla.*
@@ -87,14 +85,8 @@ method agarrar() {
   
 
   method soltar() {
-    const frenteAMesaEntrega= game.getObjectsIn(self.celdaDeEnfrente()).any({ obj => obj.esMesaDeEntrega() })
-  
-    //Si la hay aviva el fuego
-    if (!frenteAMesaEntrega) {
-      carga.soltar()
-      carga = sinCarga
-    }
-    
+    carga.soltar()
+    carga = sinCarga
   }
 
   // Posición polimórfica para el ítem que esta en el item frame, o sea en el inventario del asador
@@ -113,16 +105,5 @@ method agarrar() {
     if (frenteAParrilla) {
       parrilla.fuego(parrilla.fuego().siguiente())
     }
-  }
-
-  method entregar(){
-    const frenteAMesaEntrega= game.getObjectsIn(self.celdaDeEnfrente()).any({ obj => obj.esMesaDeEntrega() })
-  
-    //Si la hay aviva el fuego
-    if (frenteAMesaEntrega) {
-      //Hacer una entrega
-      mesaEntrega.entregarPedido(carga)
-    }
-
-  }
+  }  
 }
