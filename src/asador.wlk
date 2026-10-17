@@ -9,6 +9,7 @@ object sinCarga {
   method esAgarrable() = false
   method ponerseEn(carga){}
   method dejarEn(piso){}
+  method apoyar(){}
 }
 
 // agregamos la logica para que pueda agarrar al contacto cualquier cosa que tenga implementado el metodo asignarA
@@ -41,10 +42,10 @@ object asador {
   // la celda que tiene justo adelante, según para dónde mira
   method celdaDeEnfrente() = direccion.siguiente(position)
 
-  method estaFrenteA(algo) = self.celdaDeEnfrente() == algo.position()
+  method laPosicionObjeto() = position.up(2).right(1)
 
   method loQueTengoEnFrente() {
-    const celdaLibre = new LugarLibre(celdaActual = self.celdaDeEnfrente())
+    const celdaLibre = new LugarLibre(celdaActual = self.laPosicionObjeto())
     const cosasEnfrente = game.getObjectsIn(self.celdaDeEnfrente())
     cosasEnfrente.add(celdaLibre)
     return cosasEnfrente.first()
@@ -88,20 +89,14 @@ method agarrar() {
   }
 
   // Posición polimórfica para el ítem que esta en el item frame, o sea en el inventario del asador
-  method posicionPara(item) = position.up(2).right(1)
+  method posicionPara(item) = self.laPosicionObjeto()
 
   //podria cambiar
   method remover(algo){
     carga = sinCarga
   }
 
-  method avivarFuego() {
-    //Hay una parrilla en la celda de enfrente?
-    const frenteAParrilla = game.getObjectsIn(self.celdaDeEnfrente()).any({ obj => obj.esParrilla() })
-  
-    //Si la hay aviva el fuego
-    if (frenteAParrilla) {
-      parrilla.fuego(parrilla.fuego().siguiente())
-    }
+  method avivarFuego() {    
+    self.loQueTengoEnFrente().avivar()
   }  
 }

@@ -3,7 +3,7 @@ import parrilla.*
 
 object lluvia{
     method mojarParrilla() { 
-        parrilla.fuego(mojado) 
+        //parrilla.fuego(mojado) 
     } 
 
     //poner chapa en la parrilla para protegerla de lluvia

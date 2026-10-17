@@ -33,7 +33,7 @@ Agarrar objetos: <kbd>e</kbd>
 Soltar objetos: <kbd>q</kbd>
 
 Interacciones con la parrilla: (Deben pararse frente a ella)
-Cocinar la carne : <kbd>c</kbd> 
+Cocinar la carne : <kbd>q</kbd> 
 Avivar el fuego: <kbd>a</kbd>
 
 

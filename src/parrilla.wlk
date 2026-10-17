@@ -9,7 +9,6 @@ object parrilla {
   method esAgarrable() = false
   method esSolido() = true
   method esParrilla() = true
-  method esMesaDeEntrega() = false
 
   const property position = game.at(2,2)
   // variable temporal, cambiar implementacion en proximas entregas
@@ -57,11 +56,17 @@ object parrilla {
     carga.ponerseEn(self)
   }
 
-  //posiblemente remover
   method remover(carne){
     self.sacarCarne()
   }
 
+  method avivar() { 
+    fuego = fuego.siguiente()
+  }
+
+  method apagarPoco() {
+    fuego = fuego.anterior()
+  }
 
   //... mas cosas
 }
@@ -71,7 +76,6 @@ object parrilla1 {
   method muestraItemFrame() = false
   method esAgarrable() = false
   method esSolido() = true
-  method esMesaDeEntrega() = false
   method esParrilla() = true
 
   const property position = parrilla.position().right(1)
@@ -81,6 +85,7 @@ object parrilla1 {
   // Delegaciones a la parrilla real
   method estaOcupada() = parrilla.estaOcupada()
   method recibir(carga) {parrilla.recibir(carga)}
+  method avivar() {parrilla.avivar()}
 }
 
 //el calor son puntos de coccion 

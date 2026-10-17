@@ -36,6 +36,8 @@ class BarraProgreso {
     } 
 
     method recibir(carga){}
+    method avivar(){}
+
 }
 
 // le agrego una barra indicadora de tiempo restante a cada elemento de nuestra lista de pedidos pendientes.
@@ -78,4 +80,6 @@ class BarraPedido
 	}
 
     method recibir(carga){}
+    method avivar(){}
+
 }

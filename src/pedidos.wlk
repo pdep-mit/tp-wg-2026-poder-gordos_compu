@@ -47,5 +47,6 @@ object listadoPedidos{
   method HayPedidos() = not pedidos.isEmpty()
 
   method recibir(carga){}
+  method avivar(){}
 }
 

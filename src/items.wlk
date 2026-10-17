@@ -1,3 +1,4 @@
+import asador.*
 import gameConfiguration.*
 import wollok.game.*
 import itemFrame.*
@@ -53,13 +54,19 @@ class ElementoAgarrable {
   * metodo para que no se pueda poner una carne arriba de otra
   */
   method recibir(carga){
-    self.error("hay algo ya apoyado")
+    carga.apoyar()
   }
 
   method dejarEn(piso){
     posicionEnSuelo = piso.celdaActual()
     self.asignarA(sinContenedor)
   }
+
+  method apoyar(){
+    self.error("hay algo ya apoyado")
+  }
+
+  method avivar(){}
 }
 
 /*
@@ -71,10 +78,12 @@ class LugarLibre{
   method recibir(carga){
     //valida que no este en el borde
     if(not self.estaAdentro()) 
-      self.error("casi se me cae ufff 💧")
+      asador.error("casi se me cae ufff 💧")
     carga.dejarEn(self)
   }
 
   method estaAdentro() = config.esCeldaPermitida(self)
+
+  method avivar(){}
 }
 

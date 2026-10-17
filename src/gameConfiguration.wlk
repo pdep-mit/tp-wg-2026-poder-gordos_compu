@@ -77,12 +77,10 @@ object config {
 	keyboard.left().onPressDo({asador.direccion(haciaLaIzquierda) movimiento.mover(asador, haciaLaIzquierda) })
 	keyboard.right().onPressDo({asador.direccion(haciaLaDerecha) movimiento.mover(asador, haciaLaDerecha) })
     
-    //acciones del asador agarrar y soltar
+    //acciones del asador agarrar y soltar (ahora puede poner una carne con la q y no le deja poner una carne si esta fuera de la pantalla)
     keyboard.e().onPressDo({ asador.agarrar() })
-    keyboard.q().onPressDo({ asador.soltar()})
+    keyboard.q().onPressDo({ asador.ponerCarne()})
 
-    //acciones del asador para poner una carne en la parrilla 
-    keyboard.c().onPressDo({ asador.ponerCarne()})
 
     //acion del asador para avivar el fuego
     keyboard.a().onPressDo({asador.avivarFuego()})
@@ -112,7 +110,7 @@ object config {
 
   //cada x segundos le dice a la parrilla que se apague un poco, va al fuego anterior
   method configurarFuego() {
-    game.tick( self.tiempoCambioFuego(), {parrilla.fuego(parrilla.fuego().anterior())},false).start()
+    game.tick( self.tiempoCambioFuego(), {parrilla.apagarPoco()},false).start()
   }
 
   method configurarAnimacion(){

@@ -44,11 +44,13 @@ object mesaEntrega {
   }
 
   method recibir(carga){}
+
+  method avivar(){}
+
 }
 
 class ParteAuxiliarMesa {
   const desplazamientoX
-  method esMesaDeEntrega() = true
 
   method position() = mesaEntrega.position().right(desplazamientoX)
   method esSolido() = true
@@ -60,4 +62,6 @@ class ParteAuxiliarMesa {
   method sumarPuntos(pedido) { mesaEntrega.sumarPuntos(pedido) }
   method restarPuntos(pedido) { mesaEntrega.restarPuntos(pedido) }
   method recibir(carga) { mesaEntrega.recibir(carga) }
+  method avivar(){}
+
 }
