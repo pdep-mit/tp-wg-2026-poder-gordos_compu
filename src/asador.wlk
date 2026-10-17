@@ -17,7 +17,10 @@ object asador {
   var property position = game.at(1,1)
   var property carga = sinCarga
   var property direccion = haciaAbajo
-
+  method esParrilla() = false
+  method muestraItemFrame() = true
+  method esSolido() = false
+  
   // introducimos los puntos (a mejorar)
   var property puntos = 0
 
@@ -31,9 +34,7 @@ object asador {
     puntos -= cantidad  
   }
   //Claramente el asador no es una parrilla, no?
-  method esParrilla() = false
-
-  method muestraItemFrame() = true
+  
 
   method image() = "asador_" + direccion.toString() + ".png"  
 
@@ -95,11 +96,12 @@ method agarrar() {
   }
 
   method avivarFuego() {
-  const cosasEnfrente = game.getObjectsIn(self.celdaDeEnfrente())
-  const parrillasEnfrente = cosasEnfrente.filter({ obj => obj.esParrilla() })
+    //Hay una parrilla en la celda de enfrente?
+    const frenteAParrilla = game.getObjectsIn(self.celdaDeEnfrente()).any({ obj => obj.esParrilla() })
   
-  if (!parrillasEnfrente.isEmpty()) {
-    parrilla.fuego(parrilla.fuego().siguiente())
-  }
-}
+    //Si la hay aviva el fuego
+    if (frenteAParrilla) {
+      parrilla.fuego(parrilla.fuego().siguiente())
+    }
+  }  
 }

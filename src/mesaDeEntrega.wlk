@@ -48,6 +48,7 @@ object mesaEntrega {
 
 class ParteAuxiliarMesa {
   const desplazamientoX
+  method esMesaDeEntrega() = true
 
   method position() = mesaEntrega.position().right(desplazamientoX)
   method esSolido() = true

@@ -4,15 +4,16 @@ import pedidos.*
 
 class BarraProgreso {
     var property carneActual = noCarne
+    method esAgarrable() = false
+    method esParrilla() = false
+    
+
     //serian los puntos que debe de superar la carne para cambiar de barra de progreso 
     const listaPorcentajes = [1, 50, 75, 100]
 
     //la posicion depende de la de la carne (se puede modificar para que aparezca la barra luego)
     method position () = carneActual.position().down(1) 
     
-    method esAgarrable() = false
-    method esParrilla() = false
-
     method image() = "barra_progreso_" + self.calcularProgreso() + ".png"
 
     //en base al estado de la carne se calcula la imagen que debe mostrar el progreso de la misma
