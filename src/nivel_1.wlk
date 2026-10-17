@@ -1,4 +1,4 @@
-import mesaDeEntrega.*
+import pedidos.*
 import gameConfiguration.*
 import carnes.*
 

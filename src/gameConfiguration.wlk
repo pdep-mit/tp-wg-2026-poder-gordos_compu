@@ -9,6 +9,7 @@ import cosoParaAgarrarMP.*
 import sarten.*
 import tablaDeCortar.*
 import movimientos.*
+import pedidos.*
 import mesaDeEntrega.*
 
 
@@ -56,12 +57,12 @@ object config {
 
   method agregarVisuales(){
     game.addVisual(parrilla)
+    game.addVisual(mesaEntrega)
     game.addVisual(unAsado)
     game.addVisual(unChori)
     game.addVisual(unaTira)
     game.addVisual(asador)
     game.addVisual(listadoPedidos)
-    game.addVisual(mesaEntrega)
     //agregar aca todo lo que sea visual y que tenga que estar visible 
     //sea la parrilla, el asador, etc. 
   }

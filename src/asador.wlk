@@ -30,6 +30,7 @@ object asador {
   }
   //Claramente el asador no es una parrilla, no?
   method esParrilla() = false
+  method esMesaDeEntrega() = false
 
   method muestraItemFrame() = true
 
@@ -45,7 +46,8 @@ object asador {
       // Busca qué hay en la celda de enfrente
       const cosasEnfrente = game.getObjectsIn(self.celdaDeEnfrente())
       
-      // Filtra las que sean parrilla y que además acepten carne
+      // Filtra las que sean parrilla y que además acepten carne 
+      //quizas se puede reutiliar para la mesa de entrega
       const destinos = cosasEnfrente.filter({ obj => obj.esParrilla() && obj.aceptaCarne() })
 
       if (!destinos.isEmpty()) {

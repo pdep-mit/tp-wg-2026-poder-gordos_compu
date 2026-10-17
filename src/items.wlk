@@ -20,6 +20,7 @@ class ElementoAgarrable {
 
   method esAgarrable() = true
   method esParrilla() = false
+  method esMesaDeEntrega() = false
   method position() = contenedor.posicionPara(self)
 
   //Le asginamos un nuevo contenedor al item

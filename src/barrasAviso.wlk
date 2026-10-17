@@ -1,6 +1,6 @@
 import wollok.game.*
 import carnes.*
-import mesaDeEntrega.*
+import pedidos.*
 
 class BarraProgreso {
     var property carneActual = noCarne

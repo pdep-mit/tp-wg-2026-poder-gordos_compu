@@ -1,5 +1,6 @@
 import gameConfiguration.*
 import parrilla.*
+import mesaDeEntrega.*
 /*
 * Acá se define cómo se mueven los personajes cuando se usan las flechitas.
 * Las posiciones son objetos inmutables, pero los personajes controlados pueden
@@ -19,7 +20,8 @@ object movimiento {
          // Si la nueva posición coincide con la parrilla, no se mueve
          //NO HACE FALTA USAR ON COLIDE PARA ESTO, ON COLDIDE sirve para otra cosa! Generar efecto atraves de levantar un flag! Para esto es pesimo (creanme lo intente).
          //ojo aca podemos usar quizas coliders, comprobamos todas las posiciones de los coliders que no sean la misma que la nueva posicion
-    if (nuevaPosicion != parrilla.position() && nuevaPosicion != parrilla1.position()) {
+    if (nuevaPosicion != parrilla.position() && nuevaPosicion != parrilla1.position() && nuevaPosicion != mesaEntrega.position() && nuevaPosicion != mesaDeEntrega1.position() 
+    && nuevaPosicion != mesaDeEntrega2.position() && nuevaPosicion != mesaDeEntrega3.position()) { // ESTO HAY QUE REVISARLO ESTA MUY MUY RANCIO
       personajeLibre.position(nuevaPosicion)
         }
     }

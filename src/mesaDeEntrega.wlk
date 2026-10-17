@@ -2,56 +2,19 @@ import src.asador.*
 import carnes.*
 import barrasAviso.*
 import gameConfiguration.*
-
-class ElementoLista{ 
-    var property pedidoActual 
-    var property position = game.at(0, config.alturaMaxima() - 1)
-    const barraIndividual = new BarraPedido(elementoActual = self)
-    
-    method tiempoRestante() = barraIndividual.duracionActual()
-    // inicializo la barra de tiempo del plato y tambien su imagen de referencia
-    method image(){
-      pedidoActual.nombre() + "_plato.png"
-      game.addVisual(barraIndividual)
-    }
-    
-    method cambiarPosicion(nuevaPosicionX, nuevaPosicionY) {
-      position = game.at(nuevaPosicionX,nuevaPosicionY)
-    }
-    
-    method registrarTiempo()
-    {
-      barraIndividual.detener()
-    }
-}
-
-object listadoPedidos{
-  const pedidos = []
-  const property origen = game.at(1, config.alturaMaxima() - 1 )
-  method position() = origen
-  method tomarPedido(pedido){
-    pedidos.add(pedido)
-    self.acomodar()
-    }
-  method acomodar(){
-    pedidos.forEach({pedido => pedido.position(origen.right(pedidos.indexOf(pedido)))})
-  }
-  
-  method estaElPedido(pedido) = pedidos.contains(pedido)
-  method borrarPedido(pedido)
-  {
-    const pedidoBuscado = pedidos.find({pedidoBuscado => pedidoBuscado.pedidoActual().nombre() == pedido.pedidoActual().nombre()})
-    pedidoBuscado.registrarTiempo()
-    pedidos.remove(pedidoBuscado) // agregar lo de remove visual (probablemente va en otro archivo)
-  }
-  method HayPedidos() = not pedidos.isEmpty()
-}
+import pedidos.*
 
 object mesaEntrega { 
   method image() = "mesa_pedidos.png"
   method position()= game.at(4, 9)
   method esAgarrable() = false
 
+  method initialize() {
+    game.addVisual(mesaDeEntrega1)
+    game.addVisual(mesaDeEntrega2)
+    game.addVisual(mesaDeEntrega3)
+  }
+  
   method entregarPedido(pedido)
   {
     if(not listadoPedidos.HayPedidos())
@@ -76,4 +39,36 @@ object mesaEntrega {
   {
     asador.restarPuntos(10)
   }
+}
+
+// ESTOY HAY QUE REVISARLO QUIZAS HACIENDO LA MESA DE ENTREGA MAS CHICA ESTO QUEDE MEJOR PERO ASI COMO ESTA HAY UN MONTON DE REPETICION DE LOGICA
+object mesaDeEntrega1{
+  method position()= game.at(5, 9)
+  method esAgarrable() = false
+  method image() = "imagenInvisible.png" 
+  method esMesaDeEntrega() = true
+  
+  method entregarPedido(pedido) {mesaEntrega.entregarPedido(pedido) }
+  method sumarPuntos(pedido) {mesaEntrega.sumarPuntos(pedido)}
+  method restarPuntos(pedido) {mesaEntrega.restarPuntos(pedido)}
+}
+object mesaDeEntrega2{
+  method position()= game.at(6, 9)
+  method esAgarrable() = false
+  method image() = "imagenInvisible.png" 
+  method esMesaDeEntrega() = true
+
+  method entregarPedido(pedido) {mesaEntrega.entregarPedido(pedido) }
+  method sumarPuntos(pedido) {mesaEntrega.sumarPuntos(pedido)}
+  method restarPuntos(pedido) {mesaEntrega.restarPuntos(pedido)}
+}
+object mesaDeEntrega3{
+  method position()= game.at(7, 9)
+  method esAgarrable() = false
+  method image() = "imagenInvisible.png" 
+  method esMesaDeEntrega() = true
+
+  method entregarPedido(pedido) {mesaEntrega.entregarPedido(pedido) }
+  method sumarPuntos(pedido) {mesaEntrega.sumarPuntos(pedido)}
+  method restarPuntos(pedido) {mesaEntrega.restarPuntos(pedido)}
 }
