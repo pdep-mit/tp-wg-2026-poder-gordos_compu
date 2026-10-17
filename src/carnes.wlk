@@ -88,8 +88,6 @@ class TiraAsado inherits ElementoAgarrable {
     posicionEnSuelo = game.at(8,8)
   }
 
-  method esCarne() = false
-
   method ponerseEn(parrilla){
     self.error("primero me tenes que cortar")
   }

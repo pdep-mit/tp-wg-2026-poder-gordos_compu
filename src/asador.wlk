@@ -2,11 +2,13 @@ import carnes.*
 import wollok.game.*
 import parrilla.*
 import movimientos.*
+import items.*
 
 object sinCarga {
   method soltar(){}
   method esAgarrable() = false
-  method esCarne() = false
+  method ponerseEn(carga){}
+  method dejarEn(piso){}
 }
 
 // agregamos la logica para que pueda agarrar al contacto cualquier cosa que tenga implementado el metodo asignarA
@@ -40,20 +42,16 @@ object asador {
 
   method estaFrenteA(algo) = self.celdaDeEnfrente() == algo.position()
 
+  method loQueTengoEnFrente() {
+    const celdaLibre = new LugarLibre(celdaActual = self.celdaDeEnfrente())
+    const cosasEnfrente = game.getObjectsIn(self.celdaDeEnfrente())
+    cosasEnfrente.add(celdaLibre)
+    return cosasEnfrente.first()
+  }
+    
+ 
   method ponerCarne(){
-   if (carga.esCarne()) {
-      // Busca qué hay en la celda de enfrente
-      const cosasEnfrente = game.getObjectsIn(self.celdaDeEnfrente())
-      
-      // Filtra las que sean parrilla y que además acepten carne 
-      //quizas se puede reutiliar para la mesa de entrega
-      const destinos = cosasEnfrente.filter({ obj => obj.esParrilla() && obj.aceptaCarne() })
-
-      if (!destinos.isEmpty()) {
-        destinos.first().recibirCarne(carga)
-        carga = sinCarga
-      }
-    }
+    self.loQueTengoEnFrente().recibir(carga)
   }
 
 

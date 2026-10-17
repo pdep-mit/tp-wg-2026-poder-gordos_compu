@@ -4,10 +4,11 @@ import animaciones.*
 
 //la parrila tmb puede ser una clase ya que podemos tener mas de una parrilla 
 object parrilla {
+  //todo esto se tiene que ir
   method muestraItemFrame() = false
   method esAgarrable() = false
   method esSolido() = true
-   method esParrilla() = true
+  method esParrilla() = true
 
   const property position = game.at(2,2)
   // variable temporal, cambiar implementacion en proximas entregas
@@ -60,16 +61,7 @@ object parrilla {
     self.sacarCarne()
   }
 
- 
 
-  //borrar
-  method aceptaCarne() = not self.estaOcupada()
-
-  //borrar
-  method recibirCarne(carne) {
-    self.ponerCarne(carne)
-    //carne.asignarA(self)
-  }
   //... mas cosas
 }
 
@@ -87,8 +79,6 @@ object parrilla1 {
 
   // Delegaciones a la parrilla real
   method estaOcupada() = parrilla.estaOcupada()
-  method aceptaCarne() = parrilla.aceptaCarne()
-  method recibirCarne(carne) { parrilla.recibirCarne(carne) }
   method recibir(carga) {parrilla.recibir(carga)}
 }
 

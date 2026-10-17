@@ -25,7 +25,7 @@ object config {
   method tiempoCambioFuego() = 20000
 
   //asado de prueba
-  const unAsado = new Asado(posicionEnSuelo = game.at(2,2))
+  const unAsado = new Asado(posicionEnSuelo = game.at(2,4))
   //chori de prueba
   const unChori = new Chorizo(posicionEnSuelo = game.at(2,3))
   //tira de asado de prueba
@@ -100,6 +100,11 @@ object config {
 
 	}
 
+  //verifica que la celda este en el tablero 
+  method esCeldaPermitida(celda)=
+    celda.celdaActual().x().between(0, self.anchoMaximo() -1) and
+    celda.celdaActual().y().between(0, self.alturaMaxima() - 2)
+
   //le dice a la parrilla que cocine la carne cada 1 segundo 
   method configurarParrilla(){
     game.tick(1000, {parrilla.asar()}, true).start()
@@ -107,10 +112,9 @@ object config {
 
   //cada x segundos le dice a la parrilla que se apague un poco, va al fuego anterior
   method configurarFuego() {
-    game.tick( self.tiempoCambioFuego(), {parrilla.fuego(parrilla.fuego().anterior())},true).start()
+    game.tick( self.tiempoCambioFuego(), {parrilla.fuego(parrilla.fuego().anterior())},false).start()
   }
 
-  //aca hay polimorfismo -> animaciones de 8 frames
   method configurarAnimacion(){
     game.tick(300,{animaciones.aumentarContador()},true).start()
   }
