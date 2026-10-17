@@ -46,7 +46,7 @@ object mesaDeEntrega1{
   method position()= game.at(5, 9)
   method esAgarrable() = false
   method image() = "imagenInvisible.png" 
-  method esMesaDeEntrega() = true
+  
   
   method entregarPedido(pedido) {mesaEntrega.entregarPedido(pedido) }
   method sumarPuntos(pedido) {mesaEntrega.sumarPuntos(pedido)}
@@ -56,7 +56,7 @@ object mesaDeEntrega2{
   method position()= game.at(6, 9)
   method esAgarrable() = false
   method image() = "imagenInvisible.png" 
-  method esMesaDeEntrega() = true
+  
 
   method entregarPedido(pedido) {mesaEntrega.entregarPedido(pedido) }
   method sumarPuntos(pedido) {mesaEntrega.sumarPuntos(pedido)}
@@ -66,7 +66,7 @@ object mesaDeEntrega3{
   method position()= game.at(7, 9)
   method esAgarrable() = false
   method image() = "imagenInvisible.png" 
-  method esMesaDeEntrega() = true
+  
 
   method entregarPedido(pedido) {mesaEntrega.entregarPedido(pedido) }
   method sumarPuntos(pedido) {mesaEntrega.sumarPuntos(pedido)}

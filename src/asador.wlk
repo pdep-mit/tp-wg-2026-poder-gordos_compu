@@ -30,7 +30,6 @@ object asador {
   }
   //Claramente el asador no es una parrilla, no?
   method esParrilla() = false
-  method esMesaDeEntrega() = false
 
   method muestraItemFrame() = true
 
