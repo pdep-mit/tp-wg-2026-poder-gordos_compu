@@ -73,20 +73,16 @@ object config {
 		
     //movimiento 
     keyboard.up().onPressDo({asador.direccion(haciaArriba) movimiento.mover(asador, haciaArriba)})
-		keyboard.down().onPressDo({asador.direccion(haciaAbajo) movimiento.mover(asador, haciaAbajo) })
-		keyboard.left().onPressDo({asador.direccion(haciaLaIzquierda) movimiento.mover(asador, haciaLaIzquierda) })
-		keyboard.right().onPressDo({asador.direccion(haciaLaDerecha) movimiento.mover(asador, haciaLaDerecha) })
+	keyboard.down().onPressDo({asador.direccion(haciaAbajo) movimiento.mover(asador, haciaAbajo) })
+	keyboard.left().onPressDo({asador.direccion(haciaLaIzquierda) movimiento.mover(asador, haciaLaIzquierda) })
+	keyboard.right().onPressDo({asador.direccion(haciaLaDerecha) movimiento.mover(asador, haciaLaDerecha) })
     
-    // acciones del asador agarrar y soltar (con la e deberia poder sacar carnes del dispenser)
+    //acciones del asador agarrar y soltar
     keyboard.e().onPressDo({ asador.agarrar() })
-    keyboard.q().onPressDo({asador.ponerCarne()})
-    keyboard.q().onPressDo({asador.entregar()})
     keyboard.q().onPressDo({ asador.soltar()})
 
     //acciones del asador para poner una carne en la parrilla 
-    //keyboard.c().onPressDo({ asador.ponerCarne()})
-    //Ahora es con la q
-    
+    keyboard.c().onPressDo({ asador.ponerCarne()})
 
     //acion del asador para avivar el fuego
     keyboard.a().onPressDo({asador.avivarFuego()})
