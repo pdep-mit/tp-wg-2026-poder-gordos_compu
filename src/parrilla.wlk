@@ -7,7 +7,8 @@ object parrilla {
   method muestraItemFrame() = false
   method esAgarrable() = false
   method esSolido() = true
-   method esParrilla() = true
+  method esParrilla() = true
+  method esMesaDeEntrega() = false
 
   const property position = game.at(2,2)
   // variable temporal, cambiar implementacion en proximas entregas
@@ -78,10 +79,10 @@ object parrilla1 {
   method muestraItemFrame() = false
   method esAgarrable() = false
   method esSolido() = true
-  const property position = parrilla.position().right(1)
-
+  method esMesaDeEntrega() = false
   method esParrilla() = true
 
+  const property position = parrilla.position().right(1)
   // Imagen transparente de 1x1 o vacía
   method image() = "imagenInvisible.png" 
 

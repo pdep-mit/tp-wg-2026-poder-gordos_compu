@@ -9,6 +9,8 @@ import items.*
 //super clase carne abstracta 
 class Carne inherits ElementoAgarrable {
   method esSolido() = false
+  method esCarne() = true
+
   //el tiempo que pasa en la parrilla en puntos de coccion 
   var tiempoParrilla = 0 
   
@@ -59,7 +61,7 @@ class Carne inherits ElementoAgarrable {
     game.removeVisual(barraProgreso)
   } 
 
-  method esCarne() = true
+  
   
   method ponerseEn(parrilla){
     parrilla.ponerCarne(self)

@@ -11,6 +11,7 @@ object mesaEntrega {
   method esAgarrable() = false
   method esSolido() = true
   method esParrilla() = false
+  method esMesaDeEntrega() = true
 
   method initialize() {
     game.addVisual(new ParteAuxiliarMesa(desplazamientoX = 1))
@@ -26,6 +27,7 @@ object mesaEntrega {
     }
     if(listadoPedidos.estaElPedido(pedido))
     {
+      pedido.removeVisual()
       self.sumarPuntos(pedido)
       listadoPedidos.borrarPedido(pedido)
     }
@@ -48,6 +50,7 @@ object mesaEntrega {
 
 class ParteAuxiliarMesa {
   const desplazamientoX
+  method esMesaDeEntrega() = true
 
   method position() = mesaEntrega.position().right(desplazamientoX)
   method esSolido() = true

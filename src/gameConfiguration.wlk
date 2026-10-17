@@ -68,7 +68,7 @@ object config {
   }
 
 
-  // aca estan las acciones que puede hacer el asador, cualqueir accion hecha con una tecla por el asador deberia estar aca
+  // aca estan las acciones que puede hacer el asador, cualquier accion hecha con una tecla por el asador deberia estar aca
   method configurarAcciones(){
 		
     //movimiento 
@@ -77,12 +77,16 @@ object config {
 		keyboard.left().onPressDo({asador.direccion(haciaLaIzquierda) movimiento.mover(asador, haciaLaIzquierda) })
 		keyboard.right().onPressDo({asador.direccion(haciaLaDerecha) movimiento.mover(asador, haciaLaDerecha) })
     
-    // acciones del asador agarrar y soltar
+    // acciones del asador agarrar y soltar (con la e deberia poder sacar carnes del dispenser)
     keyboard.e().onPressDo({ asador.agarrar() })
+    keyboard.q().onPressDo({asador.ponerCarne()})
+    keyboard.q().onPressDo({asador.entregar()})
     keyboard.q().onPressDo({ asador.soltar()})
 
     //acciones del asador para poner una carne en la parrilla 
-    keyboard.c().onPressDo({ asador.ponerCarne()})
+    //keyboard.c().onPressDo({ asador.ponerCarne()})
+    //Ahora es con la q
+    
 
     //acion del asador para avivar el fuego
     keyboard.a().onPressDo({asador.avivarFuego()})
