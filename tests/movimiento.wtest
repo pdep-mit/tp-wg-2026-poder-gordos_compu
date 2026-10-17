@@ -1,0 +1,59 @@
+import src.movimientos.*
+import src.carnes.*
+import src.asador.*
+import wollok.game.*
+
+describe "El parrillero se mueve y mueve los objetos de un lugar a otro"{
+
+  const unAsado = new Asado()
+
+  method initialize() {
+    game.clear()
+    
+    asador.position(game.at(1, 1))
+    game.addVisual(asador)
+    
+    unAsado.posicionEnSuelo(game.at(5, 2))
+    game.addVisual(unAsado)
+  }
+  
+  test "el jugador se mueve hacia arriba 5 casillas" {
+    5.times({i => movimiento.mover(asador,haciaArriba)})
+    assert.equals(game.at(1, 6), asador.position())
+  }
+
+  test "el jugador se mueve hacia la derecha 5 casillas" {
+    5.times({i => movimiento.mover(asador,haciaLaDerecha)})
+    assert.equals(game.at(6, 1), asador.position())
+  }
+
+  test "el jugador se mueve en un cuadrado de 5 casillas de lado volviendo a la posicion inicial" {
+    5.times({i => movimiento.mover(asador,haciaLaDerecha)})
+    5.times({i => movimiento.mover(asador,haciaArriba)})
+    5.times({i => movimiento.mover(asador,haciaLaIzquierda)})
+    5.times({i => movimiento.mover(asador,haciaAbajo)})
+    assert.equals(game.at(1, 1), asador.position())
+  }
+  test "el jugador agarra una carne en (5,2)" {
+    //Ojo con los objetos, el asador claramente no puede atravesar la parrilla por eso este test depende de la posicion de la carne. 
+    //Si se agregan otras colisiones debera ser tenido en cuenta
+  4.times({i => movimiento.mover(asador,haciaLaDerecha)})
+  movimiento.mover(asador, haciaArriba)
+
+  asador.agarrar()
+
+  assert.equals(asador, unAsado.contenedor())
+  }
+  test "el jugador agarra una carne en (5,2) y luego la suelta en otra ubicacion basandose en la posicion del item frame" {
+    //Ojo con los objetos, el asador claramente no puede atravesar la parrilla por eso este test depende de la posicion de la carne. 
+    //Si se agregan otras colisiones debera ser tenido en cuenta
+    //Lo del item frame es rancio CAMBIAR SI CAMBIAMOS LOS SPRITES DE COMO SE LLEVA LA CARNE
+  4.times({i => movimiento.mover(asador,haciaLaDerecha)})
+  movimiento.mover(asador, haciaArriba)
+
+  asador.agarrar()
+  2.times({i => movimiento.mover(asador,haciaArriba)})
+  asador.soltar()
+  assert.equals(unAsado.posicionEnSuelo(),asador.posicionPara(self)) //<<<<------------------- REVISAR ESTO SI SE REVISAN LOS SPRITES DE LA CARNE
+  }
+}
