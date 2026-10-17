@@ -5,9 +5,13 @@ import animaciones.*
 //la parrila tmb puede ser una clase ya que podemos tener mas de una parrilla 
 object parrilla {
   method muestraItemFrame() = false
+  method esAgarrable() = false
+  method esSolido() = true
+   method esParrilla() = true
+
   const property position = game.at(2,2)
   // variable temporal, cambiar implementacion en proximas entregas
-  method esAgarrable() = false
+  
 
   //Autoinicializa su propia otra parte, esto es fundamental para que agarrar pueda encontrar al objeto parrilla1 y que parrilla1 pueda delegar en la parrilla origianl
   method initialize() {
@@ -56,7 +60,7 @@ object parrilla {
     self.sacarCarne()
   }
 
-  method esParrilla() = true
+ 
 
   //borrar
   method aceptaCarne() = not self.estaOcupada()
@@ -73,6 +77,7 @@ object parrilla {
 object parrilla1 {
   method muestraItemFrame() = false
   method esAgarrable() = false
+  method esSolido() = true
   const property position = parrilla.position().right(1)
 
   method esParrilla() = true

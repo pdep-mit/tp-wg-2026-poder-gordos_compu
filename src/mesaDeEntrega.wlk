@@ -1,3 +1,4 @@
+import src.movimientos.*
 import src.asador.*
 import carnes.*
 import barrasAviso.*
@@ -8,11 +9,12 @@ object mesaEntrega {
   method image() = "mesa_pedidos.png"
   method position()= game.at(4, 9)
   method esAgarrable() = false
+  method esSolido() = true
 
   method initialize() {
-    game.addVisual(mesaDeEntrega1)
-    game.addVisual(mesaDeEntrega2)
-    game.addVisual(mesaDeEntrega3)
+    game.addVisual(new ParteAuxiliarMesa(desplazamientoX = 1))
+    game.addVisual(new ParteAuxiliarMesa(desplazamientoX = 2))
+    game.addVisual(new ParteAuxiliarMesa(desplazamientoX = 3))
   }
   
   method entregarPedido(pedido)
@@ -43,38 +45,16 @@ object mesaEntrega {
   method recibir(carga){}
 }
 
-// ESTOY HAY QUE REVISARLO QUIZAS HACIENDO LA MESA DE ENTREGA MAS CHICA ESTO QUEDE MEJOR PERO ASI COMO ESTA HAY UN MONTON DE REPETICION DE LOGICA
-// hacer que la mesa de entrada sea una clase y que hereden 
-object mesaDeEntrega1{
-  method position()= game.at(5, 9)
-  method esAgarrable() = false
-  method image() = "imagenInvisible.png" 
-  
-  
-  method entregarPedido(pedido) {mesaEntrega.entregarPedido(pedido) }
-  method sumarPuntos(pedido) {mesaEntrega.sumarPuntos(pedido)}
-  method restarPuntos(pedido) {mesaEntrega.restarPuntos(pedido)}
-  method recibir(carga){mesaEntrega.recibir(carga)}
-}
-object mesaDeEntrega2{
-  method position()= game.at(6, 9)
-  method esAgarrable() = false
-  method image() = "imagenInvisible.png" 
-  
+class ParteAuxiliarMesa {
+  const desplazamientoX
 
-  method entregarPedido(pedido) {mesaEntrega.entregarPedido(pedido) }
-  method sumarPuntos(pedido) {mesaEntrega.sumarPuntos(pedido)}
-  method restarPuntos(pedido) {mesaEntrega.restarPuntos(pedido)}
-  method recibir(carga){mesaEntrega.recibir(carga)}
-}
-object mesaDeEntrega3{
-  method position()= game.at(7, 9)
+  method position() = mesaEntrega.position().right(desplazamientoX)
+  method esSolido() = true
   method esAgarrable() = false
-  method image() = "imagenInvisible.png" 
-  
+  method image() = "imagenInvisible.png"
 
-  method entregarPedido(pedido) {mesaEntrega.entregarPedido(pedido) }
-  method sumarPuntos(pedido) {mesaEntrega.sumarPuntos(pedido)}
-  method restarPuntos(pedido) {mesaEntrega.restarPuntos(pedido)}
-  method recibir(carga){mesaEntrega.recibir(carga)}
+  method entregarPedido(pedido) { mesaEntrega.entregarPedido(pedido) }
+  method sumarPuntos(pedido) { mesaEntrega.sumarPuntos(pedido) }
+  method restarPuntos(pedido) { mesaEntrega.restarPuntos(pedido) }
+  method recibir(carga) { mesaEntrega.recibir(carga) }
 }
