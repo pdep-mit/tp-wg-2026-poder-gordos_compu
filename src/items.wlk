@@ -1,4 +1,4 @@
-
+import gameConfiguration.*
 import wollok.game.*
 import itemFrame.*
 
@@ -55,5 +55,26 @@ class ElementoAgarrable {
   method recibir(carga){
     self.error("hay algo ya apoyado")
   }
+
+  method dejarEn(piso){
+    posicionEnSuelo = piso.celdaActual()
+    self.asignarA(sinContenedor)
+  }
+}
+
+/*
+* clase que representa las casillas libres en el tablero 
+*/ 
+class LugarLibre{
+  var property celdaActual 
+
+  method recibir(carga){
+    //valida que no este en el borde
+    if(not self.estaAdentro()) 
+      self.error("casi se me cae ufff 💧")
+    carga.dejarEn(self)
+  }
+
+  method estaAdentro() = config.esCeldaPermitida(self)
 }
 
