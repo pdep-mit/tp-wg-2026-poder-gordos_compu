@@ -5,7 +5,7 @@ import wollok.game.*
 
 describe "El parrillero se mueve y mueve los objetos de un lugar a otro"{
 
-  const unAsado = new Asado()
+  const unAsado = new Asado(posicionEnSuelo = game.at(2,3))
 
   method initialize() {
     game.clear()

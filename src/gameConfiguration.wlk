@@ -25,9 +25,9 @@ object config {
   method tiempoCambioFuego() = 20000
 
   //asado de prueba
-  const unAsado = new Asado()
+  const unAsado = new Asado(posicionEnSuelo = game.at(2,2))
   //chori de prueba
-  const unChori = new Chorizo()
+  const unChori = new Chorizo(posicionEnSuelo = game.at(2,3))
   //tira de asado de prueba
   const unaTira = new TiraAsado()
   
@@ -102,17 +102,17 @@ object config {
 
   //le dice a la parrilla que cocine la carne cada 1 segundo 
   method configurarParrilla(){
-    game.onTick(1000, "cocinarCarne", {parrilla.asar()})
+    game.tick(1000, {parrilla.asar()}, true).start()
   }
 
   //cada x segundos le dice a la parrilla que se apague un poco, va al fuego anterior
   method configurarFuego() {
-    game.onTick( self.tiempoCambioFuego(),"cambioFuego", {parrilla.fuego(parrilla.fuego().anterior())})
+    game.tick( self.tiempoCambioFuego(), {parrilla.fuego(parrilla.fuego().anterior())},true).start()
   }
 
   //aca hay polimorfismo -> animaciones de 8 frames
   method configurarAnimacion(){
-    game.onTick(300, "animaciones",{animaciones.aumentarContador()})
+    game.tick(300,{animaciones.aumentarContador()},true).start()
   }
 }
 
@@ -131,9 +131,9 @@ class Pedido {
 class Nivel { 
   
   // declaro todos los posibles platos a pedir por los niveles
-  
-  const chorizo = new Pedido(plato = new Chorizo())
-  const asado = new Pedido(plato = new Asado())
+  //borrar
+  const chorizo = new Pedido(plato = new Chorizo(posicionEnSuelo = game.at(2,3)))
+  const asado = new Pedido(plato = new Asado(posicionEnSuelo = game.at(2,3)))
   //metodo abstracto -- que deberia contener una lista de los posibles pedidos
   method listaPedidosPosibles()
 
@@ -153,6 +153,6 @@ class Nivel {
 
   //configura la velocidad con la que los pedidos se agregan a la lista
   method configurarFrecuenciaPedidos(){
-    game.onTick(self.frecuenciaPedidos(),"configurarFrecuenciaPedidos", {self.agregarPedidoAListaDePedidos()})
+    game.tick(self.frecuenciaPedidos(),{self.agregarPedidoAListaDePedidos()},true).start()
   }
 }

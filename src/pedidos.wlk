@@ -45,5 +45,7 @@ object listadoPedidos{
     pedidos.remove(pedidoBuscado) // agregar lo de remove visual (probablemente va en otro archivo)
   }
   method HayPedidos() = not pedidos.isEmpty()
+
+  method recibir(carga){}
 }
 

@@ -18,7 +18,7 @@ class Dispensador{
 
 class DispensadorAsado inherits Dispensador{
     //dispensar asado
-    override method loQueDoy() = new Asado()
+    override method loQueDoy() = new Asado(posicionEnSuelo = game.at(2,3))
     //hacer metodo boludo para cambiar lo que doy
 }
 

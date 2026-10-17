@@ -16,7 +16,7 @@ object sinContenedor {
 class ElementoAgarrable {
   //Origianlmente el item esta en el piso
   var property contenedor = sinContenedor
-  var property posicionEnSuelo = game.at(5,5)
+  var property posicionEnSuelo
 
   method esAgarrable() = true
   method esParrilla() = false
@@ -48,4 +48,12 @@ class ElementoAgarrable {
     if (game.hasVisual(itemFrame)) game.removeVisual(itemFrame)
     comensal.recibirPedido(self)
   }
+
+  /*
+  * metodo para que no se pueda poner una carne arriba de otra
+  */
+  method recibir(carga){
+    self.error("hay algo ya apoyado")
+  }
 }
+

@@ -33,6 +33,8 @@ class BarraProgreso {
         return listaPorcentajeReal.size()
 
     } 
+
+    method recibir(carga){}
 }
 
 // le agrego una barra indicadora de tiempo restante a cada elemento de nuestra lista de pedidos pendientes.
@@ -73,5 +75,6 @@ class BarraPedido
     method detener() {
 		game.removeTickEvent(nombreEvento)
 	}
-    
+
+    method recibir(carga){}
 }

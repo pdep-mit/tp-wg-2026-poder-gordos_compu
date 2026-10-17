@@ -27,6 +27,7 @@ object parrilla {
   method ponerCarne(carne) {
     carneActual = carne
     carne.enLaParrilla()
+    carne.asignarA(self)
   } 
 
   method sacarCarne(){
@@ -40,22 +41,35 @@ object parrilla {
   //le preguntamos a la parrilla si esta libre para que le pongan una carne
   method estaOcupada() = carneActual.esCarne()
 
+  method recibir(carga){
+    /*
+    * hacemos una verificacion y luego la logica del metodo ;) 
+    */
+    if(self.estaOcupada()){
+      self.error("la parrilla esta ocupada")
+    }
+    carga.ponerseEn(self)
+  }
+
+  //posiblemente remover
   method remover(carne){
     self.sacarCarne()
   }
 
   method esParrilla() = true
 
+  //borrar
   method aceptaCarne() = not self.estaOcupada()
 
+  //borrar
   method recibirCarne(carne) {
     self.ponerCarne(carne)
-    carne.asignarA(self)
+    //carne.asignarA(self)
   }
   //... mas cosas
 }
 
-//Este es el objeto invisible que acompania a la parrilla para las colisiones y para poder cocinar
+//Este es el objeto invisible que acompania a la parrilla para las colisiones y para poder cocinar -- deberiamos hacer a la parrilla una clase
 object parrilla1 {
   method muestraItemFrame() = false
   method esAgarrable() = false
@@ -70,6 +84,7 @@ object parrilla1 {
   method estaOcupada() = parrilla.estaOcupada()
   method aceptaCarne() = parrilla.aceptaCarne()
   method recibirCarne(carne) { parrilla.recibirCarne(carne) }
+  method recibir(carga) {parrilla.recibir(carga)}
 }
 
 //el calor son puntos de coccion 

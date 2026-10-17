@@ -17,4 +17,6 @@ object itemFrame {
       game.removeVisual(self)
     }
   }
+
+  method recibir(carga){}
 }

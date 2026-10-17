@@ -39,9 +39,12 @@ object mesaEntrega {
   {
     asador.restarPuntos(10)
   }
+
+  method recibir(carga){}
 }
 
 // ESTOY HAY QUE REVISARLO QUIZAS HACIENDO LA MESA DE ENTREGA MAS CHICA ESTO QUEDE MEJOR PERO ASI COMO ESTA HAY UN MONTON DE REPETICION DE LOGICA
+// hacer que la mesa de entrada sea una clase y que hereden 
 object mesaDeEntrega1{
   method position()= game.at(5, 9)
   method esAgarrable() = false
@@ -51,6 +54,7 @@ object mesaDeEntrega1{
   method entregarPedido(pedido) {mesaEntrega.entregarPedido(pedido) }
   method sumarPuntos(pedido) {mesaEntrega.sumarPuntos(pedido)}
   method restarPuntos(pedido) {mesaEntrega.restarPuntos(pedido)}
+  method recibir(carga){mesaEntrega.recibir(carga)}
 }
 object mesaDeEntrega2{
   method position()= game.at(6, 9)
@@ -61,6 +65,7 @@ object mesaDeEntrega2{
   method entregarPedido(pedido) {mesaEntrega.entregarPedido(pedido) }
   method sumarPuntos(pedido) {mesaEntrega.sumarPuntos(pedido)}
   method restarPuntos(pedido) {mesaEntrega.restarPuntos(pedido)}
+  method recibir(carga){mesaEntrega.recibir(carga)}
 }
 object mesaDeEntrega3{
   method position()= game.at(7, 9)
@@ -71,4 +76,5 @@ object mesaDeEntrega3{
   method entregarPedido(pedido) {mesaEntrega.entregarPedido(pedido) }
   method sumarPuntos(pedido) {mesaEntrega.sumarPuntos(pedido)}
   method restarPuntos(pedido) {mesaEntrega.restarPuntos(pedido)}
+  method recibir(carga){mesaEntrega.recibir(carga)}
 }

@@ -59,6 +59,10 @@ class Carne inherits ElementoAgarrable {
   } 
 
   method esCarne() = true
+  
+  method ponerseEn(parrilla){
+    parrilla.ponerCarne(self)
+  }
 } 
 
 class Asado inherits Carne {
@@ -84,11 +88,7 @@ class TiraAsado inherits ElementoAgarrable {
 
   method esCarne() = false
 
-  method cocinar(calor){}
-
-  method enLaParrilla(){}
-
-  method noSePuedeCocinar() {
+  method ponerseEn(parrilla){
     self.error("primero me tenes que cortar")
   }
 }

@@ -7,7 +7,7 @@ describe "Las carnes se cocinan en la parrilla y cambian su estado" {
 
   //como en los test no pasa el tiempo podemos usar times para que se repita la accion varias veces 
 
-  const unAsado = new Asado()
+  const unAsado = new Asado(posicionEnSuelo = game.at(2,3))
   
   const unaTira = new TiraAsado()
 
