@@ -12,13 +12,12 @@ object movimiento {
 
 	method mover(personajeLibre, direccion)
     {   
-        const cosasEnfrente = game.getObjectsIn(personajeLibre.celdaDeEnfrente())
-        //Revisamos si en frente hay objetos solidos
-        const cosasSolidasEnFrente = cosasEnfrente.filter({obj => obj.esSolido()})
         const nuevaPosicion = direccion.posicionSiguiente(personajeLibre.position())
-        //Si la en frente no hay solidos entonces avanza, de no ser asi no avanza a la nueva posicion :p bastante logico
-        if(cosasSolidasEnFrente.isEmpty())
-        {
+        //Chequeamos si en la nueva posicion hay solidos
+        const haySolidos = game.getObjectsIn(nuevaPosicion).any({ obj => obj.esSolido() })
+
+        //Si no hay solidos avanzo :))
+        if (!haySolidos) {
             personajeLibre.position(nuevaPosicion)
         }
     }

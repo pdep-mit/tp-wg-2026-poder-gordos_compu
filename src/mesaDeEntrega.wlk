@@ -10,6 +10,7 @@ object mesaEntrega {
   method position()= game.at(4, 9)
   method esAgarrable() = false
   method esSolido() = true
+  method esParrilla() = false
 
   method initialize() {
     game.addVisual(new ParteAuxiliarMesa(desplazamientoX = 1))
@@ -51,6 +52,7 @@ class ParteAuxiliarMesa {
   method position() = mesaEntrega.position().right(desplazamientoX)
   method esSolido() = true
   method esAgarrable() = false
+  method esParrilla() = false
   method image() = "imagenInvisible.png"
 
   method entregarPedido(pedido) { mesaEntrega.entregarPedido(pedido) }
