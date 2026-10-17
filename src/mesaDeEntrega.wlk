@@ -11,7 +11,6 @@ object mesaEntrega {
   method esAgarrable() = false
   method esSolido() = true
   method esParrilla() = false
-  method esMesaDeEntrega() = true
 
   method initialize() {
     game.addVisual(new ParteAuxiliarMesa(desplazamientoX = 1))
@@ -27,7 +26,6 @@ object mesaEntrega {
     }
     if(listadoPedidos.estaElPedido(pedido))
     {
-      pedido.removeVisual()
       self.sumarPuntos(pedido)
       listadoPedidos.borrarPedido(pedido)
     }
