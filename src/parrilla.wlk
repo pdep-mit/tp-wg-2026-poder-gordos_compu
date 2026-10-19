@@ -1,18 +1,13 @@
 import wollok.game.*
 import carnes.*
 import animaciones.*
+import superClaseChad.*
 
 //la parrila tmb puede ser una clase ya que podemos tener mas de una parrilla 
-object parrilla {
-  //todo esto se tiene que ir
-  method muestraItemFrame() = false
-  method esAgarrable() = false
-  method esSolido() = true
-  method esParrilla() = true
-
+object parrilla inherits Chad {
   const property position = game.at(2,2)
-  // variable temporal, cambiar implementacion en proximas entregas
   
+  override method esSolido() = true 
 
   //Autoinicializa su propia otra parte, esto es fundamental para que agarrar pueda encontrar al objeto parrilla1 y que parrilla1 pueda delegar en la parrilla origianl
   method initialize() {
@@ -46,7 +41,7 @@ object parrilla {
   //le preguntamos a la parrilla si esta libre para que le pongan una carne
   method estaOcupada() = carneActual.esCarne()
 
-  method recibir(carga){
+  override method recibir(carga){
     /*
     * hacemos una verificacion y luego la logica del metodo ;) 
     */
@@ -60,7 +55,7 @@ object parrilla {
     self.sacarCarne()
   }
 
-  method avivar() { 
+  override method avivar() { 
     fuego = fuego.siguiente()
   }
 
@@ -68,24 +63,22 @@ object parrilla {
     fuego = fuego.anterior()
   }
 
+  //temp 
+  override method esParrilla() = true
   //... mas cosas
 }
 
 //Este es el objeto invisible que acompania a la parrilla para las colisiones y para poder cocinar -- deberiamos hacer a la parrilla una clase
-object parrilla1 {
-  method muestraItemFrame() = false
-  method esAgarrable() = false
-  method esSolido() = true
-  method esParrilla() = true
-
+object parrilla1 inherits Chad {
   const property position = parrilla.position().right(1)
   // Imagen transparente de 1x1 o vacía
   method image() = "imagenInvisible.png" 
-
+  override method esSolido() = true
   // Delegaciones a la parrilla real
   method estaOcupada() = parrilla.estaOcupada()
-  method recibir(carga) {parrilla.recibir(carga)}
-  method avivar() {parrilla.avivar()}
+  override method recibir(carga) {parrilla.recibir(carga)}
+  override method avivar() {parrilla.avivar()}
+  override method esParrilla() = true
 }
 
 //el calor son puntos de coccion 

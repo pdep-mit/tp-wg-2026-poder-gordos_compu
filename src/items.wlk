@@ -2,7 +2,7 @@ import asador.*
 import gameConfiguration.*
 import wollok.game.*
 import itemFrame.*
-
+import superClaseChad.*
 
 // Null Object para cuando un elemento no está en un contenedor
 // O sea esta en el piso
@@ -14,13 +14,10 @@ object sinContenedor {
 }
 
 // superclase para cualquier cosa transportable por el inventario del asador u otros contenedores
-class ElementoAgarrable {
+class ElementoAgarrable inherits Chad {
   //Origianlmente el item esta en el piso
   var property contenedor = sinContenedor
   var property posicionEnSuelo
-
-  method esAgarrable() = true
-  method esParrilla() = false
   method position() = contenedor.posicionPara(self)
 
   //Le asginamos un nuevo contenedor al item
@@ -53,7 +50,7 @@ class ElementoAgarrable {
   /*
   * metodo para que no se pueda poner una carne arriba de otra
   */
-  method recibir(carga){
+  override method recibir(carga){
     carga.apoyar()
   }
 
@@ -66,16 +63,18 @@ class ElementoAgarrable {
     self.error("hay algo ya apoyado")
   }
 
-  method avivar(){}
+  //temp 
+  override method esAgarrable() = true
+
 }
 
 /*
 * clase que representa las casillas libres en el tablero 
 */ 
-class LugarLibre{
+class LugarLibre inherits Chad{
   var property celdaActual 
 
-  method recibir(carga){
+  override method recibir(carga){
     //valida que no este en el borde
     if(not self.estaAdentro()) 
       asador.error("casi se me cae ufff 💧")
@@ -84,6 +83,5 @@ class LugarLibre{
 
   method estaAdentro() = config.esCeldaPermitida(self)
 
-  method avivar(){}
 }
 

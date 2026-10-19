@@ -1,11 +1,10 @@
 import wollok.game.*
+import superClaseChad.*
 
-object tablaDeCortar {
+object tablaDeCortar inherits Chad {
     method image() = "tabla_cortar.png"
     method position()= game.at(10, 4)
-    method esAgarrable() = false
-    method esSolido() = true
-    method esParrilla() = false
+    override method esSolido() = true
 
     method initialize() {
         game.addVisual(self)

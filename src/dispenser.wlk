@@ -27,6 +27,9 @@ class DispensadorAsado inherits Dispensador{
     override method position()= game.at(11, 7)
     
 
+
+//mover todo esto a coso para agarrar MP -- Tiene la super clase Chad que chad que es 
+
     method initialize() {
         game.addVisual(self)
     }

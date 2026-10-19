@@ -4,13 +4,13 @@ import carnes.*
 import barrasAviso.*
 import gameConfiguration.*
 import pedidos.*
+import superClaseChad.*
 
-object mesaEntrega { 
+object mesaEntrega inherits Chad { 
   method image() = "mesa_pedidos.png"
   method position()= game.at(7, 9)
-  method esAgarrable() = false
-  method esSolido() = true
-  method esParrilla() = false
+
+  override method esSolido() = true
 
   method initialize() {
     game.addVisual(new ParteAuxiliarMesa(desplazamientoX = 1))
@@ -42,26 +42,18 @@ object mesaEntrega {
   {
     asador.restarPuntos(10)
   }
-
-  method recibir(carga){}
-
-  method avivar(){}
-
 }
 
-class ParteAuxiliarMesa {
+class ParteAuxiliarMesa inherits Chad {
   const desplazamientoX
 
   method position() = mesaEntrega.position().right(desplazamientoX)
-  method esSolido() = true
-  method esAgarrable() = false
-  method esParrilla() = false
   method image() = "imagenInvisible.png"
 
   method entregarPedido(pedido) { mesaEntrega.entregarPedido(pedido) }
   method sumarPuntos(pedido) { mesaEntrega.sumarPuntos(pedido) }
   method restarPuntos(pedido) { mesaEntrega.restarPuntos(pedido) }
-  method recibir(carga) { mesaEntrega.recibir(carga) }
-  method avivar(){}
+  
+  override method esSolido() = true
 
 }
