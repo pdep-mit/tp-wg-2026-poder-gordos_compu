@@ -5,12 +5,12 @@ import wollok.game.*
 import parrilla.*
 import asador.*
 import carnes.*
-import cosoParaAgarrarMP.*
 import sarten.*
 import tablaDeCortar.*
 import movimientos.*
 import pedidos.*
 import mesaDeEntrega.*
+import dispenser.*
 
 
 //dependencia utils
@@ -24,15 +24,17 @@ object config {
   //el tiempo que pasa para que el fuego cambie de estado (fuerte -> medio -> bajo) esta en 20s para mi es poco
   method tiempoCambioFuego() = 20000
 
-  //asado de prueba
+  //  asado de prueba
   const unAsado = new Asado(posicionEnSuelo = game.at(2,4))
-  //chori de prueba
+  //  chori de prueba
   const unChori = new Chorizo(posicionEnSuelo = game.at(2,3))
-  //tira de asado de prueba
+  //  tira de asado de prueba
   const unaTira = new TiraAsado()
+  //  dispenser de prueba
+  const unDispenser = new DispensadorAsado()
   
   
-
+  
 
   method configurarJuego(){
 		self.configurarVentana()

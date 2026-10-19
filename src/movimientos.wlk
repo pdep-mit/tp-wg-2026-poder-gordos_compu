@@ -36,7 +36,7 @@ object movimiento {
     // }
 
 object haciaArriba {
-    method posicionSiguiente(posicion) = game.at(posicion.x(),(config.alturaMaxima()-2).min(posicion.up(1).y()))
+    method posicionSiguiente(posicion) = game.at(posicion.x(),(config.alturaMaxima()-3).min(posicion.up(1).y()))
 
     method siguiente(posicion) =  posicion.up(1)
 }
