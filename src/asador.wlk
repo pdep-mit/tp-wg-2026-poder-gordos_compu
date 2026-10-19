@@ -45,7 +45,7 @@ object asador {
   method laPosicionObjeto() = position.up(2).right(1)
 
   method loQueTengoEnFrente() {
-    const celdaLibre = new LugarLibre(celdaActual = self.laPosicionObjeto())
+    const celdaLibre = new LugarLibre(celdaActual = self.celdaDeEnfrente())
     const cosasEnfrente = game.getObjectsIn(self.celdaDeEnfrente())
     cosasEnfrente.add(celdaLibre)
     return cosasEnfrente.first()
