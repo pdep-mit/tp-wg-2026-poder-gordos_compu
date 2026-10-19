@@ -3,6 +3,7 @@ import wollok.game.*
 import parrilla.*
 import movimientos.*
 import items.*
+import superClaseChad.* 
 
 object sinCarga {
   method soltar(){}
@@ -14,14 +15,14 @@ object sinCarga {
 
 // agregamos la logica para que pueda agarrar al contacto cualquier cosa que tenga implementado el metodo asignarA
 // tambien el metodo para soltar, lo cual asigna como su nueva posicion la actual y se desvincula del gordo 
-object asador { 
+object asador inherits Chad { 
   var property position = game.at(1,1)
   var property carga = sinCarga
-  var property direccion = haciaAbajo
-  method esParrilla() = false
-  method muestraItemFrame() = true
-  method esSolido() = false
+  var property direccion = haciaAbajo  
   
+  //temp? 
+  override method muestraItemFrame() = true
+
   // introducimos los puntos (a mejorar)
   var property puntos = 0
 
@@ -34,7 +35,7 @@ object asador {
   {
     puntos -= cantidad  
   }
-  //Claramente el asador no es una parrilla, no?
+
   
 
   method image() = "asador_" + direccion.toString() + ".png"  

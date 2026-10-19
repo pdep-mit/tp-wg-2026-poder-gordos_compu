@@ -8,7 +8,6 @@ import items.*
 
 //super clase carne abstracta 
 class Carne inherits ElementoAgarrable {
-  method esSolido() = false
   method esCarne() = true
 
   //el tiempo que pasa en la parrilla en puntos de coccion 
@@ -83,7 +82,7 @@ class Asado inherits Carne {
 }
 
 class TiraAsado inherits ElementoAgarrable {
-  method esSolido() = false
+  
   const property image = "tira_asado.png" 
 
   override method initialize() {

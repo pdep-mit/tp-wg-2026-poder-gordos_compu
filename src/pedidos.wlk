@@ -2,6 +2,7 @@ import src.asador.*
 import carnes.*
 import barrasAviso.*
 import gameConfiguration.*
+import superClaseChad.*
 
 class ElementoLista{ 
     var property pedidoActual 
@@ -25,7 +26,7 @@ class ElementoLista{
     }
 }
 
-object listadoPedidos{
+object listadoPedidos inherits Chad{
   const pedidos = []
   const property origen = game.at(1, config.alturaMaxima() - 1 )
   method position() = origen
@@ -45,8 +46,5 @@ object listadoPedidos{
     pedidos.remove(pedidoBuscado) // agregar lo de remove visual (probablemente va en otro archivo)
   }
   method HayPedidos() = not pedidos.isEmpty()
-
-  method recibir(carga){}
-  method avivar(){}
 }
 

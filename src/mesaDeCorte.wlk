@@ -1,14 +1,13 @@
 import gameConfiguration.*
+import superClaseChad.*
 
-
-object mesaCorte {
+object mesaCorte inherits Chad {
     method image() = "mesa_corte.png"
     method position() = game.at(9, 0)
-    method esAgarrable() = false
-    method esSolido() = true
-    method esParrilla() = false
 
     method initialize() {
         game.addVisual(self)
     }
+
+    override method esSolido() = true
 }
