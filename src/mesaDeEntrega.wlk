@@ -7,7 +7,7 @@ import pedidos.*
 
 object mesaEntrega { 
   method image() = "mesa_pedidos.png"
-  method position()= game.at(4, 9)
+  method position()= game.at(7, 9)
   method esAgarrable() = false
   method esSolido() = true
   method esParrilla() = false

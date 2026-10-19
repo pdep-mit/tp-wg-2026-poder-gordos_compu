@@ -52,7 +52,7 @@ object config {
 		game.height(self.alturaMaxima())
 		game.width(self.anchoMaximo())
     game.cellSize(48) //tamanio de las celdas 
-		//game.boardGround("image.png") //descomentar cuando tengamos una imagen de fondo
+		game.boardGround("fondo.png")
 	}
 
   method agregarVisuales(){
