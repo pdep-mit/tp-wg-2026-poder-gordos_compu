@@ -22,7 +22,7 @@ object mesaEntrega inherits Chad {
     //3.times({i => new ElementoAuxiliar(duenio = self, desplazamientoX = i)})
   }
   
-  method entregarPedido(pedido)
+  override method recibir(pedido)
   {
     if(not listadoPedidos.HayPedidos())
     {
@@ -46,5 +46,6 @@ object mesaEntrega inherits Chad {
   {
     asador.restarPuntos(10)
   }
+
 }
 

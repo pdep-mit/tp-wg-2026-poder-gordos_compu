@@ -108,7 +108,7 @@ object config {
   method esCeldaPermitida(celda)=
     celda.celdaActual().x().between(0, self.anchoMaximo() -1) and
     celda.celdaActual().y().between(0, self.alturaMaxima() - 2)
-
+  
   //le dice a la parrilla que cocine la carne cada 1 segundo 
   method configurarParrilla(){
     game.tick(1000, {parrilla.asar()}, true).start()
