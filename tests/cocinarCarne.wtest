@@ -28,7 +28,7 @@ describe "Las carnes se cocinan en la parrilla y cambian su estado" {
   test "no se puede cocinar una tira de asado" {
     asador.carga(unaTira)
     //al hacer la accion de la derecha deberia saltar el msg de la izq. 
-    assert.throwsExceptionWithMessage("primero me tenes que cortar", { asador.ponerCarne() })
+    assert.throwsExceptionWithMessage("primero me tenes que cortar", { asador.soltar() })
   }
 
   //revisar si hay mejores...

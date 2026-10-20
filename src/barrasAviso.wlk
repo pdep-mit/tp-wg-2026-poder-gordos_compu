@@ -2,6 +2,7 @@ import wollok.game.*
 import carnes.*
 import pedidos.*
 import src.superClaseChad.*
+import animaciones.*
 
 class BarraProgreso inherits Chad {
     var property carneActual = noCarne
@@ -22,10 +23,13 @@ class BarraProgreso inherits Chad {
         
         const estadoCarne = carneActual.comoAndas()
 
-        //antes de hacer cosas verificamos que no se haya quemado
+        //cuando esta en el rango de cocida le tenemos que avisar que se esta por quemar
+        if(carneActual.seEstaPorQuemar()){
+            return animaciones.siguienteFrame(2) + 8
+        }
+
         if(carneActual.seQuemo()){
-            //valor intermedio hasta tener la imagen del triangulo de alerta 
-            return 5
+            return 10
         }
 
         //quiero una nueva lista que contenga unicamente los elementos que sean menores al estado de la carne (queriendo decir que ya paso x esa etapa de progreso)

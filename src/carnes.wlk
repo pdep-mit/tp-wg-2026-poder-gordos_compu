@@ -37,9 +37,11 @@ class Carne inherits ElementoAgarrable {
 
   //da 4 puntos de coccion de chance para que la vayas a sacar 
   method seQuemo() = tiempoParrilla > self.limiteDeQuemado()
-
+  
   //indica si la carne esta dentro del rango de "cocida"
   method estaCocida() = tiempoParrilla.between(self.tiempoCoccion(), self.limiteDeQuemado())
+
+  method seEstaPorQuemar() = tiempoParrilla.between(self.tiempoCoccion() + 2, self.limiteDeQuemado())
 
   method cocinar(calor) {
     tiempoParrilla += calor
