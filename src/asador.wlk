@@ -6,11 +6,12 @@ import items.*
 import superClaseChad.* 
 
 object sinCarga {
-  method soltar(){}
-  method esAgarrable() = false
   method ponerseEn(carga){}
   method dejarEn(piso){}
   method apoyar(){}
+  method agarrarCarga(parrilero){
+    parrilero.agarrarLoDeEnfrente()
+  }
 }
 
 // agregamos la logica para que pueda agarrar al contacto cualquier cosa que tenga implementado el metodo asignarA
@@ -52,43 +53,32 @@ object asador inherits Chad {
     return cosasEnfrente.first()
   }
     
- 
+  
   method ponerCarne(){
     self.loQueTengoEnFrente().recibir(carga)
   }
 
+  //metodo super chad 
+  method agarrar() {
+    carga.agarrarCarga(self)
+  }
 
-method agarrar() {
-    const cosasEnfrente = game.getObjectsIn(self.celdaDeEnfrente())
-    const cosasEnMisPies = game.getObjectsIn(position)
-    
-    // Filtramos para ignorar a nosotros mismos
-    const cosasCerca = (cosasEnfrente + cosasEnMisPies).filter({ obj => obj != self })
-
-    // 1. Buscamos primero si hay una carne cocinándose en la parrilla y estamos cerca de cualquier parte
-    const hayParrillaOcupada = cosasCerca.any({ obj => obj.esParrilla() && obj.estaOcupada() })
-
-    if (hayParrillaOcupada) {
-      self.soltar()
-      carga = parrilla.carneActual()
-      carga.asignarA(self)
-    } else {
-      // 2. Si no hay parrilla con carne cerca, buscamos ítems sueltos en el piso o mesa
-      const agarrables = cosasCerca.filter({ obj => obj.esAgarrable() })
-      if (!agarrables.isEmpty()) {
-        self.soltar()
-        carga = agarrables.first()
-        carga.asignarA(self)
-      }
-    }
+  method tomar(nuevaCarga){
+    carga = nuevaCarga
+    nuevaCarga.asignarA(self)
   }
   
-
-  method soltar() {
-    carga.soltar()
-    carga = sinCarga
+  method loQuePuedoAgarrar(){
+    const misPies = game.getObjectsIn(self.position())
+    misPies.remove(self)
+    misPies.add(self.loQueTengoEnFrente())
+    return misPies.first()
   }
 
+  method agarrarLoDeEnfrente(){
+    self.loQuePuedoAgarrar().dejarAgarrarPor(self)
+  }
+  
   // Posición polimórfica para el ítem que esta en el item frame, o sea en el inventario del asador
   method posicionPara(item) = self.laPosicionObjeto()
 

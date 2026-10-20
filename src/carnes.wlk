@@ -128,4 +128,5 @@ object noCarne {
   method enLaParrilla(){}
   method fueraDeParrilla(){}
   method esCarne() = false
+  method dejarAgarrarPor(parrilero){}
 }

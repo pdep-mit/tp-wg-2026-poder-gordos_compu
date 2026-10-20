@@ -10,11 +10,7 @@ class Chad {
 
     method esSolido() = false 
 
-    //temp
-    method esAgarrable() = false 
-
-    //temp 
-    method esParrilla() = false 
+    method dejarAgarrarPor(parrillero){}
 
     //temp ? 
     method muestraItemFrame() = false

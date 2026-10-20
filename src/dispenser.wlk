@@ -1,10 +1,10 @@
 import wollok.game.*
 import carnes.*
-
+import superClaseChad.*
 //le hay que cambiar el nombre pero basicamente es el lugar de donde podes agarrar las carnes, verduras panes etc
 
 
-class Dispensador{
+class Dispensador inherits Chad{
     
     method position()
     method loQueDoy()

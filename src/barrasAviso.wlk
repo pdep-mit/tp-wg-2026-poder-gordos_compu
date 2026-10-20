@@ -1,8 +1,9 @@
 import wollok.game.*
 import carnes.*
 import pedidos.*
+import src.superClaseChad.*
 
-class BarraProgreso {
+class BarraProgreso inherits Chad {
     var property carneActual = noCarne
     method esAgarrable() = false
     method esParrilla() = false
@@ -35,13 +36,14 @@ class BarraProgreso {
 
     } 
 
-    method recibir(carga){}
-    method avivar(){}
-
+    //delegamos pa 
+    override method dejarAgarrarPor(parrillero){
+        carneActual.dejarAgarrarPor(parrillero)
+    }
 }
 
 // le agrego una barra indicadora de tiempo restante a cada elemento de nuestra lista de pedidos pendientes.
-class BarraPedido
+class BarraPedido inherits Chad
 {
     const listaPorcentajes = [0, 25, 50, 75, 100]
     const elementoActual
@@ -78,8 +80,4 @@ class BarraPedido
     method detener() {
 		game.removeTickEvent(nombreEvento)
 	}
-
-    method recibir(carga){}
-    method avivar(){}
-
 }

@@ -31,15 +31,11 @@ class ElementoAgarrable inherits Chad {
 
     //Desvinculamos del contenedor anterior
     //Cada tipo de contenedor va a tener una forma deiferente de dejarDeLlevar
+    //aca hay polimorfismo
     contenedor.remover(self)
     //Adopcion del nuevo dueno
     contenedor = nuevoContenedor
   }
-
- method soltar() {
-  posicionEnSuelo = self.position()
-  self.asignarA(sinContenedor)
-}
 
   // metodo para entregar el plato al comensal -- creo q deberia estar en asador
   method entregarA(comensal) {
@@ -63,8 +59,12 @@ class ElementoAgarrable inherits Chad {
     self.error("hay algo ya apoyado")
   }
 
-  //temp 
-  override method esAgarrable() = true
+  override method dejarAgarrarPor(parrillero){
+    parrillero.tomar(self)
+  }
+  
+  //no hace nada pq tendrias que solar primero lo que tenes para poder agarrar una nueva carne -- se pude modificar 
+  method agarrarCarga(parrillero){}
 
 }
 

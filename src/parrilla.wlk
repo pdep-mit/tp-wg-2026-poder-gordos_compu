@@ -63,8 +63,10 @@ object parrilla inherits Chad {
     fuego = fuego.anterior()
   }
 
-  //temp 
-  override method esParrilla() = true
+  override method dejarAgarrarPor(parrilero){
+    carneActual.dejarAgarrarPor(parrilero)
+  }
+  
   //... mas cosas
 }
 
@@ -74,11 +76,11 @@ object parrilla1 inherits Chad {
   // Imagen transparente de 1x1 o vacía
   method image() = "imagenInvisible.png" 
   override method esSolido() = true
+  
   // Delegaciones a la parrilla real
-  method estaOcupada() = parrilla.estaOcupada()
   override method recibir(carga) {parrilla.recibir(carga)}
   override method avivar() {parrilla.avivar()}
-  override method esParrilla() = true
+  override method dejarAgarrarPor(parrillero){parrilla.dejarAgarrarPor(parrillero)}
 }
 
 //el calor son puntos de coccion 
