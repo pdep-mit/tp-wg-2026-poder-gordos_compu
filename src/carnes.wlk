@@ -49,6 +49,10 @@ class Carne inherits ElementoAgarrable {
     estado = estado.siguienteEstado(self)
   }
 
+  override method serCortada(tabla) {
+    game.say(tabla, "Esto ya fue cortado")
+  }
+
   //regla de tres simple para el porcentaje de la carne a ver como se encuentra
   //tiempoCoccion -> 100%
   //tiempoParrilla -> x 
@@ -101,6 +105,17 @@ class TiraAsado inherits ElementoAgarrable {
   method ponerseEn(parrilla){
     self.error("primero me tenes que cortar")
   }
+
+  override method serCortada(tabla) {
+      const porcionAsado = new Asado(posicionEnSuelo = tabla.position()) 
+            
+      game.addVisual(porcionAsado)
+            
+      if (game.hasVisual(self)) {
+        game.removeVisual(self)
+      }
+  }
+
 }
 
 class Vacio inherits Carne {
@@ -140,4 +155,6 @@ object noCarne {
   method fueraDeParrilla(){}
   method esCarne() = false
   method dejarAgarrarPor(parrilero){}
+  method dejarEn(lugar) {} 
+  method serCortada(tabla) {}
 }

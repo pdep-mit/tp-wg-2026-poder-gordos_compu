@@ -6,14 +6,25 @@ object tablaDeCortar inherits Chad {
     method position()= game.at(10, 4)
     override method esSolido() = true
 
-    //deberia estar en el config
+    method celdaActual() = self.position()
+
     method initialize() {
         game.addVisual(self)
     }
 
     override method recibir(carga) {
-        //Acá va la lógica de cortar la carne
-        //Si ya está cortada, no hace nada
-        //Habría que agregar estado de cortada true o false en la carne
+        carga.dejarEn(self) 
+        carga.serCortada(self) 
+    }
+
+    override method dejarAgarrarPor(parrillero) {
+        const objetosEnCelda = game.getObjectsIn(self.position())
+        const cosasEncima = objetosEnCelda.filter({ obj => obj != self })
+        
+        if (!cosasEncima.isEmpty()) {
+            cosasEncima.first().dejarAgarrarPor(parrillero)
+        } else {
+            game.say(parrillero, "La tabla está vacía")
+        }
     }
 }
