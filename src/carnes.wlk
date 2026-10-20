@@ -68,6 +68,10 @@ class Carne inherits ElementoAgarrable {
   }
 
   method miRecetaEs() 
+
+  override method entregarA(mesaDeEntrega){
+    mesaDeEntrega.soltar(self)
+  }
 } 
 
 class Asado inherits Carne {

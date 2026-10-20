@@ -39,12 +39,6 @@ class ElementoAgarrable inherits Chad {
     contenedor = nuevoContenedor
   }
 
-  // metodo para entregar el plato al comensal -- creo q deberia estar en asador
-  method entregarA(comensal) {
-    if (game.hasVisual(itemFrame)) game.removeVisual(itemFrame)
-    comensal.recibirPedido(self)
-  }
-
   /*
   * metodo para que no se pueda poner una carne arriba de otra
   */
@@ -70,6 +64,19 @@ class ElementoAgarrable inherits Chad {
 
   method mostrarParteInvisible(){
     game.addVisual(elementoInvisible)
+  }
+
+  method entregarA(mesaDeEntrega){
+    self.error("esto no se puede entregar")
+  }
+
+  method desaparecer(){
+    contenedor.remover(self)
+    itemFrame.ocultar()
+    game.removeVisual(self)
+    if (game.hasVisual(elementoInvisible)){
+      game.removeVisual(elementoInvisible)
+    }
   }
 
 }

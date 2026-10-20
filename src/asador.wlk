@@ -12,6 +12,7 @@ object sinCarga {
   method agarrarCarga(parrilero){
     parrilero.agarrarLoDeEnfrente()
   }
+  method entregarA(mesaDeEntrega){}
 }
 
 // agregamos la logica para que pueda agarrar al contacto cualquier cosa que tenga implementado el metodo asignarA
@@ -23,21 +24,6 @@ object asador inherits Chad {
   
   //temp? 
   override method muestraItemFrame() = true
-
-  // introducimos los puntos (a mejorar)
-  var property puntos = 0
-
-  method sumarPuntos(cantidad)
-  {
-    puntos += cantidad
-  }
-
-  method restarPuntos(cantidad)
-  {
-    puntos -= cantidad  
-  }
-
-  
 
   method image() = "asador_" + direccion.toString() + ".png"  
 

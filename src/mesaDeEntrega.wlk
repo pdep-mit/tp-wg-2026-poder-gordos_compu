@@ -8,6 +8,7 @@ import superClaseChad.*
 import elementosInvisibles.*
 
 object mesaEntrega inherits Chad { 
+  //la tenemos que agrandar 
   method image() = "mesa_pedidos.png"
   method position()= game.at(7, 9)
 
@@ -22,30 +23,16 @@ object mesaEntrega inherits Chad {
     //3.times({i => new ElementoAuxiliar(duenio = self, desplazamientoX = i)})
   }
   
-  override method recibir(pedido)
-  {
-    if(not listadoPedidos.HayPedidos())
-    {
-      self.error("No hay Pedidos Disponibles para entregar")
-    }
-    if(listadoPedidos.estaElPedido(pedido))
-    {
-      self.sumarPuntos(pedido)
-      listadoPedidos.borrarPedido(pedido)
-    }
-    else
-    {
-      self.restarPuntos(pedido)
-    }
+  override method recibir(carga){
+    carga.entregarA(self)
   }
-  method sumarPuntos(pedido)
-  {
-    asador.sumarPuntos(20 + pedido.tiempoRestante())
+
+  method soltar(carga){
+    const pedidoBuscado = listadoPedidos.estaElPedido(carga)
+    pedidoBuscado.cumplirComanda(carga)
+
   }
-  method restarPuntos(pedido)
-  {
-    asador.restarPuntos(10)
-  }
+ 
 
 }
 

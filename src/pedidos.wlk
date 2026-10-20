@@ -9,6 +9,7 @@ class ElementoLista inherits Chad{
     var property position = game.at(0, config.alturaMaxima() - 1)
     const barraIndividual = new BarraPedido(elementoActual = self)
     method tiempo() = pedidoActual.tiempoEntrega() 
+    const timer = game.tick(1000, {self.expiroElPedido()}, false)
 
     method tiempoRestante() = barraIndividual.duracionActual()
     // inicializo la barra de tiempo del plato y tambien su imagen de referencia
@@ -27,30 +28,35 @@ class ElementoLista inherits Chad{
       game.addVisual(self)
       game.addVisual(barraIndividual)
       barraIndividual.acortarTiempo()
-      self.expiroElPedido()
+      self.empezarTimer()
     }
 
     method desaparecerPedido(){
       game.removeVisual(self)
       game.removeVisual(barraIndividual)
       self.registrarTiempo()
+      self.terminarTimer()
       listadoPedidos.borrarPedido(self)
       listadoPedidos.acomodar()
     }
 
-    method expiroElPedido()
-    {
-      // consulta cada 1 segundo el tiempo restante del pedido
-      game.tick(1000, 
-      {
-      if(self.tiempoRestante() == 0)
-        {
-        self.desaparecerPedido() 
-        }
-      }, false).start()
-
+    method expiroElPedido(){
+      if(self.tiempoRestante() == 0){
+        self.desaparecerPedido()
+        config.nivelActual().restarPuntos(10) 
+      }
     }
 
+    method empezarTimer() = timer.start()
+    method terminarTimer() = timer.stop()
+
+    method aceptoUn(pedido) = pedido.miRecetaEs() == pedidoActual and pedido.estaCocida() 
+
+    method cumplirComanda(carne){
+      config.nivelActual().sumarPuntos(20 + self.tiempoRestante())
+      self.desaparecerPedido()
+      carne.desaparecer()
+    }   
     
 }
 
@@ -68,7 +74,7 @@ object listadoPedidos inherits Chad{
     pedidos.size().times({i => pedidos.get(i - 1).position(origen.right(i-1))})
   }
   
-  method estaElPedido(pedido) = pedidos.contains(pedido)
+  method estaElPedido(pedido) = pedidos.findOrDefault({comanda => comanda.aceptoUn(pedido)} , ningunPedido)
   
   method borrarPedido(pedido)
   {
@@ -77,3 +83,8 @@ object listadoPedidos inherits Chad{
   method HayPedidos() = not pedidos.isEmpty()
 }
 
+object ningunPedido{
+   method cumplirComanda(carne){
+    config.nivelActual().restarPuntos(10)
+   }
+}

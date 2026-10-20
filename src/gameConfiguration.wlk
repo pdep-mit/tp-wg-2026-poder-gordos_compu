@@ -17,9 +17,11 @@ import platos.*
 //dependencia utils
 import animaciones.*
 import azar.* 
-
+import src.nivel_1.*
 
 object config {
+  var property nivelActual = nivel1 
+  
   method alturaMaxima() = 12 
   method anchoMaximo() = 20
   
@@ -49,6 +51,7 @@ object config {
 class Nivel { 
   
   method arrancarNivel(){
+    config.nivelActual(self)
     self.agregarVisuales()
     self.configurarColisiones()
     self.configurarAcciones()
@@ -181,6 +184,14 @@ class Nivel {
 
   method configurarAnimacion(){
     game.tick(300,{animaciones.aumentarContador()},true).start()
+  }
+
+  method sumarPuntos(puntos){
+    aplausos += puntos
+  }
+
+  method restarPuntos(puntos){
+    aplausos -= puntos
   }
 }
 
