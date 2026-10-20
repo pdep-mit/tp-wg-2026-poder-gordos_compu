@@ -27,17 +27,35 @@ class ElementoLista inherits Chad{
       game.addVisual(self)
       game.addVisual(barraIndividual)
       barraIndividual.acortarTiempo()
+      self.expiroElPedido()
     }
 
     method desaparecerPedido(){
       game.removeVisual(self)
       game.removeVisual(barraIndividual)
       self.registrarTiempo()
+      listadoPedidos.borrarPedido(self)
+      listadoPedidos.acomodar()
     }
+
+    method expiroElPedido()
+    {
+      // consulta cada 1 segundo el tiempo restante del pedido
+      game.tick(1000, 
+      {
+      if(self.tiempoRestante() == 0)
+        {
+        self.desaparecerPedido() 
+        }
+      }, false).start()
+
+    }
+
+    
 }
 
 object listadoPedidos inherits Chad{
-  const pedidos = []
+  const property pedidos = []
   const property origen = game.at(0, config.alturaMaxima() - 1 )
   method position() = origen
   method tomarPedido(pedido){
@@ -51,11 +69,10 @@ object listadoPedidos inherits Chad{
   }
   
   method estaElPedido(pedido) = pedidos.contains(pedido)
+  
   method borrarPedido(pedido)
   {
-    const pedidoBuscado = pedidos.find({pedidoBuscado => pedidoBuscado.pedidoActual().nombre() == pedido.pedidoActual().nombre()})
-    pedidoBuscado.registrarTiempo()
-    pedidos.remove(pedidoBuscado) // agregar lo de remove visual (probablemente va en otro archivo)
+    pedidos.remove(pedido)
   }
   method HayPedidos() = not pedidos.isEmpty()
 }

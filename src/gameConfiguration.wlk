@@ -95,7 +95,10 @@ class Nivel {
 
   //agrega el pedido elegido al azar a la lista de pedidos 
   method agregarPedidoAListaDePedidos(){
-    listadoPedidos.tomarPedido(new ElementoLista(pedidoActual = self.siguientePedido()))
+    if(listadoPedidos.pedidos().size() < 5)
+    {
+      listadoPedidos.tomarPedido(new ElementoLista(pedidoActual = self.siguientePedido()))
+    }
   }
   
   method configurarNivel(){ 
