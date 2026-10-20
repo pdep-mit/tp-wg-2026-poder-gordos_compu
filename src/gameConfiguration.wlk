@@ -18,7 +18,6 @@ import platos.*
 import animaciones.*
 import azar.* 
 
-
 object config {
   method alturaMaxima() = 12 
   method anchoMaximo() = 20
@@ -70,6 +69,7 @@ class Nivel {
   const unaTira = new TiraAsado()
   //  dispenser de prueba
   const unDispenser = new DispensadorAsado()
+  const dosDispenser = new DispensadorChori()
   
   method duracionNivel()
   var tiempoRestante = 0
@@ -123,6 +123,7 @@ class Nivel {
 
   method agregarVisuales(){
     game.addVisual(unDispenser)
+    game.addVisual(dosDispenser)
     game.addVisual(parrilla)
     game.addVisual(barraDePedidos)
     game.addVisual(mesaEntrega)

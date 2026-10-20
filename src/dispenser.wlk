@@ -15,8 +15,10 @@ class Dispensador inherits Chad{
     }
     //la logica deberia estar aca
     override method esSolido() = true
-    method dispensar(){
-        //deberia crear una nuva clase de lo que doy y darle la posicion que tiene el dispensador
+    override method dejarAgarrarPor(parrillero){
+        const algo = self.generar()
+        self.mostrarme(algo)
+        algo.dejarAgarrarPor(parrillero)     
     }
 
     
@@ -25,21 +27,13 @@ class Dispensador inherits Chad{
 
 class DispensadorAsado inherits Dispensador{
     override method generar() = new Asado(posicionEnSuelo = self.position())
-
-    override method dejarAgarrarPor(parrillero){
-        const asado = self.generar()
-        self.mostrarme(asado)
-        asador.tomar(asado)     
-    }
-    method tengoAlgoArriba() = game.getObjectsIn(self.position()).size() > 1 
-    
     method image() = "dispenser_carne.png"
     override method position()= game.at(11, 7)
-    
-
 }
 class DispensadorChori inherits Dispensador{
-    
+    override method generar() = new Chorizo(posicionEnSuelo = self.position())
+    method image() = "dispenser_chori.png"
+    override method position()= game.at(14, 7)
 }
 
 //etc...
