@@ -139,7 +139,17 @@ class Pedido {
 }
 //clase abstracta 
 class Nivel { 
-  
+  method duracionNivel()
+  var tiempoRestante
+
+  //esto puede cambiar pero para mi los aplausos capaz pueden ser del nivel no del asador
+  var property aplausos = 0 
+
+  method cantidadPuntosParaPasar() 
+
+  method aumentarTiempo(){
+    tiempoRestante += 1
+  }  
   // declaro todos los posibles platos a pedir por los niveles
   //borrar
   const chorizo = new Pedido(plato = new Chorizo(posicionEnSuelo = game.at(2,3)))
@@ -159,10 +169,39 @@ class Nivel {
     listadoPedidos.tomarPedido(self.siguientePedido())
   }
   
-  
+  method configurarNivel(){ 
+    game.tick(1000,{
+
+    //aumenta en un segundo el tiempo restante
+    self.aumentarTiempo()
+    
+    if(self.terminoElJuego()){
+      cartel.mostrarCartel(aplausos, self.cantidadPuntosParaPasar())
+      //deberia mandarle un mensaje a algun cartel que en base a los aplausos del asador decida si gano o perdio 
+    }
+    }, false).start()
+  }
+
+  method terminoElJuego() = tiempoRestante >= self.duracionNivel()
 
   //configura la velocidad con la que los pedidos se agregan a la lista
   method configurarFrecuenciaPedidos(){
     game.tick(self.frecuenciaPedidos(),{self.agregarPedidoAListaDePedidos()},true).start()
   }
+}
+
+object cartel{
+
+  method mostrarCartel(puntos, cantidadPuntosParaPasar){
+    if(puntos >= cantidadPuntosParaPasar){
+      self.mostrarCartelVictoria()
+    }
+    else {
+      self.mostrarCartelDerrota()
+    }
+  }
+
+  method mostrarCartelVictoria(){}
+
+  method mostrarCartelDerrota(){}
 }
