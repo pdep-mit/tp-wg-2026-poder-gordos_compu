@@ -1,3 +1,4 @@
+import src.asador.*
 import wollok.game.*
 import carnes.*
 import superClaseChad.*
@@ -7,11 +8,17 @@ import superClaseChad.*
 class Dispensador inherits Chad{
     
     method position()
-    method loQueDoy()
+    method generar()
+    method mostrarme(elemento)
+    {
+        game.addVisual(elemento)
+    }
     //la logica deberia estar aca
-
-    method dispensar(){
-        //deberia crear una nuva clase de lo que doy y darle la posicion que tiene el dispensador
+    override method esSolido() = true
+    override method dejarAgarrarPor(parrillero){
+        const algo = self.generar()
+        self.mostrarme(algo)
+        algo.dejarAgarrarPor(parrillero)     
     }
 
     
@@ -19,18 +26,14 @@ class Dispensador inherits Chad{
 }
 
 class DispensadorAsado inherits Dispensador{
-    //dispensar asado
-    override method loQueDoy() = new Asado(posicionEnSuelo = self.position())
-    //hacer metodo boludo para cambiar lo que doy
-    // esto esta mal pero por ahora lo dejo 
+    override method generar() = new Asado(posicionEnSuelo = self.position())
     method image() = "dispenser_carne.png"
     override method position()= game.at(11, 7)
-    
-
 }
-
 class DispensadorChori inherits Dispensador{
-    //dispensar chori
+    override method generar() = new Chorizo(posicionEnSuelo = self.position())
+    method image() = "dispenser_chori.png"
+    override method position()= game.at(14, 7)
 }
 
 //etc...
