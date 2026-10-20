@@ -2,6 +2,7 @@ import wollok.game.*
 import carnes.*
 import animaciones.*
 import superClaseChad.*
+import elementosInvisibles.*
 
 //la parrila tmb puede ser una clase ya que podemos tener mas de una parrilla 
 object parrilla inherits Chad {
@@ -9,9 +10,8 @@ object parrilla inherits Chad {
   
   override method esSolido() = true 
 
-  //Autoinicializa su propia otra parte, esto es fundamental para que agarrar pueda encontrar al objeto parrilla1 y que parrilla1 pueda delegar en la parrilla origianl
   method initialize() {
-    game.addVisual(parrilla1)
+    game.addVisual(new ElementoAuxiliar(duenio = self, desplazamientoX = 1))
   }
   //func: la parrilla solo puede tener una unica carne a la vez
   //el fuego puede tener tres estados, 0 apagado, 1, poca llama, 2 media y 3 fuerte (se hace mas rapido pero se puede quemar)
@@ -70,18 +70,6 @@ object parrilla inherits Chad {
   //... mas cosas
 }
 
-//Este es el objeto invisible que acompania a la parrilla para las colisiones y para poder cocinar -- deberiamos hacer a la parrilla una clase
-object parrilla1 inherits Chad {
-  const property position = parrilla.position().right(1)
-  // Imagen transparente de 1x1 o vacía
-  method image() = "imagenInvisible.png" 
-  override method esSolido() = true
-  
-  // Delegaciones a la parrilla real
-  override method recibir(carga) {parrilla.recibir(carga)}
-  override method avivar() {parrilla.avivar()}
-  override method dejarAgarrarPor(parrillero){parrilla.dejarAgarrarPor(parrillero)}
-}
 
 //el calor son puntos de coccion 
 object apagado {

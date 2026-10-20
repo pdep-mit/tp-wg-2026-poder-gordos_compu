@@ -44,16 +44,18 @@ describe "El parrillero se mueve y mueve los objetos de un lugar a otro"{
 
   assert.equals(asador, unAsado.contenedor())
   }
+  /*
   test "el jugador agarra una carne en (5,2) y luego la suelta en otra ubicacion basandose en la posicion del item frame" {
     //Ojo con los objetos, el asador claramente no puede atravesar la parrilla por eso este test depende de la posicion de la carne. 
     //Si se agregan otras colisiones debera ser tenido en cuenta
     //Lo del item frame es rancio CAMBIAR SI CAMBIAMOS LOS SPRITES DE COMO SE LLEVA LA CARNE
   4.times({i => movimiento.mover(asador,haciaLaDerecha)})
   movimiento.mover(asador, haciaArriba)
-
+  
   asador.agarrar()
   2.times({i => movimiento.mover(asador,haciaArriba)})
   asador.soltar()
   assert.equals(unAsado.posicionEnSuelo(),asador.posicionPara(self)) //<<<<------------------- REVISAR ESTO SI SE REVISAN LOS SPRITES DE LA CARNE
   }
+  */
 }

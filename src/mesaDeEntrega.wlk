@@ -5,6 +5,7 @@ import barrasAviso.*
 import gameConfiguration.*
 import pedidos.*
 import superClaseChad.*
+import elementosInvisibles.*
 
 object mesaEntrega inherits Chad { 
   method image() = "mesa_pedidos.png"
@@ -13,9 +14,12 @@ object mesaEntrega inherits Chad {
   override method esSolido() = true
 
   method initialize() {
-    game.addVisual(new ParteAuxiliarMesa(desplazamientoX = 1))
-    game.addVisual(new ParteAuxiliarMesa(desplazamientoX = 2))
-    game.addVisual(new ParteAuxiliarMesa(desplazamientoX = 3))
+    game.addVisual(new ElementoAuxiliar(duenio = self, desplazamientoX = 1))
+    game.addVisual(new ElementoAuxiliar(duenio = self, desplazamientoX = 2))
+    game.addVisual(new ElementoAuxiliar(duenio = self, desplazamientoX = 3))
+
+    //otra opcion 
+    //3.times({i => new ElementoAuxiliar(duenio = self, desplazamientoX = i)})
   }
   
   method entregarPedido(pedido)
@@ -44,16 +48,3 @@ object mesaEntrega inherits Chad {
   }
 }
 
-class ParteAuxiliarMesa inherits Chad {
-  const desplazamientoX
-
-  method position() = mesaEntrega.position().right(desplazamientoX)
-  method image() = "imagenInvisible.png"
-
-  method entregarPedido(pedido) { mesaEntrega.entregarPedido(pedido) }
-  method sumarPuntos(pedido) { mesaEntrega.sumarPuntos(pedido) }
-  method restarPuntos(pedido) { mesaEntrega.restarPuntos(pedido) }
-  
-  override method esSolido() = true
-
-}

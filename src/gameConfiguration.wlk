@@ -58,11 +58,15 @@ object config {
 	}
 
   method agregarVisuales(){
+    game.addVisual(unDispenser)
     game.addVisual(parrilla)
     game.addVisual(mesaEntrega)
     game.addVisual(unAsado)
+    unAsado.mostrarParteInvisible()
     game.addVisual(unChori)
+    unChori.mostrarParteInvisible()
     game.addVisual(unaTira)
+    unaTira.mostrarParteInvisible()
     game.addVisual(asador)
     game.addVisual(listadoPedidos)
     //agregar aca todo lo que sea visual y que tenga que estar visible 
@@ -75,9 +79,9 @@ object config {
 		
     //movimiento 
     keyboard.up().onPressDo({asador.direccion(haciaArriba) movimiento.mover(asador, haciaArriba)})
-	keyboard.down().onPressDo({asador.direccion(haciaAbajo) movimiento.mover(asador, haciaAbajo) })
-	keyboard.left().onPressDo({asador.direccion(haciaLaIzquierda) movimiento.mover(asador, haciaLaIzquierda) })
-	keyboard.right().onPressDo({asador.direccion(haciaLaDerecha) movimiento.mover(asador, haciaLaDerecha) })
+	  keyboard.down().onPressDo({asador.direccion(haciaAbajo) movimiento.mover(asador, haciaAbajo) })
+	  keyboard.left().onPressDo({asador.direccion(haciaLaIzquierda) movimiento.mover(asador, haciaLaIzquierda) })
+	  keyboard.right().onPressDo({asador.direccion(haciaLaDerecha) movimiento.mover(asador, haciaLaDerecha) })
     
     //acciones del asador agarrar y soltar (ahora puede poner una carne con la q y no le deja poner una carne si esta fuera de la pantalla)
     keyboard.e().onPressDo({ asador.agarrar() })
