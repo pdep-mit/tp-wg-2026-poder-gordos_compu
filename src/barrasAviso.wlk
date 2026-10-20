@@ -49,10 +49,10 @@ class BarraProgreso inherits Chad {
 // le agrego una barra indicadora de tiempo restante a cada elemento de nuestra lista de pedidos pendientes.
 class BarraPedido inherits Chad
 {
-    const listaPorcentajes = [0, 25, 50, 75, 100]
+    const listaPorcentajes = [1, 25, 50, 75]
     const elementoActual
     var property segundosTranscurridos = 0
-    const nombreEvento = "calcularProgreso" + self.identity()
+    const reloj = game.tick(1000, {self.aniadirSegundos()}, false)
 
     method duracionInicial() = elementoActual.tiempo()
 
@@ -64,9 +64,7 @@ class BarraPedido inherits Chad
 
     method position() = elementoActual.position().down(1)
 
-    method acortarTiempo(){
-            game.onTick(1000, nombreEvento, {self.aniadirSegundos()})
-        }
+    method acortarTiempo() = reloj.start()
 
     method aniadirSegundos() {
         segundosTranscurridos = (segundosTranscurridos + 1).min(self.duracionInicial())
@@ -79,9 +77,5 @@ class BarraPedido inherits Chad
         return ( self.duracionActual()* 100) / self.duracionInicial()
     }
 
-    // freno el timer individual de cada elemento por separado usando el
-    // self.identity() en el nombre de calcularProgreso
-    method detener() {
-		game.removeTickEvent(nombreEvento)
-	}
+    method detener() = reloj.stop()
 }

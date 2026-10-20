@@ -5,6 +5,7 @@ import animaciones.*
 import estadoCarne.*
 import itemFrame.*
 import items.*
+import platos.*
 
 //super clase carne abstracta 
 class Carne inherits ElementoAgarrable {
@@ -62,11 +63,11 @@ class Carne inherits ElementoAgarrable {
     game.removeVisual(barraProgreso)
   } 
 
-  
-  
   method ponerseEn(parrilla){
     parrilla.soltar(self)
   }
+
+  method miRecetaEs() 
 } 
 
 class Asado inherits Carne {
@@ -81,6 +82,8 @@ class Asado inherits Carne {
     //cosas de herencia cheta
     return super()
   }
+
+  override method miRecetaEs() = platoAsado
 }
 
 class TiraAsado inherits ElementoAgarrable {
@@ -116,6 +119,8 @@ class Chorizo inherits Carne {
     //cosas de herencia cheta
     return super()
   }
+
+  override method miRecetaEs() = platoChori
 }
 
 class Morcilla inherits Carne{

@@ -1,7 +1,10 @@
 import wollok.game.*
-import gameConfiguration.*
+import nivel_1.*
+import src.gameConfiguration.*
+
 
 program NombreDeJuego {
 	config.configurarJuego()
+	nivel1.arrancarNivel()
 	game.start()
 }

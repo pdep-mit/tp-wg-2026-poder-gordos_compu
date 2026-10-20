@@ -1,3 +1,4 @@
+import src.barraDePedidos.*
 import src.barrasAviso.*
 import wollok.game.*
 
@@ -11,7 +12,7 @@ import movimientos.*
 import pedidos.*
 import mesaDeEntrega.*
 import dispenser.*
-
+import platos.*
 
 //dependencia utils
 import animaciones.*
@@ -21,6 +22,43 @@ import azar.*
 object config {
   method alturaMaxima() = 12 
   method anchoMaximo() = 20
+  
+  method configurarJuego(){
+		self.configurarVentana()
+     //agregar aca todo lo que sea necesario para iniciar el juego
+  }
+
+  method configurarVentana(){
+		game.title("Grupo: GordosCompu | Nombre de jueguito")
+		game.height(self.alturaMaxima())
+		game.width(self.anchoMaximo())
+    game.cellSize(48) //tamanio de las celdas 
+		game.boardGround("fondo.png")
+	}
+
+  //verifica que la celda este en el tablero 
+  method esCeldaPermitida(celda)=
+    celda.celdaActual().x().between(0, self.anchoMaximo() -1) and
+    celda.celdaActual().y().between(0, self.alturaMaxima() - 2)  
+    // esto no tiene sentido debido a que ya no se puede soltar la carne en el lugar del item fram
+    //not (celda == parrilla.position() or celda == parrilla.position().right(1)) //Habria que revisar esto pero va por ahi aunque esta raro
+}
+
+
+//clase abstracta 
+class Nivel { 
+  
+  method arrancarNivel(){
+    self.agregarVisuales()
+    self.configurarColisiones()
+    self.configurarAcciones()
+    self.configurarFrecuenciaPedidos()
+    self.configurarNivel()
+    self.configurarParrilla()
+    self.configurarFuego()
+    self.configurarAnimacion()
+  }
+  
   //el tiempo que pasa para que el fuego cambie de estado (fuerte -> medio -> bajo) esta en 20s para mi es poco
   method tiempoCambioFuego() = 20000
 
@@ -33,33 +71,57 @@ object config {
   //  dispenser de prueba
   const unDispenser = new DispensadorAsado()
   
-  
+  method duracionNivel()
+  var tiempoRestante = 0
+
+  //esto puede cambiar pero para mi los aplausos capaz pueden ser del nivel no del asador
+  var property aplausos = 0 
+
+  method cantidadPuntosParaPasar() 
+
+  method aumentarTiempo(){
+    tiempoRestante += 1
+  }  
+
+  //metodo abstracto -- que deberia contener una lista de los posibles pedidos
+  method listaPedidosPosibles()
+
+  //la frecuencia con la que los pedidos se agregan a la lista
+  method frecuenciaPedidos()
+
+  //tiene que agarrar un nuevo pedido al azar de la lisra de pedidos 
+  method siguientePedido() = self.listaPedidosPosibles().get(azar.numeroEntre(0, self.listaPedidosPosibles().size() -1))
   
 
-  method configurarJuego(){
-		self.configurarVentana()
-    self.agregarVisuales()
-    self.configurarColisiones()
-    self.configurarParrilla()
-    self.configurarFuego()
-    self.configurarAnimacion()
-    self.configurarAcciones()
+  //agrega el pedido elegido al azar a la lista de pedidos 
+  method agregarPedidoAListaDePedidos(){
+    listadoPedidos.tomarPedido(new ElementoLista(pedidoActual = self.siguientePedido()))
+  }
+  
+  method configurarNivel(){ 
+    game.tick(1000,{
+
+    //aumenta en un segundo el tiempo restante
+    self.aumentarTiempo()
     
-    
-    //agregar aca todo lo que sea necesario para iniciar el juego
+    if(self.terminoElJuego()){
+      cartel.mostrarCartel(aplausos, self.cantidadPuntosParaPasar())
+      //deberia mandarle un mensaje a algun cartel que en base a los aplausos del asador decida si gano o perdio 
+    }
+    }, false).start()
   }
 
-  method configurarVentana(){
-		game.title("Grupo: GordosCompu | Nombre de jueguito")
-		game.height(self.alturaMaxima())
-		game.width(self.anchoMaximo())
-    game.cellSize(48) //tamanio de las celdas 
-		game.boardGround("fondo.png")
-	}
+  method terminoElJuego() = tiempoRestante >= self.duracionNivel()
+
+  //configura la velocidad con la que los pedidos se agregan a la lista
+  method configurarFrecuenciaPedidos(){
+    game.tick(self.frecuenciaPedidos(),{self.agregarPedidoAListaDePedidos()},false).start()
+  }
 
   method agregarVisuales(){
     game.addVisual(unDispenser)
     game.addVisual(parrilla)
+    game.addVisual(barraDePedidos)
     game.addVisual(mesaEntrega)
     game.addVisual(unAsado)
     unAsado.mostrarParteInvisible()
@@ -103,13 +165,6 @@ object config {
     //agregar coliciones del tipo, carne con parrilla, el asador con las esquinas, el asador con los items etc ...  
 
 	}
-
-  //verifica que la celda este en el tablero 
-  method esCeldaPermitida(celda)=
-    celda.celdaActual().x().between(0, self.anchoMaximo() -1) and
-    celda.celdaActual().y().between(0, self.alturaMaxima() - 2)  
-    // esto no tiene sentido debido a que ya no se puede soltar la carne en el lugar del item fram
-    //not (celda == parrilla.position() or celda == parrilla.position().right(1)) //Habria que revisar esto pero va por ahi aunque esta raro
   
   //le dice a la parrilla que cocine la carne cada 1 segundo 
   method configurarParrilla(){
@@ -123,70 +178,6 @@ object config {
 
   method configurarAnimacion(){
     game.tick(300,{animaciones.aumentarContador()},true).start()
-  }
-}
-
-
-//otra clase abstracta del pedido
-class Pedido {
-  const property plato
-  method nombre(){
-    plato.nombre()
-  }
-  method tiempo(){
-    plato.tiempoCoccion() + 40
-  }
-}
-//clase abstracta 
-class Nivel { 
-  method duracionNivel()
-  var tiempoRestante
-
-  //esto puede cambiar pero para mi los aplausos capaz pueden ser del nivel no del asador
-  var property aplausos = 0 
-
-  method cantidadPuntosParaPasar() 
-
-  method aumentarTiempo(){
-    tiempoRestante += 1
-  }  
-  // declaro todos los posibles platos a pedir por los niveles
-  //borrar
-  const chorizo = new Pedido(plato = new Chorizo(posicionEnSuelo = game.at(2,3)))
-  const asado = new Pedido(plato = new Asado(posicionEnSuelo = game.at(2,3)))
-  //metodo abstracto -- que deberia contener una lista de los posibles pedidos
-  method listaPedidosPosibles()
-
-  //la frecuencia con la que los pedidos se agregan a la lista
-  method frecuenciaPedidos()
-
-  //tiene que agarrar un nuevo pedido al azar de la lisra de pedidos 
-  method siguientePedido() = self.listaPedidosPosibles().get(azar.numeroEntre(0, self.listaPedidosPosibles().size() -1))
-  
-
-  //agrega el pedido elegido al azar a la lista de pedidos 
-  method agregarPedidoAListaDePedidos(){
-    listadoPedidos.tomarPedido(self.siguientePedido())
-  }
-  
-  method configurarNivel(){ 
-    game.tick(1000,{
-
-    //aumenta en un segundo el tiempo restante
-    self.aumentarTiempo()
-    
-    if(self.terminoElJuego()){
-      cartel.mostrarCartel(aplausos, self.cantidadPuntosParaPasar())
-      //deberia mandarle un mensaje a algun cartel que en base a los aplausos del asador decida si gano o perdio 
-    }
-    }, false).start()
-  }
-
-  method terminoElJuego() = tiempoRestante >= self.duracionNivel()
-
-  //configura la velocidad con la que los pedidos se agregan a la lista
-  method configurarFrecuenciaPedidos(){
-    game.tick(self.frecuenciaPedidos(),{self.agregarPedidoAListaDePedidos()},true).start()
   }
 }
 
