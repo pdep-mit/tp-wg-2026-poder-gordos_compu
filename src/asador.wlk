@@ -54,7 +54,7 @@ object asador inherits Chad {
   }
     
   
-  method ponerCarne(){
+  method soltar(){
     self.loQueTengoEnFrente().recibir(carga)
   }
 

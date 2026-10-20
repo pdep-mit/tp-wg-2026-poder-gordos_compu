@@ -85,7 +85,7 @@ object config {
     
     //acciones del asador agarrar y soltar (ahora puede poner una carne con la q y no le deja poner una carne si esta fuera de la pantalla)
     keyboard.e().onPressDo({ asador.agarrar() })
-    keyboard.q().onPressDo({ asador.ponerCarne()})
+    keyboard.q().onPressDo({ asador.soltar()})
 
 
     //acion del asador para avivar el fuego
@@ -107,7 +107,9 @@ object config {
   //verifica que la celda este en el tablero 
   method esCeldaPermitida(celda)=
     celda.celdaActual().x().between(0, self.anchoMaximo() -1) and
-    celda.celdaActual().y().between(0, self.alturaMaxima() - 2)
+    celda.celdaActual().y().between(0, self.alturaMaxima() - 2)  
+    // esto no tiene sentido debido a que ya no se puede soltar la carne en el lugar del item fram
+    //not (celda == parrilla.position() or celda == parrilla.position().right(1)) //Habria que revisar esto pero va por ahi aunque esta raro
   
   //le dice a la parrilla que cocine la carne cada 1 segundo 
   method configurarParrilla(){

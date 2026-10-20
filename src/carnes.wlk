@@ -63,7 +63,7 @@ class Carne inherits ElementoAgarrable {
   
   
   method ponerseEn(parrilla){
-    parrilla.ponerCarne(self)
+    parrilla.soltar(self)
   }
 } 
 

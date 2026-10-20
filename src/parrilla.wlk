@@ -24,7 +24,7 @@ object parrilla inherits Chad {
   //absolute cinema -- la parrilla "asa" cada 1 segundo pero dependiendo del fuego se cocinara mas lento o mas rapido 
   method asar() = carneActual.cocinar(fuego.calor())
 
-  method ponerCarne(carne) {
+  method soltar(carne) {
     carneActual = carne
     carne.enLaParrilla()
     carne.asignarA(self)
