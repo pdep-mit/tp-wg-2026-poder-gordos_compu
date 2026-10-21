@@ -223,7 +223,6 @@ object cartel{
     else {
       self.mostrarCartelDerrota()
     }
-    menuPrincipal.pararMusica()
   }
 
   method mostrarCartelVictoria(){}

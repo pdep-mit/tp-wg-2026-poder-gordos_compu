@@ -28,8 +28,4 @@ object menuPrincipal {
         keyboard.m().onPressDo({ musicaFondo.pause() })
         keyboard.u().onPressDo({ musicaFondo.resume() })
     }
-
-    method pararMusica(){
-        musicaFondo.stop()
-    }
 }
