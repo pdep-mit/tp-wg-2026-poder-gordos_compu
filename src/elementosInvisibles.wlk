@@ -5,10 +5,15 @@ import superClaseChad.*
 */
 
 class ElementoAuxiliar inherits Chad{
-    const duenio
+    const  duenio
     const  desplazamientoX 
+    const  desplazamientoY
 
-    method position() = duenio.position().right(desplazamientoX)
+    // Suma algebraica directa y transparente:
+    method position() = game.at(
+        duenio.position().x() + desplazamientoX,
+        duenio.position().y() + desplazamientoY
+    )
     method image() = "imagenInvisible.png" 
     override method esSolido() = duenio.esSolido()
     override method recibir(carga){ duenio.recibir(carga)}

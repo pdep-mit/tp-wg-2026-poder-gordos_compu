@@ -1,5 +1,7 @@
 import wollok.game.*
 import superClaseChad.*
+import elementosInvisibles.*
+
 
 object tablaDeCortar inherits Chad {
     method image() = "tabla_cortar.png"
@@ -10,6 +12,11 @@ object tablaDeCortar inherits Chad {
 
     method initialize() {
         game.addVisual(self)
+        game.addVisual(new ElementoAuxiliar(duenio = self,desplazamientoX = 0, desplazamientoY = -1))
+        game.addVisual(new ElementoAuxiliar(duenio = self,desplazamientoX = 0, desplazamientoY = -2))
+        game.addVisual(new ElementoAuxiliar(duenio = self,desplazamientoX = 0, desplazamientoY = -3))
+        game.addVisual(new ElementoAuxiliar(duenio = self,desplazamientoX = 0, desplazamientoY = -4))
+       
     }
 
     override method recibir(carga) {

@@ -19,7 +19,7 @@ class ElementoAgarrable inherits Chad {
   //Origianlmente el item esta en el piso
   var property contenedor = sinContenedor
   var property posicionEnSuelo
-  const elementoInvisible = new ElementoAuxiliar(duenio = self, desplazamientoX = 1)
+  const elementoInvisible = new ElementoAuxiliar(duenio = self, desplazamientoX = 1,desplazamientoY =0)
   method position() = contenedor.posicionPara(self)
 
   //Le asginamos un nuevo contenedor al item

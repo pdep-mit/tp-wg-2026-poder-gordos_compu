@@ -1,5 +1,6 @@
 import gameConfiguration.*
 import superClaseChad.*
+import elementosInvisibles.*
 
 object mesaCorte inherits Chad {
     method image() = "mesa_corte.png"
@@ -7,7 +8,8 @@ object mesaCorte inherits Chad {
 
     method initialize() {
         game.addVisual(self)
+ 
     }
 
-    override method esSolido() = true
+    override method esSolido() = false
 }

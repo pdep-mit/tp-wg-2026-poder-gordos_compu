@@ -11,7 +11,7 @@ object parrilla inherits Chad {
   override method esSolido() = true 
 
   method initialize() {
-    game.addVisual(new ElementoAuxiliar(duenio = self, desplazamientoX = 1))
+    game.addVisual(new ElementoAuxiliar(duenio = self, desplazamientoX = 1,desplazamientoY = 0))
   }
   //func: la parrilla solo puede tener una unica carne a la vez
   //el fuego puede tener tres estados, 0 apagado, 1, poca llama, 2 media y 3 fuerte (se hace mas rapido pero se puede quemar)

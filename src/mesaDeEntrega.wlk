@@ -15,9 +15,9 @@ object mesaEntrega inherits Chad {
   override method esSolido() = true
 
   method initialize() {
-    game.addVisual(new ElementoAuxiliar(duenio = self, desplazamientoX = 1))
-    game.addVisual(new ElementoAuxiliar(duenio = self, desplazamientoX = 2))
-    game.addVisual(new ElementoAuxiliar(duenio = self, desplazamientoX = 3))
+    game.addVisual(new ElementoAuxiliar(duenio = self, desplazamientoX = 1,desplazamientoY = 0))
+    game.addVisual(new ElementoAuxiliar(duenio = self, desplazamientoX = 2,desplazamientoY = 0))
+    //game.addVisual(new ElementoAuxiliar(duenio = self, desplazamientoX = 3,desplazamientoY = 0)) esta estaba de mas
 
     //otra opcion 
     //3.times({i => new ElementoAuxiliar(duenio = self, desplazamientoX = i)})
