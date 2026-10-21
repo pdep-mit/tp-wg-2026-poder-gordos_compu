@@ -7,12 +7,13 @@ object tablaDeCortar inherits Chad {
     const barraEsfuerzo = new BarraEsfuerzo(duenio = self)
     
     method image() = "tabla_cortar.png"
-    method position()= game.at(10, 4)
+    method position() = game.at(10, 4)
     override method esSolido() = true
 
     method celdaActual() = self.position()
 
-    method initialize() {
+    // Agregamos un método para agregar la tabla y sus elementos auxiliares cuando arranque el nivel
+    method agregarVisuales() {
         game.addVisual(self)
         game.addVisual(new ElementoAuxiliar(duenio = self,desplazamientoX = 0, desplazamientoY = -1))
         game.addVisual(new ElementoAuxiliar(duenio = self,desplazamientoX = 0, desplazamientoY = -2))

@@ -1,4 +1,5 @@
 import src.superClaseChad.*
+import src.mesaDeCorte.*
 import src.barraDePedidos.*
 import src.barrasAviso.*
 import wollok.game.*
@@ -128,6 +129,8 @@ class Nivel {
   }
 
   method agregarVisuales(){
+    game.addVisual(mesaCorte)
+    tablaDeCortar.agregarVisuales()
     game.addVisual(unDispenser)
     game.addVisual(dosDispenser)
     game.addVisual(parrilla)
