@@ -28,6 +28,12 @@ object asador inherits Chad {
   var property carga = sinCarga
   var property direccion = haciaAbajo  
   
+  method reiniciar() {
+    position = game.at(1,1)
+    self.direccion(haciaAbajo)
+    carga = null // O la forma en que manejes la mano vacía
+  }
+  
   //temp? 
   override method muestraItemFrame() = true
 

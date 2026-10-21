@@ -11,6 +11,7 @@ class ElementoLista inherits Chad{
     method tiempo() = pedidoActual.tiempoEntrega() 
     const timer = game.tick(1000, {self.expiroElPedido()}, false)
 
+    
     method tiempoRestante() = barraIndividual.duracionActual()
     // inicializo la barra de tiempo del plato y tambien su imagen de referencia
     method image() = pedidoActual.image()
@@ -61,6 +62,7 @@ class ElementoLista inherits Chad{
 }
 
 object listadoPedidos inherits Chad{
+  
   const property pedidos = []
   const property origen = game.at(0, config.alturaMaxima() - 1 )
   method position() = origen
@@ -81,6 +83,10 @@ object listadoPedidos inherits Chad{
     pedidos.remove(pedido)
   }
   method HayPedidos() = not pedidos.isEmpty()
+  
+  method reiniciar() {
+    pedidos.clear()
+  }
 }
 
 object ningunPedido{

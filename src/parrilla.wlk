@@ -12,6 +12,12 @@ object parrilla inherits Chad {
   override method esSolido() = true
   const sonidoPlacer = game.sound("cocinando_carne.mp3") 
 
+  method reiniciar() {
+    carneActual = noCarne
+    fuego = apagado
+    barraEsfuerzo.reiniciar()
+    }
+
   method agregarVisuales(){
     game.addVisual(self)
     game.addVisual(new ElementoAuxiliar(duenio = self, desplazamientoX = 1,desplazamientoY = 0))
