@@ -6,8 +6,8 @@ import carnes.*
 
 object nivel1 inherits Nivel {
     //dos minutos de duracion x nivel 
-    override method duracionNivel() = 120
-
+    //override method duracionNivel() = 120
+    override method duracionNivel() = 3 // <-- Dura 3 segundos para probar
     //cada 12 ssegundos
     override method frecuenciaPedidos() = 12000
 

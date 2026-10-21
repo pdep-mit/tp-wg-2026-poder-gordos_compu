@@ -3,6 +3,7 @@ import src.mesaDeCorte.*
 import src.barraDePedidos.*
 import src.barrasAviso.*
 import wollok.game.*
+import menu.*
 
 //dependecias relacionadas al juego en si (se pueden separar mas qsy)
 import parrilla.*
@@ -20,6 +21,7 @@ import platos.*
 import animaciones.*
 import azar.* 
 import src.nivel_1.*
+
 
 object config {
   var property nivelActual = nivel1 
@@ -69,10 +71,12 @@ object iconoAplauso inherits Chad {
 //clase abstracta 
 class Nivel { 
   var property tiempoTranscurrido = 0
+  
+
   method arrancarNivel(){
     config.nivelActual(self)
     self.agregarVisuales()
-    self.configurarColisiones()
+    //self.configurarColisiones()
     self.configurarAcciones()
     self.configurarFrecuenciaPedidos()
     self.configurarNivel()
@@ -81,6 +85,22 @@ class Nivel {
     self.configurarAnimacion()
   }
 
+  method reiniciarNivel() {
+    // 1. Limpiamos visuales, ticks y listeners del motor
+    game.clear()
+
+    // 2. Reseteamos métricas del nivel
+    tiempoTranscurrido = 0
+    aplausos = 0
+
+    // 3. Reseteamos el estado de los objetos a nuevo
+    asador.reiniciar()
+    listadoPedidos.reiniciar()
+    parrilla.reiniciar()
+
+    // 4. Volvemos al menú principal
+    menuPrincipal.iniciar()
+  }
   //el tiempo que pasa para que el fuego cambie de estado (fuerte -> medio -> bajo) esta en 20s para mi es poco
   method tiempoCambioFuego() = 20000
 
@@ -123,21 +143,24 @@ class Nivel {
   method configurarNivel(){ 
     game.tick(1000,{
 
-    //aumenta en un segundo el tiempo restante
-    self.aumentarTiempo()
+    //Deja de aumentar el tiempo si se termino el juego
+    if (!self.terminoElJuego()) {
+      //aumenta en un segundo el tiempo restante
+      self.aumentarTiempo()
     
-    if(self.terminoElJuego()){
-      cartel.mostrarCartel(aplausos, self.cantidadPuntosParaPasar())
-      //deberia mandarle un mensaje a algun cartel que en base a los aplausos del asador decida si gano o perdio 
-    }
+      if(self.terminoElJuego()){
+        cartel.mostrarCartel(aplausos, self.cantidadPuntosParaPasar())
+        //deberia mandarle un mensaje a algun cartel que en base a los aplausos del asador decida si gano o perdio 
+      }
+      }
     }, false).start()
   }
-
-  method terminoElJuego() = self.tiempoRestante() != 0
+  //Como estaba antes saltaba terminar el juego siempre que el tiempo NO sea 0, ahora lo arregle
+  method terminoElJuego() = self.tiempoRestante() == 0
 
   //configura la velocidad con la que los pedidos se agregan a la lista
   method configurarFrecuenciaPedidos(){
-    game.tick(self.frecuenciaPedidos(),{self.agregarPedidoAListaDePedidos()},false).start()
+    game.tick(self.frecuenciaPedidos(),{ if (!self.terminoElJuego()) self.agregarPedidoAListaDePedidos() },false).start()
   }
 
   method agregarVisuales(){
@@ -160,48 +183,51 @@ class Nivel {
 
   // aca estan las acciones que puede hacer el asador, cualquier accion hecha con una tecla por el asador deberia estar aca
   method configurarAcciones(){
-		
+    
     //movimiento 
-    keyboard.up().onPressDo({asador.direccion(haciaArriba) movimiento.mover(asador, haciaArriba)})
-	  keyboard.down().onPressDo({asador.direccion(haciaAbajo) movimiento.mover(asador, haciaAbajo) })
-	  keyboard.left().onPressDo({asador.direccion(haciaLaIzquierda) movimiento.mover(asador, haciaLaIzquierda) })
-	  keyboard.right().onPressDo({asador.direccion(haciaLaDerecha) movimiento.mover(asador, haciaLaDerecha) })
+    keyboard.up().onPressDo({ if (!self.terminoElJuego()) { asador.direccion(haciaArriba) movimiento.mover(asador, haciaArriba) } })
+    keyboard.down().onPressDo({ if (!self.terminoElJuego()) { asador.direccion(haciaAbajo) movimiento.mover(asador, haciaAbajo) } })
+    keyboard.left().onPressDo({ if (!self.terminoElJuego()) { asador.direccion(haciaLaIzquierda) movimiento.mover(asador, haciaLaIzquierda) } })
+    keyboard.right().onPressDo({ if (!self.terminoElJuego()) { asador.direccion(haciaLaDerecha) movimiento.mover(asador, haciaLaDerecha) } })
     
     //acciones del asador agarrar y soltar (ahora puede poner una carne con la q y no le deja poner una carne si esta fuera de la pantalla)
-    keyboard.e().onPressDo({ asador.agarrar() })
-    keyboard.q().onPressDo({ asador.soltar()})
+    keyboard.e().onPressDo({ if (!self.terminoElJuego()) asador.agarrar() })
+    keyboard.q().onPressDo({ if (!self.terminoElJuego()) asador.soltar() })
 
 
     //acion del asador para avivar el fuego
-    keyboard.a().onPressDo({asador.avivarFuego()})
+    keyboard.a().onPressDo({ if (!self.terminoElJuego()) asador.avivarFuego() })
     
     //accion del asador para cortar una carne
-    keyboard.c().onPressDo({asador.cortar()})
-	}
+    keyboard.c().onPressDo({ if (!self.terminoElJuego()) asador.cortar() })
 
-  method configurarColisiones(){
+    //accion para reiniciar nivel cuando termine
+    keyboard.r().onPressDo({ if (self.terminoElJuego()) self.reiniciarNivel() })
+  }
 
-    //deberia permitir al asador que al apretar ciertas teclas, le permita poner la carne en la parrilla, sacarla, avivar el fuego etc
+  // method configurarColisiones(){
+
+  //   //deberia permitir al asador que al apretar ciertas teclas, le permita poner la carne en la parrilla, sacarla, avivar el fuego etc
     
-    //Solo colisiones cuando necesitas producir un efecto que levanta un flag, ojo que no es onColideDo() y luego cuando ya no esta colisionando unDo
-    // las bolas la flag queda levantada
+  //   //Solo colisiones cuando necesitas producir un efecto que levanta un flag, ojo que no es onColideDo() y luego cuando ya no esta colisionando unDo
+  //   // las bolas la flag queda levantada
 
-    //agregar coliciones del tipo, carne con parrilla, el asador con las esquinas, el asador con los items etc ...  
+  //   //agregar coliciones del tipo, carne con parrilla, el asador con las esquinas, el asador con los items etc ...  
 
-	}
+  // }
   
   //le dice a la parrilla que cocine la carne cada 1 segundo 
   method configurarParrilla(){
-    game.tick(1000, {parrilla.asar()}, true).start()
+    game.tick(1000, { if (!self.terminoElJuego()) parrilla.asar() }, true).start()
   }
 
   //cada x segundos le dice a la parrilla que se apague un poco, va al fuego anterior
   method configurarFuego() {
-    game.tick( self.tiempoCambioFuego(), {parrilla.apagarPoco()},false).start()
+    game.tick( self.tiempoCambioFuego(), { if (!self.terminoElJuego()) parrilla.apagarPoco() },false).start()
   }
 
   method configurarAnimacion(){
-    game.tick(300,{animaciones.aumentarContador()},true).start()
+    game.tick(300,{ if (!self.terminoElJuego()) animaciones.aumentarContador() },true).start()
   }
 
   method sumarPuntos(puntos){
@@ -212,19 +238,71 @@ class Nivel {
     aplausos -= puntos
   }
 }
+// Clase para cada segmento del fondo
+class SegmentoFondoTexto inherits Chad {
+  const property desplazamientoX = 0
 
-object cartel{
+  method position() = cartel.position().down(1).right(desplazamientoX)
+  method image() = "fondoNegro.png" 
+  override method esSolido() = false
+}
 
-  method mostrarCartel(puntos, cantidadPuntosParaPasar){
-    if(puntos >= cantidadPuntosParaPasar){
-      self.mostrarCartelVictoria()
+// Los 3 bloques que forman la tira ancha
+object fondoIzquierda inherits SegmentoFondoTexto(desplazamientoX = -1) {}
+object fondoCentro    inherits SegmentoFondoTexto(desplazamientoX = 0) {}
+object fondoDerecha   inherits SegmentoFondoTexto(desplazamientoX = 1) {}
+
+// El objeto que dibuja el texto
+object cartelTexto inherits Chad {
+  var property mensaje = ""
+
+  
+  method position() = fondoCentro.position()
+  override method esSolido() = false
+
+  method text() = mensaje
+  method textColor() = "FFFFFFFF"
+}
+
+object cartel inherits Chad {
+  var property image = "cartel_victoria.png"
+  var property puntosObtenidos = 0
+
+  method position() = game.at(6, 5)
+  override method esSolido() = false
+
+  method mostrarCartel(puntos, cantidadPuntosParaPasar) {
+    puntosObtenidos = puntos
+
+    if (puntos >= cantidadPuntosParaPasar) {
+      self.mostrarCartelVictoria(puntos)
+    } else {
+      self.mostrarCartelDerrota(puntos)
     }
-    else {
-      self.mostrarCartelDerrota()
+
+    // 1. Cartel principal
+    if (!game.hasVisual(self)) {
+      game.addVisual(self)
+    }
+
+    // 2. Tira de 3 celdas de fondo (capa inferior)
+    if (!game.hasVisual(fondoIzquierda)) { game.addVisual(fondoIzquierda) }
+    if (!game.hasVisual(fondoCentro))    { game.addVisual(fondoCentro) }
+    if (!game.hasVisual(fondoDerecha))   { game.addVisual(fondoDerecha) }
+
+    // 3. Texto por encima (capa superior)
+    if (!game.hasVisual(cartelTexto)) {
+      game.addVisual(cartelTexto)
     }
   }
 
-  method mostrarCartelVictoria(){}
+  method mostrarCartelVictoria(puntos) {
+    image = "cartel_victoria.png"
+    cartelTexto.mensaje("VICTORIA! - " + puntos.toString() + "\n pts | [R] Reiniciar")
+  }
 
-  method mostrarCartelDerrota(){}
+  method mostrarCartelDerrota(puntos) {
+    image = "cartel_derrota.png"
+    cartelTexto.mensaje("DERROTA! - " + puntos.toString() + "\n pts | [R] Reiniciar")
+  }
 }

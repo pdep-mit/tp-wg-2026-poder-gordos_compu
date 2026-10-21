@@ -11,6 +11,12 @@ object parrilla inherits Chad {
   const barraEsfuerzo = new BarraEsfuerzo(duenio = self)
   override method esSolido() = true 
 
+  method reiniciar() {
+       carneActual = noCarne
+      fuego = apagado
+      barraEsfuerzo.reiniciar()
+    }
+
   method agregarVisuales(){
     game.addVisual(self)
     game.addVisual(new ElementoAuxiliar(duenio = self, desplazamientoX = 1,desplazamientoY = 0))
