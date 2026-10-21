@@ -48,10 +48,22 @@ object config {
     //not (celda == parrilla.position() or celda == parrilla.position().right(1)) //Habria que revisar esto pero va por ahi aunque esta raro
 }
 
+//temporales
 object cronometro inherits Chad {
   method position() = game.at(18, 0)
   method textColor() = "FFFFFFFF"
   method text() = config.nivelActual().tiempoRestante().toString()
+}
+
+object contadorAplausos inherits Chad {
+  method position() = game.at(1, 0)
+  method textColor() = "FFFFFFFF"
+  method text() = config.nivelActual().aplausos().toString()
+}
+
+object iconoAplauso inherits Chad {
+  method position() = game.at(0, 0)
+  method image() = "aplausos.png"
 }
 
 //clase abstracta 
@@ -139,6 +151,8 @@ class Nivel {
     game.addVisual(asador)
     game.addVisual(listadoPedidos)
     game.addVisual(cronometro)
+    game.addVisual(contadorAplausos)
+    game.addVisual(iconoAplauso)
     //agregar aca todo lo que sea visual y que tenga que estar visible 
     //sea la parrilla, el asador, etc. 
   }
