@@ -240,17 +240,17 @@ class Nivel {
 }
 // Clase para cada segmento del fondo
 class SegmentoFondoTexto inherits Chad {
-  const property desplazamientoX = 0
+  const property desplazamientoX
 
-  method position() = cartel.position().down(1).right(desplazamientoX)
+  var property position = cartel.position().down(1).right(desplazamientoX)
   method image() = "fondoNegro.png" 
   override method esSolido() = false
 }
 
 // Los 3 bloques que forman la tira ancha
-object fondoIzquierda inherits SegmentoFondoTexto(desplazamientoX = -1) {}
-object fondoCentro    inherits SegmentoFondoTexto(desplazamientoX = 0) {}
-object fondoDerecha   inherits SegmentoFondoTexto(desplazamientoX = 1) {}
+object fondoIzquierda inherits SegmentoFondoTexto(desplazamientoX = 3) {}
+object fondoCentro    inherits SegmentoFondoTexto(desplazamientoX = 4) {}
+object fondoDerecha   inherits SegmentoFondoTexto(desplazamientoX = 5) {}
 
 // El objeto que dibuja el texto
 object cartelTexto inherits Chad {

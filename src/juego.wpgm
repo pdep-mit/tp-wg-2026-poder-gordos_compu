@@ -8,3 +8,4 @@ program NombreDeJuego {
 	menuPrincipal.iniciar()
 	game.start()
 }
+

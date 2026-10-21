@@ -42,4 +42,6 @@ También, en la clase *Nivel*, aplicamos encapsulamiento sobre las mecánicas de
 
 # Diagramas
 
+esto esta en diagamaDeClases.puml, no seas malo rasta abrilo desde ahi es *option d* `;)`
+
 *Incluír al menos un diagrama para comunicar su solución*
