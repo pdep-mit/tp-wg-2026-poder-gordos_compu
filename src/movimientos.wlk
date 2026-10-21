@@ -1,6 +1,7 @@
 import gameConfiguration.*
 import parrilla.*
 import mesaDeEntrega.*
+import tablaDeCortar.*
 /*
 * Acá se define cómo se mueven los personajes cuando se usan las flechitas.
 * Las posiciones son objetos inmutables, pero los personajes controlados pueden
@@ -18,6 +19,9 @@ object movimiento {
 
         //Si no hay solidos avanzo :))
         if (!haySolidos) {
+            //esto es re croto 
+            parrilla.reiniciarEsfuerzo()
+            tablaDeCortar.reiniciarEsfuerzo()
             personajeLibre.position(nuevaPosicion)
         }
     }

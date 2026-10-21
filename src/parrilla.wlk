@@ -20,7 +20,7 @@ object parrilla inherits Chad {
   //func: la parrilla solo puede tener una unica carne a la vez
   //el fuego puede tener tres estados, 0 apagado, 1, poca llama, 2 media y 3 fuerte (se hace mas rapido pero se puede quemar)
   //el fuego es un objeto que tiene un calor especifico 
-  var property fuego = fuerte
+  var property fuego = apagado
   var property carneActual = noCarne 
 
   method image() = fuego.imagenParrilla()
@@ -60,7 +60,7 @@ object parrilla inherits Chad {
   }
 
   override method avivar() { 
-    barraEsfuerzo.esforzar() 
+    fuego.avivarCon(barraEsfuerzo)
   }
 
   method terminoElEsfuerzo(){
@@ -76,7 +76,10 @@ object parrilla inherits Chad {
   }
   
   method posicionBarra() = self.position().up(1)
-  //... mas cosas
+  
+  method reiniciarEsfuerzo() {
+    barraEsfuerzo.reiniciar()
+  }
 }
 
 
@@ -89,6 +92,10 @@ object apagado {
   method anterior() = self
 
   method siguiente() = bajo 
+
+  method avivarCon(barra){
+    barra.esforzar() 
+  }
 }
 
 object bajo {
@@ -99,6 +106,10 @@ object bajo {
   method anterior() = apagado
   
   method siguiente() = medio
+
+  method avivarCon(barra){
+    barra.esforzar() 
+  }
 }
 
 object medio {
@@ -109,6 +120,10 @@ object medio {
   method anterior() = bajo
   
   method siguiente() = fuerte
+
+  method avivarCon(barra){
+    barra.esforzar() 
+  }
 }
 
 object fuerte {
@@ -119,6 +134,8 @@ object fuerte {
   method anterior() = medio
   
   method siguiente() = self
+
+  method avivarCon(barra){}
 }
 
 //agregamos un tipo de fuego que sea mojado 

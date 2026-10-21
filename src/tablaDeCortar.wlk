@@ -50,4 +50,8 @@ object tablaDeCortar inherits Chad {
     }
 
     method tablaLibre() = self.loQueTengoEnsima().isEmpty()
+
+    method reiniciarEsfuerzo() {
+        barraEsfuerzo.reiniciar()
+    }
 }
