@@ -28,10 +28,10 @@ class Dispensador inherits Chad{
 class DispensadorAsado inherits Dispensador{
     override method generar() = new TiraAsado(posicionEnSuelo = self.position())
     method image() = "dispenser_carne.png"
-    override method position()= game.at(11, 7)
+    override method position()= game.at(15, 8)
 }
 class DispensadorChori inherits Dispensador{
     override method generar() = new Chorizo(posicionEnSuelo = self.position())
     method image() = "dispenser_chori.png"
-    override method position()= game.at(14, 7)
+    override method position()= game.at(18, 8)
 }
