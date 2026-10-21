@@ -15,10 +15,7 @@ object tablaDeCortar inherits Chad {
     // Agregamos un método para agregar la tabla y sus elementos auxiliares cuando arranque el nivel
     method agregarVisuales() {
         game.addVisual(self)
-        game.addVisual(new ElementoAuxiliar(duenio = self,desplazamientoX = 0, desplazamientoY = -1))
-        game.addVisual(new ElementoAuxiliar(duenio = self,desplazamientoX = 0, desplazamientoY = -2))
-        game.addVisual(new ElementoAuxiliar(duenio = self,desplazamientoX = 0, desplazamientoY = -3))
-        game.addVisual(new ElementoAuxiliar(duenio = self,desplazamientoX = 0, desplazamientoY = -4))
+       
         game.addVisual(barraEsfuerzo)
     }
 

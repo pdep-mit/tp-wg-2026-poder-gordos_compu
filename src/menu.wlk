@@ -1,25 +1,25 @@
 import wollok.game.*
-import src.nivel_1.* // Ajustá este import según dónde esté tu nivel1
+import src.nivel_1.*
 import src.gameConfiguration.*
 
+object visualMenu {
+    method position() = game.at(0, 0)
+    method image() = "menu.jpg"
+}
+
 object menuPrincipal {
-    
     method iniciar() {
-        game.boardGround("menu.jpg") 
+        game.addVisual(visualMenu)
 
-        // Dejo esto por si quieremos agregar una musiquita
-        // const musicaMenu = game.sound("musica_intro.mp3")
-        // musicaMenu.play()
-
-        // Tocar enter para arrancar
         keyboard.enter().onPressDo {
             self.empezarJuego()
         }
     }
 
     method empezarJuego() {
-        game.clear() 
-        game.boardGround("fondo.png") 
+        if (game.hasVisual(visualMenu)) {
+            game.removeVisual(visualMenu)
+        }
         nivel1.arrancarNivel() 
     }
 }

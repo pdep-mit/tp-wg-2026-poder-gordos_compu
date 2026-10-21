@@ -141,7 +141,7 @@ class Nivel {
   }
 
   method agregarVisuales(){
-    game.addVisual(mesaCorte)
+    mesaCorte.agregarVisuales()
     tablaDeCortar.agregarVisuales()
     game.addVisual(unDispenser)
     game.addVisual(dosDispenser)
