@@ -4,7 +4,7 @@ import src.gameConfiguration.*
 
 object visualMenu {
     method position() = game.at(0, 0)
-    method image() = "menu.jpg"
+    method image() = "menu.png"
 }
 
 object menuPrincipal {
