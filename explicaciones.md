@@ -32,7 +32,13 @@ En ElementoAuxiliar, podemos ver que tanto su colisión como cualquier interacci
 
 # Encapsulamiento 
 
-(...terminar)
+Durante el desarrollo nos aseguramos de ocultar el estado interno de los objetos, evitando que se modifiquen libremente desde afuera y exponiendo solo los métodos necesarios para que el resto del sistema interactúe.
+
+Un caso se da en la superclase *Carne*. Los atributos `tiempoParrilla` y `estado` son variables internas que no exponen su modificación directa mediante properties. Ni la parrilla ni el asador necesitan saber exactamente cuántos puntos de cocción tiene la porción en crudo ni le cambian el estado "a mano". La parrilla simplemente le envía el mensaje `cocinar(calor)` a la carne. Es la propia carne la que encapsula la regla de aumentar su cocción y decidir por sí misma si debe invocar a `estado.siguienteEstado(self)`.
+
+Otro ejemplo de encapsulamiento se ve en la superclase *ElementoAgarrable* con la gestión de su `contenedor`. Para que un item cambie de manos (del piso al asador, o del asador a la tabla), no se le pisa la variable `contenedor` desde afuera, sino que se utiliza el método `asignarA(nuevoContenedor)`, que se encarga de mostrar u ocultar el frame en la interfaz, se desvincula de su contenedor anterior avisándole con `contenedor.remover(self)` y finalmente se guarda la referencia del nuevo dueño.
+
+También, en la clase *Nivel*, aplicamos encapsulamiento sobre las mecánicas de la partida. El atributo `tiempoRestante` no tiene property, por lo que nadie puede adelantarlo; está encapsulado y solo se incrementa mediante el método `aumentarTiempo()` que llama el motor en cada tick. Lo mismo ocurre con los `aplausos` (el puntaje): en lugar de que otros objetos sumen o resten directamente sobre la variable, se ven obligados a interactuar usando los mensajes `sumarPuntos(puntos)` y `restarPuntos(puntos)`.
 
 # Diagramas
 
