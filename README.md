@@ -1,4 +1,4 @@
-# Wollok Game: Título de juego
+# Wollok Game: Nombre del Juego
 
 **Grupo:** Gordos compu
 
@@ -36,7 +36,8 @@ Interacciones con la parrilla: (Deben pararse frente a ella)
 Cocinar la carne : <kbd>q</kbd> 
 Avivar el fuego: <kbd>a</kbd>
 
-
+Interacciones con la tabla de corte: 
+Luego de soltar un objeto, para cortarlo : <kbd>c</kbd> (varias veces)
 
 # Explicaciones
 

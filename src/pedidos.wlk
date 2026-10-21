@@ -92,5 +92,6 @@ object listadoPedidos inherits Chad{
 object ningunPedido{
    method cumplirComanda(carne){
     config.nivelActual().restarPuntos(10)
+    carne.desaparecer()
    }
 }
