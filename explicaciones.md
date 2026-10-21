@@ -4,7 +4,7 @@
 
 # Polimorfismo
 
-en el TP nos aseguramos de ser lo mas polimorfos posible. La insstancia donde mas se ve el polirfismo en con
+en el TP nos aseguramos de ser lo mas polimorfos posible. La instancia donde mas se ve el polirfismo en con
 nuestra SuperClase *Chad*, ya que contiene los metodos necesarios para que todos los items visibles en la pantalla
 entiendan los mensajes ...(redactar)
 
@@ -27,6 +27,8 @@ Ademas tenemos la superClase *ElementoAgarrable* la cual la heredan todos los el
 Durante el desarrollo del TP nos aseguramos fuertemente de que haya un nivel de delegacion optimo 
 
 En carne, podemos ver que tanto su imagen como saber cuando cambia de estado, se lo delega al atributo *estado* los cuales son tres objetos que contienen los tres posibles estados de la carne, crudo, cocido y quemado (por el momento). Ademas su posicion se la delega a la posicion del asador 
+
+En ElementoAuxiliar, podemos ver que tanto su colisión como cualquier interacción que reciba, se las delega al atributo duenio, el cual referencia al objeto original (como la mesa de corte o la parrilla). Esto permite extender la superficie del mueble a lo largo del mapa sin duplicar su lógica ni su estado.
 
 # Encapsulamiento 
 
