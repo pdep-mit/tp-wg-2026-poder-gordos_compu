@@ -1,3 +1,4 @@
+import src.superClaseChad.*
 import src.barraDePedidos.*
 import src.barrasAviso.*
 import wollok.game.*
@@ -46,10 +47,15 @@ object config {
     //not (celda == parrilla.position() or celda == parrilla.position().right(1)) //Habria que revisar esto pero va por ahi aunque esta raro
 }
 
+object cronometro inherits Chad {
+  method position() = game.at(18, 0)
+  method textColor() = "FFFFFFFF"
+  method text() = config.nivelActual().tiempoRestante().toString()
+}
 
 //clase abstracta 
 class Nivel { 
-  
+  var property tiempoTranscurrido = 0
   method arrancarNivel(){
     config.nivelActual(self)
     self.agregarVisuales()
@@ -61,31 +67,27 @@ class Nivel {
     self.configurarFuego()
     self.configurarAnimacion()
   }
-  
+
   //el tiempo que pasa para que el fuego cambie de estado (fuerte -> medio -> bajo) esta en 20s para mi es poco
   method tiempoCambioFuego() = 20000
 
-  //  asado de prueba
-  const unAsado = new Asado(posicionEnSuelo = game.at(2,4))
-  //  chori de prueba
-  const unChori = new Chorizo(posicionEnSuelo = game.at(2,3))
-  //  tira de asado de prueba
-  const unaTira = new TiraAsado()
-  //  dispenser de prueba
+  //  dispensers
   const unDispenser = new DispensadorAsado()
   const dosDispenser = new DispensadorChori()
-  
-  method duracionNivel()
-  var tiempoRestante = 0
 
+  method duracionNivel()
+  method tiempoRestante() = 0.max(self.duracionNivel() - self.tiempoTranscurrido())
+  
   //esto puede cambiar pero para mi los aplausos capaz pueden ser del nivel no del asador
   var property aplausos = 0 
 
   method cantidadPuntosParaPasar() 
 
   method aumentarTiempo(){
-    tiempoRestante += 1
-  }  
+    tiempoTranscurrido += 1
+  } 
+
+  
 
   //metodo abstracto -- que deberia contener una lista de los posibles pedidos
   method listaPedidosPosibles()
@@ -118,7 +120,7 @@ class Nivel {
     }, false).start()
   }
 
-  method terminoElJuego() = tiempoRestante >= self.duracionNivel()
+  method terminoElJuego() = self.tiempoRestante() != 0
 
   //configura la velocidad con la que los pedidos se agregan a la lista
   method configurarFrecuenciaPedidos(){
@@ -131,14 +133,9 @@ class Nivel {
     game.addVisual(parrilla)
     game.addVisual(barraDePedidos)
     game.addVisual(mesaEntrega)
-    game.addVisual(unAsado)
-    unAsado.mostrarParteInvisible()
-    game.addVisual(unChori)
-    unChori.mostrarParteInvisible()
-    game.addVisual(unaTira)
-    unaTira.mostrarParteInvisible()
     game.addVisual(asador)
     game.addVisual(listadoPedidos)
+    game.addVisual(cronometro)
     //agregar aca todo lo que sea visual y que tenga que estar visible 
     //sea la parrilla, el asador, etc. 
   }
