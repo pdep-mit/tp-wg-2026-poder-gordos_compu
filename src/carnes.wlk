@@ -132,11 +132,17 @@ class Chorizo inherits Carne {
     if(self.estaCocida()) {
       return "chori_cocido_" + animaciones.siguienteFrame(8) + ".png"
     }   
-    //cosas de herencia cheta
+    else {
+      return "chori_crudo.png"
+    }
     return super()
   }
 
   override method miRecetaEs() = platoChori
+
+  override method validarSiEsCortable() {
+    self.error("¿Quién corta los chorizos?")
+  }
 }
 
 class Morcilla inherits Carne{

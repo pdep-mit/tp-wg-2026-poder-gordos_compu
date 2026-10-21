@@ -16,6 +16,9 @@ object sinCarga {
   method serCortada(tabla){
     self.error("no hay nada que cortar")
   }
+  method validarSiEsCortable() {
+    self.error("No podés cortar el aire, ¡agarrá algo primero!")
+  }
 }
 
 // agregamos la logica para que pueda agarrar al contacto cualquier cosa que tenga implementado el metodo asignarA

@@ -79,7 +79,7 @@ class ElementoAgarrable inherits Chad {
     }
   }
 
-  
+  method validarSiEsCortable() {}  
 }
 
 /*

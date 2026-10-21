@@ -1,3 +1,4 @@
+import src.carnes.*
 import wollok.game.*
 import superClaseChad.*
 import elementosInvisibles.*
@@ -15,7 +16,6 @@ object tablaDeCortar inherits Chad {
     // Agregamos un método para agregar la tabla y sus elementos auxiliares cuando arranque el nivel
     method agregarVisuales() {
         game.addVisual(self)
-       
         game.addVisual(barraEsfuerzo)
     }
 
@@ -23,6 +23,9 @@ object tablaDeCortar inherits Chad {
         if(not self.tablaLibre()){
             self.error("la tabla esta ocupada")
         }
+        // Le pedimos a la carga que valide si se puede cortar, sino devuelve error.
+        carga.validarSiEsCortable()
+        
         carga.dejarEn(self) 
     }
 
