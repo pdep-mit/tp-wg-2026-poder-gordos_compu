@@ -55,6 +55,8 @@ object cronometro inherits Chad {
   method position() = game.at(18, 0)
   method textColor() = "FFFFFFFF"
   method text() = config.nivelActual().tiempoRestante().toString()
+
+  method image() = "fondoNegro.png" 
 }
 
 object contadorAplausos inherits Chad {
@@ -204,17 +206,6 @@ class Nivel {
     //accion para reiniciar nivel cuando termine
     keyboard.r().onPressDo({ if (self.terminoElJuego()) self.reiniciarNivel() })
   }
-
-  // method configurarColisiones(){
-
-  //   //deberia permitir al asador que al apretar ciertas teclas, le permita poner la carne en la parrilla, sacarla, avivar el fuego etc
-    
-  //   //Solo colisiones cuando necesitas producir un efecto que levanta un flag, ojo que no es onColideDo() y luego cuando ya no esta colisionando unDo
-  //   // las bolas la flag queda levantada
-
-  //   //agregar coliciones del tipo, carne con parrilla, el asador con las esquinas, el asador con los items etc ...  
-
-  // }
   
   //le dice a la parrilla que cocine la carne cada 1 segundo 
   method configurarParrilla(){
@@ -244,7 +235,6 @@ class SegmentoFondoTexto inherits Chad {
 
   var property position = cartel.position().down(1).right(desplazamientoX)
   method image() = "fondoNegro.png" 
-  override method esSolido() = false
 }
 
 // Los 3 bloques que forman la tira ancha
@@ -258,7 +248,6 @@ object cartelTexto inherits Chad {
 
   
   method position() = fondoCentro.position()
-  override method esSolido() = false
 
   method text() = mensaje
   method textColor() = "FFFFFFFF"
