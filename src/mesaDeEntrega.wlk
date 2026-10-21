@@ -14,13 +14,10 @@ object mesaEntrega inherits Chad {
 
   override method esSolido() = true
 
-  method initialize() {
+  method agregarVisuales(){
+    game.addVisual(self)
     game.addVisual(new ElementoAuxiliar(duenio = self, desplazamientoX = 1,desplazamientoY = 0))
     game.addVisual(new ElementoAuxiliar(duenio = self, desplazamientoX = 2,desplazamientoY = 0))
-    //game.addVisual(new ElementoAuxiliar(duenio = self, desplazamientoX = 3,desplazamientoY = 0)) esta estaba de mas
-
-    //otra opcion 
-    //3.times({i => new ElementoAuxiliar(duenio = self, desplazamientoX = i)})
   }
   
   override method recibir(carga){

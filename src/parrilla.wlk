@@ -11,10 +11,12 @@ object parrilla inherits Chad {
   const barraEsfuerzo = new BarraEsfuerzo(duenio = self)
   override method esSolido() = true 
 
-  method initialize() {
+  method agregarVisuales(){
+    game.addVisual(self)
     game.addVisual(new ElementoAuxiliar(duenio = self, desplazamientoX = 1,desplazamientoY = 0))
     game.addVisual(barraEsfuerzo)
   }
+
   //func: la parrilla solo puede tener una unica carne a la vez
   //el fuego puede tener tres estados, 0 apagado, 1, poca llama, 2 media y 3 fuerte (se hace mas rapido pero se puede quemar)
   //el fuego es un objeto que tiene un calor especifico 
