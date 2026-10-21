@@ -6,6 +6,6 @@ object platoAsado {
 
 object platoChori{
     //deberia estar la imagen de la comanda del chori
-    method image() = "comanda_asado.png"   
+    method image() = "comanda_chori.png"   
     method tiempoEntrega() = 52
 }

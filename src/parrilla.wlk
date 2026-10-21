@@ -6,7 +6,7 @@ import elementosInvisibles.*
 
 //la parrila tmb puede ser una clase ya que podemos tener mas de una parrilla 
 object parrilla inherits Chad {
-  const property position = game.at(2,2)
+  const property position = game.at(4,3)
   
   override method esSolido() = true 
 
