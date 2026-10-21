@@ -49,7 +49,7 @@ class Carne inherits ElementoAgarrable {
     estado = estado.siguienteEstado(self)
   }
 
-  override method serCortada(tabla) {
+  method serCortada(tabla) {
     game.say(tabla, "Esto ya fue cortado")
   }
 
@@ -106,7 +106,7 @@ class TiraAsado inherits ElementoAgarrable {
     self.error("primero me tenes que cortar")
   }
 
-  override method serCortada(tabla) {
+  method serCortada(tabla) {
       const porcionAsado = new Asado(posicionEnSuelo = tabla.position()) 
             
       game.addVisual(porcionAsado)

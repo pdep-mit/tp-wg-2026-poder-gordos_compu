@@ -79,3 +79,16 @@ class BarraPedido inherits Chad
 
     method detener() = reloj.stop()
 }
+
+class BarraEsfuerzo inherits Chad{
+    const duenio 
+    var esfuerzo 
+
+    method position() = duenio.position().up(1)
+    method image() = "barra_esfuerzo" + esfuerzo + ".png"
+
+    method esforzar(){
+        
+    }
+
+}
