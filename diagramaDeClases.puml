@@ -1,15 +1,90 @@
 @startuml diagrama de clases "nombre del juego"
 
+'la mas importante - the one and only'
+class Chad{
+    +recibir(carga)
+    +avivar()
+    +esSolido() 
+    +dejarAgarrarPor(parrillero)
+    +cortar()
+    +muestraItemFrame()
+}
+
+class Contenedor{
+
+}
+
+class ElementoAgarrable{
+    +contenedor: Contenedor
+
+    +asignarA(nuevoContenedor)
+}
+
+class TiraDeAsado{
+
+}
+
 class Carne{
+    -tiempoParrilla: Number
+    -estado: Estado
+    #tiempoCoccion()
+    +seQuemo()
+    +estaCocida()
+    +cocinar(calor)
+    'se podrian agregar mas ...'
+}
+
+class Chori{
+
+}
+
+class Asado{
 
 }
 
 object asador <<object>>{
-
+    +carga: ElementoAgarrable
+    '+direccion:' 
+    +soltar()
+    +agarrar() 
+    +tomar(nuevaCarga)
+    +avivarFuego()
+    +cortar()
+    'agregar esfuerzo despues ...'
 }
 
 object parrilla <<object>>{
+    +fuego: Fuego
+    +carneActual = Carne
+    
+    +avivar()
+    +asar()
+    +remover(carne)
+}
 
+interface Estado{
+    +estado()
+    +siguienteEstado(carne)
+}
+
+object crudo <<object>>{
+
+}
+
+object cocido <<object>>{
+
+}
+
+object quemado <<object>>{
+
+}
+
+interface Carga{
+    +method ponerseEn(carga){}
+    +method dejarEn(piso){}
+    +method apoyar(){}
+    +method agarrarCarga(parrilero){}
+    +method entregarA(mesaDeEntrega){}
 }
 
 interface Fuego{
@@ -50,4 +125,23 @@ fuerte ..|> Fuego
 
 'relaciones con la parrilla'
 parrilla --> Fuego
+parrilla --> Carga
+
+Chad <|-- parrilla
+Chad <|-- ElementoAgarrable  
+
+Carga <|-- Carne
+Carga <|-- TiraDeAsado
+ElementoAgarrable --> Carga
+
+Carne <|-- Chori
+Carne <|-- Asado 
+
+asador --> ElementoAgarrable
+asador --> parrilla
+
+Carne --> Estado
+crudo ..|> Estado 
+cocido ..|> Estado
+quemado ..|> Estado
 @enduml
