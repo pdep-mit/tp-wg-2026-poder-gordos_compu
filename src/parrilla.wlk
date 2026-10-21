@@ -9,7 +9,8 @@ import elementosInvisibles.*
 object parrilla inherits Chad {
   const property position = game.at(4,3)
   const barraEsfuerzo = new BarraEsfuerzo(duenio = self)
-  override method esSolido() = true 
+  override method esSolido() = true
+  const sonidoPlacer = game.sound("cocinando_carne.mp3") 
 
   method reiniciar() {
        carneActual = noCarne
@@ -59,10 +60,13 @@ object parrilla inherits Chad {
       self.error("la parrilla esta ocupada")
     }
     carga.ponerseEn(self)
+    sonidoPlacer.play()
+    sonidoPlacer.shouldLoop(true)
   }
 
   method remover(carne){
     self.sacarCarne()
+    sonidoPlacer.stop()
   }
 
   override method avivar() { 
