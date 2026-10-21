@@ -1,0 +1,33 @@
+import src.tablaDeCortar.*
+import wollok.game.*
+import src.asador.*
+import src.carnes.*
+import src.items.*
+
+describe "Tests de mecánicas de la Tabla de Cortar" {
+    const asadoPrueba = new Asado(posicionEnSuelo = game.at(10, 4))
+    const tiraPrueba = new TiraAsado()
+
+    method initialize() {
+        game.clear()
+        tablaDeCortar.initialize()
+        asador.carga(sinCarga) 
+    }
+
+    test "1. La tabla recibe un elemento y este actualiza su posición al dejarse en la tabla" {
+        game.addVisual(tiraPrueba)
+        tablaDeCortar.recibir(tiraPrueba)
+        assert.equals(tablaDeCortar.celdaActual(), tiraPrueba.posicionEnSuelo())
+    }
+
+    test "2. El asador agarra exitosamente un elemento que está sobre la tabla" {
+        game.addVisual(asadoPrueba)
+        tablaDeCortar.dejarAgarrarPor(asador)
+        assert.equals(asadoPrueba, asador.carga())
+    }
+
+    test "3. Interactuar con una tabla vacía no rompe el juego ni modifica la carga del asador" {
+        tablaDeCortar.dejarAgarrarPor(asador)
+        assert.equals(sinCarga, asador.carga())
+    }
+}
