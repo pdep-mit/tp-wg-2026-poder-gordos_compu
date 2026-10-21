@@ -8,6 +8,8 @@ object visualMenu {
 }
 
 object menuPrincipal {
+    const musicaFondo = game.sound("musica_fondo.mp3")
+    
     method iniciar() {
         game.addVisual(visualMenu)
 
@@ -21,5 +23,13 @@ object menuPrincipal {
             game.removeVisual(visualMenu)
         }
         nivel1.arrancarNivel() 
+        musicaFondo.play()
+        musicaFondo.shouldLoop(true)
+        keyboard.m().onPressDo({ musicaFondo.pause() })
+        keyboard.u().onPressDo({ musicaFondo.resume() })
+    }
+
+    method pararMusica(){
+        musicaFondo.stop()
     }
 }

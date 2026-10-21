@@ -1,3 +1,4 @@
+import src.menu.*
 import src.superClaseChad.*
 import src.mesaDeCorte.*
 import src.barraDePedidos.*
@@ -222,6 +223,7 @@ object cartel{
     else {
       self.mostrarCartelDerrota()
     }
+    menuPrincipal.pararMusica()
   }
 
   method mostrarCartelVictoria(){}
