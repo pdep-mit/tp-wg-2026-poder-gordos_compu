@@ -54,13 +54,14 @@ object parrilla inherits Chad {
       self.error("la parrilla esta ocupada")
     }
     carga.ponerseEn(self)
-    sonidoPlacer.play()
-    sonidoPlacer.shouldLoop(true)
+    fuego.aplicar(sonidoPlacer)
   }
 
   method remover(carne){
     self.sacarCarne()
-    sonidoPlacer.stop()
+    if(sonidoPlacer.played()){
+      sonidoPlacer.stop()
+    }
   }
 
   override method avivar() { 
@@ -69,6 +70,7 @@ object parrilla inherits Chad {
 
   method terminoElEsfuerzo(){
     fuego = fuego.siguiente()
+    //cuando avivas el fuego y tiene una carne puesta deberia arrancar el sonido
   }
 
   method apagarPoco() {
@@ -100,6 +102,8 @@ object apagado {
   method avivarCon(barra){
     barra.esforzar() 
   }
+
+  method aplicar(sonido){} 
 }
 
 object bajo {
@@ -114,6 +118,11 @@ object bajo {
   method avivarCon(barra){
     barra.esforzar() 
   }
+
+  method aplicar(sonido){
+    sonido.play()
+    sonido.shouldLoop(true)
+  } 
 }
 
 object medio {
@@ -128,6 +137,11 @@ object medio {
   method avivarCon(barra){
     barra.esforzar() 
   }
+
+  method aplicar(sonido){
+    sonido.play()
+    sonido.shouldLoop(true)
+  } 
 }
 
 object fuerte {
@@ -140,6 +154,11 @@ object fuerte {
   method siguiente() = self
 
   method avivarCon(barra){}
+
+  method aplicar(sonido){
+    sonido.play()
+    sonido.shouldLoop(true)
+  } 
 }
 
 //agregamos un tipo de fuego que sea mojado 
@@ -152,4 +171,11 @@ object mojado {
   method anterior() = self
   
   method siguiente() = apagado
+
+  method avivarCon(barra){}
+
+  method aplicar(sonido){
+    sonido.play()
+    sonido.shouldLoop(true)
+  } 
 }
