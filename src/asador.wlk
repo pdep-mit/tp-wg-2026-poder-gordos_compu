@@ -79,4 +79,8 @@ object asador inherits Chad {
   method avivarFuego() {    
     self.loQueTengoEnFrente().avivar()
   }  
+
+  override method cortar(){
+    self.loQueTengoEnFrente().cortar()
+  }
 }

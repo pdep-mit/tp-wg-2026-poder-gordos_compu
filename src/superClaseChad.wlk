@@ -12,6 +12,8 @@ class Chad {
 
     method dejarAgarrarPor(parrillero){}
 
+    method cortar(){}
+
     //temp ? 
     method muestraItemFrame() = false
 

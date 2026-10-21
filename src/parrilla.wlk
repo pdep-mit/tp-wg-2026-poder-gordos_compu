@@ -1,3 +1,4 @@
+import src.barrasAviso.*
 import wollok.game.*
 import carnes.*
 import animaciones.*
@@ -7,11 +8,12 @@ import elementosInvisibles.*
 //la parrila tmb puede ser una clase ya que podemos tener mas de una parrilla 
 object parrilla inherits Chad {
   const property position = game.at(4,3)
-  
+  const barraEsfuerzo = new BarraEsfuerzo(duenio = self)
   override method esSolido() = true 
 
   method initialize() {
     game.addVisual(new ElementoAuxiliar(duenio = self, desplazamientoX = 1,desplazamientoY = 0))
+    game.addVisual(barraEsfuerzo)
   }
   //func: la parrilla solo puede tener una unica carne a la vez
   //el fuego puede tener tres estados, 0 apagado, 1, poca llama, 2 media y 3 fuerte (se hace mas rapido pero se puede quemar)
@@ -56,6 +58,10 @@ object parrilla inherits Chad {
   }
 
   override method avivar() { 
+    barraEsfuerzo.esforzar() 
+  }
+
+  method terminoElEsfuerzo(){
     fuego = fuego.siguiente()
   }
 
@@ -67,6 +73,7 @@ object parrilla inherits Chad {
     carneActual.dejarAgarrarPor(parrilero)
   }
   
+  method posicionBarra() = self.position().up(1)
   //... mas cosas
 }
 

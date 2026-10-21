@@ -19,4 +19,5 @@ class ElementoAuxiliar inherits Chad{
     override method recibir(carga){ duenio.recibir(carga)}
     override method avivar(){duenio.avivar()}
     override method dejarAgarrarPor(parrillero){ duenio.dejarAgarrarPor(parrillero)}
+    override method cortar(){ duenio.cortar()}
 }

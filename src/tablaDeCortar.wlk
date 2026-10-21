@@ -1,9 +1,11 @@
 import wollok.game.*
 import superClaseChad.*
 import elementosInvisibles.*
-
+import barrasAviso.*
 
 object tablaDeCortar inherits Chad {
+    const barraEsfuerzo = new BarraEsfuerzo(duenio = self)
+    
     method image() = "tabla_cortar.png"
     method position()= game.at(10, 4)
     override method esSolido() = true
@@ -16,22 +18,35 @@ object tablaDeCortar inherits Chad {
         game.addVisual(new ElementoAuxiliar(duenio = self,desplazamientoX = 0, desplazamientoY = -2))
         game.addVisual(new ElementoAuxiliar(duenio = self,desplazamientoX = 0, desplazamientoY = -3))
         game.addVisual(new ElementoAuxiliar(duenio = self,desplazamientoX = 0, desplazamientoY = -4))
-       
+        game.addVisual(barraEsfuerzo)
     }
 
     override method recibir(carga) {
+        if(not self.tablaLibre()){
+            self.error("la tabla esta ocupada")
+        }
         carga.dejarEn(self) 
-        carga.serCortada(self) 
     }
 
-    override method dejarAgarrarPor(parrillero) {
-        const objetosEnCelda = game.getObjectsIn(self.position())
-        const cosasEncima = objetosEnCelda.filter({ obj => obj != self })
+    method loQueTengoEnsima() = game.getObjectsIn(self.position()).filter({ obj => obj != self })
         
-        if (!cosasEncima.isEmpty()) {
-            cosasEncima.first().dejarAgarrarPor(parrillero)
-        } else {
-            game.say(parrillero, "La tabla está vacía")
+    override method cortar() {
+        if (not self.tablaLibre()) {
+        barraEsfuerzo.esforzar()
         }
     }
+
+    method terminoElEsfuerzo() {
+     self.loQueTengoEnsima().first().serCortada(self)
+    }
+
+    method posicionBarra() = self.position().down(1)
+
+    override method dejarAgarrarPor(parrillero){
+        if(!self.tablaLibre()){
+            self.loQueTengoEnsima().first().dejarAgarrarPor(parrillero)
+        }
+    }
+
+    method tablaLibre() = self.loQueTengoEnsima().isEmpty()
 }

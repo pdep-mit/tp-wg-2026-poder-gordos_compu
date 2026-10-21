@@ -1,3 +1,4 @@
+import src.parrilla.*
 import wollok.game.*
 import carnes.*
 import pedidos.*
@@ -82,13 +83,28 @@ class BarraPedido inherits Chad
 
 class BarraEsfuerzo inherits Chad{
     const duenio 
-    var esfuerzo 
+    var property esfuerzo = 0 
 
-    method position() = duenio.position().up(1)
-    method image() = "barra_esfuerzo" + esfuerzo + ".png"
+    method position() = duenio.posicionBarra()
+    method image() = "barra_esfuerzo_" + esfuerzo + ".png"
 
     method esforzar(){
-        
+        esfuerzo += 1
+        if(esfuerzo > 4){
+            self.completar()
+        }
     }
 
+    method completar(){
+        esfuerzo = 0 
+        duenio.terminoElEsfuerzo()
+    }
+
+    method mostrar(){
+        game.addVisual(self)
+    }
+
+    override method dejarAgarrarPor(parrillero){
+        duenio.dejarAgarrarPor(parrillero)
+    }
 }

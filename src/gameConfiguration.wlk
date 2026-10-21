@@ -158,6 +158,8 @@ class Nivel {
     //acion del asador para avivar el fuego
     keyboard.a().onPressDo({asador.avivarFuego()})
     
+    //accion del asador para cortar una carne
+    keyboard.c().onPressDo({asador.cortar()})
 	}
 
   method configurarColisiones(){
