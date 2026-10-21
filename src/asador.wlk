@@ -13,6 +13,9 @@ object sinCarga {
     parrilero.agarrarLoDeEnfrente()
   }
   method entregarA(mesaDeEntrega){}
+  method serCortada(tabla){
+    self.error("no hay nada que cortar")
+  }
 }
 
 // agregamos la logica para que pueda agarrar al contacto cualquier cosa que tenga implementado el metodo asignarA

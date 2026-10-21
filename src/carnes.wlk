@@ -110,10 +110,7 @@ class TiraAsado inherits ElementoAgarrable {
       const porcionAsado = new Asado(posicionEnSuelo = tabla.position()) 
             
       game.addVisual(porcionAsado)
-            
-      if (game.hasVisual(self)) {
-        game.removeVisual(self)
-      }
+      self.desaparecer()
   }
 
 }
