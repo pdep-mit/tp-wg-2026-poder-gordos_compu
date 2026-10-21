@@ -79,7 +79,6 @@ class ElementoAgarrable inherits Chad {
     }
   }
 
-  method serCortada(tabla) {}
   
 }
 
