@@ -54,4 +54,8 @@ object tablaDeCortar inherits Chad {
     method reiniciarEsfuerzo() {
         barraEsfuerzo.reiniciar()
     }
+
+    override method reiniciar(){
+        self.reiniciarEsfuerzo()
+    }
 }

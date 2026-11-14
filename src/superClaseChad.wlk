@@ -14,6 +14,8 @@ class Chad {
 
     method cortar(){}
 
+    method reiniciar(){}
+
     //temp ? 
     method muestraItemFrame() = false
 

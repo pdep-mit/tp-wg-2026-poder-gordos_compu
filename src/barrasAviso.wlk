@@ -108,7 +108,7 @@ class BarraEsfuerzo inherits Chad{
         duenio.dejarAgarrarPor(parrillero)
     }
 
-    method reiniciar(){
+    override method reiniciar(){
         esfuerzo = 0
     }
 }

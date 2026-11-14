@@ -10,7 +10,7 @@ describe "Tests de mecánicas de la Tabla de Cortar" {
 
     method initialize() {
         game.clear()
-        tablaDeCortar.initialize()
+        tablaDeCortar.reiniciar()
         asador.carga(sinCarga) 
     }
 

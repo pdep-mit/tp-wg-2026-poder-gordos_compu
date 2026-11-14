@@ -84,7 +84,7 @@ object listadoPedidos inherits Chad{
   }
   method HayPedidos() = not pedidos.isEmpty()
   
-  method reiniciar() {
+  override method reiniciar() {
     pedidos.clear()
   }
 }

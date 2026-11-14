@@ -63,6 +63,7 @@ object contadorAplausos inherits Chad {
   method position() = game.at(1, 0)
   method textColor() = "FFFFFFFF"
   method text() = config.nivelActual().aplausos().toString()
+  method image() = "fondoNegro.png" 
 }
 
 object iconoAplauso inherits Chad {
@@ -76,6 +77,7 @@ class Nivel {
   
 
   method arrancarNivel(){
+    self.prepararEstadoInicial()
     config.nivelActual(self)
     self.agregarVisuales()
     //self.configurarColisiones()
@@ -87,22 +89,25 @@ class Nivel {
     self.configurarAnimacion()
   }
 
+  method objetosNivel() = [asador, parrilla, tablaDeCortar, listadoPedidos]
+
   method reiniciarNivel() {
-    // 1. Limpiamos visuales, ticks y listeners del motor
     game.clear()
-
-    // 2. Reseteamos métricas del nivel
-    tiempoTranscurrido = 0
-    aplausos = 0
-
-    // 3. Reseteamos el estado de los objetos a nuevo
-    asador.reiniciar()
-    listadoPedidos.reiniciar()
-    parrilla.reiniciar()
-
-    // 4. Volvemos al menú principal
     menuPrincipal.iniciar()
   }
+
+  method prepararEstadoInicial(){
+    tiempoTranscurrido = 0
+    aplausos = 0 
+    self.objetosNivel().forEach({elemento => elemento.reiniciar()})
+  }
+
+  method terminarNivel(){
+    cartel.mostrarCartel(aplausos, self.cantidadPuntosParaPasar())
+    menuPrincipal.apagar()
+    parrilla.apagar()
+  }
+
   //el tiempo que pasa para que el fuego cambie de estado (fuerte -> medio -> bajo) esta en 20s para mi es poco
   method tiempoCambioFuego() = 20000
 
@@ -151,7 +156,7 @@ class Nivel {
       self.aumentarTiempo()
     
       if(self.terminoElJuego()){
-        cartel.mostrarCartel(aplausos, self.cantidadPuntosParaPasar())
+        self.terminarNivel()
         //deberia mandarle un mensaje a algun cartel que en base a los aplausos del asador decida si gano o perdio 
       }
       }

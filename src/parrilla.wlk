@@ -12,10 +12,11 @@ object parrilla inherits Chad {
   override method esSolido() = true
   const sonidoPlacer = game.sound("cocinando_carne.mp3") 
 
-  method reiniciar() {
+  override method reiniciar() {
     carneActual = noCarne
     fuego = apagado
-    barraEsfuerzo.reiniciar()
+    self.apagar()
+    self.reiniciarEsfuerzo()
     }
 
   method agregarVisuales(){
@@ -65,9 +66,7 @@ object parrilla inherits Chad {
 
   method remover(carne){
     self.sacarCarne()
-    if(sonidoPlacer.played()){
-      sonidoPlacer.stop()
-    }
+    self.apagar()
   }
 
   override method avivar() { 
@@ -91,6 +90,12 @@ object parrilla inherits Chad {
   
   method reiniciarEsfuerzo() {
     barraEsfuerzo.reiniciar()
+  }
+
+  method apagar(){
+    if(sonidoPlacer.played()){
+      sonidoPlacer.stop()
+    }
   }
 }
 

@@ -21,11 +21,42 @@ object menuPrincipal {
     method empezarJuego() {
         if (game.hasVisual(visualMenu)) {
             game.removeVisual(visualMenu)
+            nivel1.arrancarNivel() 
+            self.prender()
+            keyboard.m().onPressDo({ self.pausar() })
+            keyboard.u().onPressDo({ self.reaunudar() })
         }
-        nivel1.arrancarNivel() 
-        musicaFondo.play()
-        musicaFondo.shouldLoop(true)
-        keyboard.m().onPressDo({ musicaFondo.pause() })
-        keyboard.u().onPressDo({ musicaFondo.resume() })
+    }
+    
+    method prender(){
+        if(musicaFondo.paused()){
+            musicaFondo.resume()
+        }
+        if(not musicaFondo.played()){
+            musicaFondo.play()
+            musicaFondo.shouldLoop(true)
+        }
+    }
+
+    method apagar(){
+        if(musicaFondo.paused()){
+            musicaFondo.resume()
+            musicaFondo.stop()
+        }
+        if(musicaFondo.played()){
+            musicaFondo.stop()
+        }
+    }
+
+    method pausar(){
+        if(musicaFondo.played()){
+            musicaFondo.pause()
+        }
+    }
+
+    method reaunudar(){
+        if(musicaFondo.paused()){
+            musicaFondo.resume()
+        }
     }
 }
