@@ -1,9 +1,12 @@
 import barrasAviso.*
 import gameConfiguration.*
 import superClaseChad.*
+import azar.*
 
 //esto seria un Pedido 
 class ElementoLista inherits Chad{ 
+    const sonidoEntrga = game.sound("sonido_exito.mp3")
+    
     //seria un plato 
     const property pedidoActual 
     var property position = game.at(0, config.alturaMaxima() - 1)
@@ -57,6 +60,7 @@ class ElementoLista inherits Chad{
       config.nivelActual().sumarPuntos(20 + self.tiempoRestante())
       self.desaparecerPedido()
       carne.desaparecer()
+      sonidoEntrga.play()
     }   
     
 }
@@ -90,8 +94,26 @@ object listadoPedidos inherits Chad{
 }
 
 object ningunPedido{
+   var property sonidoHomero = game.sound("sonido_homero.mp3")
+   var property sonidoStarWars = game.sound("sonido_star_wars.mp3")
+   const listaSonidos = [sonidoHomero, sonidoStarWars]
+
+  method elegirSonido() = listaSonidos.get(azar.numeroEntre(0,1))
+   
    method cumplirComanda(carne){
     config.nivelActual().restarPuntos(10)
     carne.desaparecer()
+    self.reproducirSonido()
+   }
+
+   method reproducirSonido(){
+      if(sonidoHomero.played()){
+        sonidoHomero.stop()
+      }
+      if(sonidoStarWars.played()){
+        sonidoStarWars.stop()
+      }
+      //tiene que tardar un toque en ejecutarse pq sino no funciona ;D
+      game.schedule(100,{self.elegirSonido().play()})
    }
 }

@@ -108,6 +108,8 @@ class Nivel {
     parrilla.apagar()
   }
 
+  method pedidosIniciales() = 2
+
   //el tiempo que pasa para que el fuego cambie de estado (fuerte -> medio -> bajo) esta en 20s para mi es poco
   method tiempoCambioFuego() = 20000
 
@@ -167,6 +169,7 @@ class Nivel {
 
   //configura la velocidad con la que los pedidos se agregan a la lista
   method configurarFrecuenciaPedidos(){
+    self.pedidosIniciales().times({i => self.agregarPedidoAListaDePedidos()})
     game.tick(self.frecuenciaPedidos(),{ if (!self.terminoElJuego()) self.agregarPedidoAListaDePedidos() },false).start()
   }
 
