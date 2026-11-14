@@ -33,7 +33,7 @@ object tablaDeCortar inherits Chad {
         
     override method cortar() {
         if (not self.tablaLibre()) {
-        barraEsfuerzo.esforzar()
+        self.loQueTengoEnsima().first().intentarCortarseEn(self)
         }
     }
 
@@ -57,5 +57,9 @@ object tablaDeCortar inherits Chad {
 
     override method reiniciar(){
         self.reiniciarEsfuerzo()
+    }
+
+    method esforzar(){ 
+        barraEsfuerzo.esforzar()
     }
 }

@@ -7,6 +7,6 @@ program NombreDeJuego {
 	config.configurarJuego()
 	menuPrincipal.iniciar()
 	game.start()
-}
+} 
 
 

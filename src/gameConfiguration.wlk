@@ -89,7 +89,7 @@ class Nivel {
     self.configurarAnimacion()
   }
 
-  method objetosNivel() = [asador, parrilla, tablaDeCortar, listadoPedidos]
+  method objetosNivel() = [asador, parrilla, tablaDeCortar, listadoPedidos, cartel]
 
   method reiniciarNivel() {
     game.clear()
@@ -261,12 +261,13 @@ object cartelTexto inherits Chad {
 object cartel inherits Chad {
   var property image = "cartel_victoria.png"
   var property puntosObtenidos = 0
-
+  const sonidoCartelVictoria = game.sound("sonido_victoria.mp3")
+  const sonidoCarntelDerrota = game.sound("sonido_derrota.mp3")
   method position() = game.at(6, 5)
   override method esSolido() = false
 
   method mostrarCartel(puntos, cantidadPuntosParaPasar) {
-    puntosObtenidos = puntos
+    puntosObtenidos = puntos 
 
     if (puntos >= cantidadPuntosParaPasar) {
       self.mostrarCartelVictoria(puntos)
@@ -292,11 +293,26 @@ object cartel inherits Chad {
 
   method mostrarCartelVictoria(puntos) {
     image = "cartel_victoria.png"
+    self.hacerSonido(sonidoCartelVictoria)
     cartelTexto.mensaje("VICTORIA! - " + puntos.toString() + "\n pts | [R] Reiniciar")
   }
 
   method mostrarCartelDerrota(puntos) {
     image = "cartel_derrota.png"
+    self.hacerSonido(sonidoCarntelDerrota)
     cartelTexto.mensaje("DERROTA! - " + puntos.toString() + "\n pts | [R] Reiniciar")
+  }
+
+  method hacerSonido(sonido) { 
+    sonido.play()
+  }
+
+  override method reiniciar(){
+    if(sonidoCarntelDerrota.played()){
+      sonidoCarntelDerrota.stop()
+    }
+    if(sonidoCartelVictoria.played()){
+      sonidoCartelVictoria.stop()
+    }
   }
 }

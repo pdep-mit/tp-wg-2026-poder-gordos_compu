@@ -80,6 +80,10 @@ class ElementoAgarrable inherits Chad {
   }
 
   method validarSiEsCortable() {}  
+
+  method intentarCortarseEn(tabla){
+    self.error("no se puede cortar")
+  }
 }
 
 /*

@@ -49,10 +49,6 @@ class Carne inherits ElementoAgarrable {
     estado = estado.siguienteEstado(self)
   }
 
-  method serCortada(tabla) {
-    game.say(tabla, "Esto ya fue cortado")
-  }
-
   //regla de tres simple para el porcentaje de la carne a ver como se encuentra
   //tiempoCoccion -> 100%
   //tiempoParrilla -> x 
@@ -75,6 +71,10 @@ class Carne inherits ElementoAgarrable {
 
   override method entregarA(mesaDeEntrega){
     mesaDeEntrega.soltar(self)
+  }
+
+  override method intentarCortarseEn(tabla){
+    self.error("ya fui cortada")
   }
 } 
 
@@ -111,6 +111,10 @@ class TiraAsado inherits ElementoAgarrable {
             
       game.addVisual(porcionAsado)
       self.desaparecer()
+  }
+
+  override method intentarCortarseEn(tabla){
+    tabla.esforzar()
   }
 
 }
