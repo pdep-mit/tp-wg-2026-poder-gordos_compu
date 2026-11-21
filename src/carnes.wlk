@@ -14,7 +14,7 @@ class Carne inherits ElementoAgarrable {
   //el tiempo que pasa en la parrilla en puntos de coccion 
   var tiempoParrilla = 0 
   
-  //pasa a ser un metodo sin cuerpo
+  
   method tiempoCoccion()
   
   //sirve para armar la imagen de la carne
@@ -26,14 +26,13 @@ class Carne inherits ElementoAgarrable {
   //el estado de la carne
   var estado = crudo
 
-  //seria el tiempo (o puntos de coccion) que le damos de chance para que evite que se queme -- maybe abstracto
+  //seria el tiempo (o puntos de coccion) que le damos de chance para que evite que se queme
   method tiempoDeOnda() = 4
 
   //es el rango q le damos al jugador para hasta que la carne se queme
   method limiteDeQuemado() = self.tiempoCoccion() + self.tiempoDeOnda()
 
   //la imagen se calcula a partir del estado de la carne 
-  //aca hay polimorfismo
   method image() = self.nombre() + "_" + estado.estado() + ".png"
 
   //da 4 puntos de coccion de chance para que la vayas a sacar 
@@ -136,9 +135,6 @@ class Chorizo inherits Carne {
     if(self.estaCocida()) {
       return "chori_cocido_" + animaciones.siguienteFrame(8) + ".png"
     }   
-    else {
-      return "chori_crudo.png"
-    }
     return super()
   }
 
@@ -153,7 +149,7 @@ class Morcilla inherits Carne{
   override method nombre() = "morcilla"
 }
 
-//esto es lo que explico la profe que esta re piola para poner el objeto vacio 
+//null object 
 object noCarne {
   method cocinar(calor){}
   method comoAndas() = 0
@@ -163,5 +159,4 @@ object noCarne {
   method esCarne() = false
   method dejarAgarrarPor(parrilero){}
   method dejarEn(lugar) {} 
-  method serCortada(tabla) {}
 }

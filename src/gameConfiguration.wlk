@@ -5,11 +5,10 @@ import src.barrasAviso.*
 import wollok.game.*
 import menu.*
 
-//dependecias relacionadas al juego en si (se pueden separar mas qsy)
+//dependecias relacionadas al juego en si
 import parrilla.*
 import asador.*
 import carnes.*
-import sarten.*
 import tablaDeCortar.*
 import movimientos.*
 import pedidos.*
@@ -31,7 +30,6 @@ object config {
   
   method configurarJuego(){
 		self.configurarVentana()
-     //agregar aca todo lo que sea necesario para iniciar el juego
   }
 
   method configurarVentana(){
@@ -46,11 +44,9 @@ object config {
   method esCeldaPermitida(celda)=
     celda.celdaActual().x().between(0, self.anchoMaximo() -1) and
     celda.celdaActual().y().between(0, self.alturaMaxima() - 2)  
-    // esto no tiene sentido debido a que ya no se puede soltar la carne en el lugar del item fram
-    //not (celda == parrilla.position() or celda == parrilla.position().right(1)) //Habria que revisar esto pero va por ahi aunque esta raro
 }
 
-//temporales
+//temporales -- LUCA ARREGLAME EL JUEGUITO
 object cronometro inherits Chad {
   method position() = game.at(18, 0)
   method textColor() = "FFFFFFFF"
@@ -110,7 +106,7 @@ class Nivel {
 
   method pedidosIniciales() = 2
 
-  //el tiempo que pasa para que el fuego cambie de estado (fuerte -> medio -> bajo) esta en 20s para mi es poco
+  //el tiempo que pasa para que el fuego cambie de estado (fuerte -> medio -> bajo) 
   method tiempoCambioFuego() = 20000
 
   //  dispensers
@@ -120,7 +116,6 @@ class Nivel {
   method duracionNivel()
   method tiempoRestante() = 0.max(self.duracionNivel() - self.tiempoTranscurrido())
   
-  //esto puede cambiar pero para mi los aplausos capaz pueden ser del nivel no del asador
   var property aplausos = 0 
 
   method cantidadPuntosParaPasar() 
@@ -263,14 +258,12 @@ object cartelTexto inherits Chad {
 
 object cartel inherits Chad {
   var property image = "cartel_victoria.png"
-  var property puntosObtenidos = 0
   const sonidoCartelVictoria = game.sound("sonido_victoria.mp3")
   const sonidoCarntelDerrota = game.sound("sonido_derrota.mp3")
   method position() = game.at(6, 5)
   override method esSolido() = false
 
   method mostrarCartel(puntos, cantidadPuntosParaPasar) {
-    puntosObtenidos = puntos 
 
     if (puntos >= cantidadPuntosParaPasar) {
       self.mostrarCartelVictoria(puntos)

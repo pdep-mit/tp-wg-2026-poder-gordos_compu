@@ -5,12 +5,13 @@ import animaciones.*
 import superClaseChad.*
 import elementosInvisibles.*
 
-//la parrila tmb puede ser una clase ya que podemos tener mas de una parrilla 
 object parrilla inherits Chad {
   const property position = game.at(4,3)
   const barraEsfuerzo = new BarraEsfuerzo(duenio = self)
   override method esSolido() = true
   const sonidoPlacer = game.sound("cocinando_carne.mp3") 
+  var property fuego = apagado
+  var property carneActual = noCarne 
 
   override method reiniciar() {
     carneActual = noCarne
@@ -25,15 +26,8 @@ object parrilla inherits Chad {
     game.addVisual(barraEsfuerzo)
   }
 
-  //func: la parrilla solo puede tener una unica carne a la vez
-  //el fuego puede tener tres estados, 0 apagado, 1, poca llama, 2 media y 3 fuerte (se hace mas rapido pero se puede quemar)
-  //el fuego es un objeto que tiene un calor especifico 
-  var property fuego = apagado
-  var property carneActual = noCarne 
-
   method image() = fuego.imagenParrilla()
 
-  //absolute cinema -- la parrilla "asa" cada 1 segundo pero dependiendo del fuego se cocinara mas lento o mas rapido 
   method asar() = carneActual.cocinar(fuego.calor())
 
   method soltar(carne) {
@@ -47,7 +41,6 @@ object parrilla inherits Chad {
     carneActual = noCarne
   }
 
-  // Polimorfismo con los contenedores para ubicar el item
   method posicionPara(item) = position
 
   //le preguntamos a la parrilla si esta libre para que le pongan una carne

@@ -9,7 +9,6 @@ class ElementoAuxiliar inherits Chad{
     const  desplazamientoX 
     const  desplazamientoY
 
-    // Suma algebraica directa y transparente:
     method position() = game.at(
         duenio.position().x() + desplazamientoX,
         duenio.position().y() + desplazamientoY

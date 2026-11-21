@@ -6,15 +6,12 @@ import src.superClaseChad.*
 import animaciones.*
 
 class BarraProgreso inherits Chad {
-    var property carneActual = noCarne
-    method esAgarrable() = false
-    method esParrilla() = false
-    
+    var property carneActual = noCarne 
 
     //serian los puntos que debe de superar la carne para cambiar de barra de progreso 
     const listaPorcentajes = [1, 50, 75, 100]
 
-    //la posicion depende de la de la carne (se puede modificar para que aparezca la barra luego)
+    //la posicion depende de la de la carne
     method position () = carneActual.position().down(1) 
     
     method image() = "barra_progreso_" + self.calcularProgreso() + ".png"
@@ -47,7 +44,6 @@ class BarraProgreso inherits Chad {
     }
 }
 
-// le agrego una barra indicadora de tiempo restante a cada elemento de nuestra lista de pedidos pendientes.
 class BarraPedido inherits Chad
 {
     const listaPorcentajes = [1, 25, 50, 75]
@@ -82,6 +78,8 @@ class BarraPedido inherits Chad
 }
 
 class BarraEsfuerzo inherits Chad{
+    //barra utilizada para q el jugador tenga que prender la parrilla y cortar la carne
+    
     const duenio 
     var property esfuerzo = 0 
 

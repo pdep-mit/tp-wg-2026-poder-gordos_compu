@@ -18,11 +18,7 @@ class ElementoLista inherits Chad{
     method tiempoRestante() = barraIndividual.duracionActual()
     // inicializo la barra de tiempo del plato y tambien su imagen de referencia
     method image() = pedidoActual.image()
-    
-    method cambiarPosicion(nuevaPosicionX, nuevaPosicionY) {
-      position = game.at(nuevaPosicionX,nuevaPosicionY)
-    }
-    
+      
     method registrarTiempo()
     {
       barraIndividual.detener()
@@ -76,7 +72,6 @@ object listadoPedidos inherits Chad{
     self.acomodar()
     }
   method acomodar(){
-    //se puede multiplicar *2 a la posicion para que esten mas espaciados pero solo podriamos tener 3 pedidos o agrandar la barra de pedidos
     pedidos.size().times({i => pedidos.get(i - 1).position(origen.right(i-1))})
   }
   
@@ -86,7 +81,6 @@ object listadoPedidos inherits Chad{
   {
     pedidos.remove(pedido)
   }
-  method HayPedidos() = not pedidos.isEmpty()
   
   override method reiniciar() {
     pedidos.clear()

@@ -2,13 +2,6 @@ import gameConfiguration.*
 import parrilla.*
 import mesaDeEntrega.*
 import tablaDeCortar.*
-/*
-* Acá se define cómo se mueven los personajes cuando se usan las flechitas.
-* Las posiciones son objetos inmutables, pero los personajes controlados pueden
-* moverse setteándose la nueva posición cuando sea necesario.
-*/
-//Movimiento comprueba las colisiones y si no hay colisiones con objetos solidos entonces avanza a la nueva posicion dada por los objetos de mas abajo ejecutados en 
-// gameconfiguration por las flechas
 object movimiento {
 
 	method mover(personajeLibre, direccion)

@@ -16,7 +16,6 @@ class Chad {
 
     method reiniciar(){}
 
-    //temp ? 
     method muestraItemFrame() = false
 
 }

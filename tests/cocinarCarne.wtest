@@ -11,6 +11,8 @@ describe "Las carnes se cocinan en la parrilla y cambian su estado" {
   
   const unaTira = new TiraAsado()
 
+  const unChori = new Chorizo(posicionEnSuelo = game.at(2, 3))
+
   test "un asado se cocina a fuego fuerte" {
     parrilla.fuego(fuerte)
     parrilla.carneActual(unAsado)
@@ -29,11 +31,19 @@ describe "Las carnes se cocinan en la parrilla y cambian su estado" {
     assert.throwsExceptionWithMessage("primero me tenes que cortar", { unaTira.ponerseEn(parrilla) })
   }
 
-  //revisar si hay mejores...
   test "un asado se cocina a fuego bajo " {
     parrilla.fuego(bajo)
     parrilla.carneActual(unAsado)
     16.times({i => parrilla.asar()})
     assert.that(unAsado.estaCocida())
+  }
+
+  //encontre un bug yey! 
+  test "cocino un asado de mas y queda quemado"{
+    parrilla.fuego(fuerte)
+    parrilla.carneActual(unChori)
+    16.times({i => parrilla.asar()})
+    assert.equals("chori_quemado.png", unChori.image())
+
   }
 }

@@ -13,16 +13,12 @@ object sinCarga {
     parrilero.agarrarLoDeEnfrente()
   }
   method entregarA(mesaDeEntrega){}
-  method serCortada(tabla){
-    self.error("no hay nada que cortar")
-  }
   method validarSiEsCortable() {
     self.error("No podés cortar el aire, ¡agarrá algo primero!")
   }
 }
 
-// agregamos la logica para que pueda agarrar al contacto cualquier cosa que tenga implementado el metodo asignarA
-// tambien el metodo para soltar, lo cual asigna como su nueva posicion la actual y se desvincula del gordo 
+//el pj principal
 object asador inherits Chad { 
   var property position = game.at(1,1)
   var property carga = sinCarga
@@ -34,7 +30,6 @@ object asador inherits Chad {
     carga = sinCarga
   }
   
-  //temp? 
   override method muestraItemFrame() = true
 
   method image() = "asador_" + direccion.toString() + ".png"  
@@ -56,7 +51,6 @@ object asador inherits Chad {
     self.loQueTengoEnFrente().recibir(carga)
   }
 
-  //metodo super chad 
   method agarrar() {
     carga.agarrarCarga(self)
   }
@@ -77,7 +71,7 @@ object asador inherits Chad {
     self.loQuePuedoAgarrar().dejarAgarrarPor(self)
   }
   
-  // Posición polimórfica para el ítem que esta en el item frame, o sea en el inventario del asador
+  //Posición polimórfica para el ítem que esta en el item frame, o sea en el inventario del asador
   method posicionPara(item) = self.laPosicionObjeto()
 
   //podria cambiar
