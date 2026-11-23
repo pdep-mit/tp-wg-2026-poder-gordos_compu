@@ -1,0 +1,30 @@
+@startuml diagrama de estatico de "Carnes" 
+
+metaclass Carne{
+    -tiempoParrilla: Number
+    -estado: Estado
+    -tiempoCoccion()
+    -nombre()
+    +seQuemo()
+    +estaCocida()
+    +cocinar(calor)
+    +image()
+}
+
+class Chori{
+    <<override>> tiempoCoccion() 
+    <<override>> nombre()
+    <<override>> image()
+}
+
+class Asado{
+    <<override>> tiempoCoccion() 
+    <<override>> nombre()
+    <<override>> image()
+}
+
+Carne <|-- Chori
+Carne <|-- Asado 
+
+
+@enduml

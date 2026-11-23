@@ -1,0 +1,20 @@
+@startuml listaDePedidos
+
+object listaPedidos <<object>> {
+    -pedidos []
+    +tomarPedido(pedido)
+    +acomodar()
+    +estaElPedido(pedido)
+}
+
+class ElementoLista <<pedido>>{
+    +pedidoActual: Plato
+    +aparecerPedido()
+    +cumplirComanda(carne)
+}
+
+listaPedidos --> ElementoLista 
+
+
+
+@enduml

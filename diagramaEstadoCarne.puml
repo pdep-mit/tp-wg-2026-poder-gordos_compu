@@ -1,0 +1,43 @@
+@startuml estadoCarne
+
+abstract class Carne {
+    -tiempoParrilla: Number
+    -estado: Estado
+    -tiempoCoccion()
+    -nombre()
+    +seQuemo()
+    +estaCocida()
+    +cocinar(calor)
+    +image()
+}
+
+interface Estado {
+    +estado()
+    +siguienteEstado(carne)
+}
+
+object crudo <<object>> {
+    +estado() = "crudo"
+}
+
+object cocido <<object>> {
+    +estado() = "cocido"
+}
+
+object quemado <<object>> {
+    +estado() = "quemado"
+}
+
+'composicion: la carne conoce a su estado actual'
+Carne --> Estado
+
+'polimorfismo: los tres estados entienden los mismos mensajes'
+Estado <|.. crudo
+Estado <|.. cocido
+Estado <|.. quemado
+
+'transiciones: cada estado decide cual es el siguiente'
+crudo .right.> cocido : si estaCocida()
+cocido .right.> quemado : si seQuemo()
+
+@enduml

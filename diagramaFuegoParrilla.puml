@@ -1,0 +1,53 @@
+@startuml polimorfimo y composicion parrilla
+
+
+object parrilla <<object>>{
+    +fuego: Fuego
+    +carneActual = Carne
+    
+    +avivar()
+    +asar()
+    +remover(carne)
+}
+
+interface Fuego{
+    +calor()
+    +imagenParrilla()
+    +siguiente()
+    'podriamos tener mas metodos pero creo con estos dos basta para entender la intefaz'
+}
+
+object apagado <<object>> {
+    +calor()
+    +imagenParrilla()
+    +siguiente()
+}
+
+object bajo <<object>> {
+    +calor()
+    +imagenParrilla()
+    +siguiente()
+}
+
+object medio <<object>> {
+    +calor()
+    +imagenParrilla()
+    +siguiente()
+}
+
+object fuerte <<object>> {
+    +calor()
+    +imagenParrilla()
+    +siguiente()
+}
+
+
+
+Fuego <|.. apagado
+Fuego <|.. bajo
+Fuego <|.. medio
+Fuego <|.. fuerte
+
+parrilla --> Fuego
+
+@enduml
