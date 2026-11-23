@@ -7,7 +7,7 @@ import elementosInvisibles.*
 
 object parrilla inherits Chad {
   const property position = game.at(4,3)
-  const barraEsfuerzo = new BarraEsfuerzo(duenio = self)
+  const property barraEsfuerzo = new BarraEsfuerzo(duenio = self)
   override method esSolido() = true
   const sonidoPlacer = game.sound("cocinando_carne.mp3") 
   var property fuego = apagado
@@ -95,76 +95,69 @@ object parrilla inherits Chad {
 }
 
 
+class Fuego{
+  method avivarCon(barra){
+    barra.esforzar() 
+  }
+
+  method aplicar(sonido){
+    sonido.play()
+    sonido.shouldLoop(true)
+  } 
+
+  method imagenParrilla() = "parrilla_"+ self.intensidad() +"_"+ animaciones.siguienteFrame(8)+".png"
+
+  method intensidad() 
+}
+
 //el calor son puntos de coccion 
-object apagado {
+object apagado inherits Fuego {
   method calor() = 0
 
-  method imagenParrilla() = "parrilla_apagada.png"
+  override method imagenParrilla() = "parrilla_apagada.png"
 
   method anterior() = self
 
   method siguiente() = bajo 
 
-  method avivarCon(barra){
-    barra.esforzar() 
-  }
+  override method aplicar(sonido){} 
 
-  method aplicar(sonido){} 
+  override method intensidad() = "apagado"
 }
 
-object bajo {
+object bajo inherits Fuego {
   method calor() = 1
 
-  method imagenParrilla() = "parrilla_bajo_" + animaciones.siguienteFrame(8) + ".png"
+  override method intensidad() = "bajo"
 
   method anterior() = apagado
   
   method siguiente() = medio
 
-  method avivarCon(barra){
-    barra.esforzar() 
-  }
-
-  method aplicar(sonido){
-    sonido.play()
-    sonido.shouldLoop(true)
-  } 
 }
 
-object medio {
+object medio inherits Fuego {
   method calor() = 2 
 
-  method imagenParrilla() = "parrilla_medio_" + animaciones.siguienteFrame(8) + ".png"
+  override method intensidad() = "medio"
 
   method anterior() = bajo
   
   method siguiente() = fuerte
 
-  method avivarCon(barra){
-    barra.esforzar() 
-  }
-
-  method aplicar(sonido){
-    sonido.play()
-    sonido.shouldLoop(true)
-  } 
 }
 
-object fuerte {
+object fuerte inherits Fuego {
   method calor() = 3
 
-  method imagenParrilla() = "parrilla_alto_" + animaciones.siguienteFrame(8) + ".png" 
+  override method intensidad() = "alto"
 
   method anterior() = medio
   
   method siguiente() = self
 
-  method avivarCon(barra){}
+  override method avivarCon(barra){}
 
-  method aplicar(sonido){
-    sonido.play()
-    sonido.shouldLoop(true)
-  } 
 }
 
 //agregamos un tipo de fuego que sea mojado 

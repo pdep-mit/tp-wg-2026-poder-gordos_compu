@@ -43,10 +43,10 @@ object fuerte <<object>> {
 
 
 
-Fuego <|.. apagado
-Fuego <|.. bajo
-Fuego <|.. medio
-Fuego <|.. fuerte
+Fuego <|-- apagado
+Fuego <|-- bajo
+Fuego <|-- medio
+Fuego <|-- fuerte
 
 parrilla --> Fuego
 

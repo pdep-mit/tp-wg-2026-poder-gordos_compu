@@ -1,0 +1,50 @@
+import src.barrasAviso.*
+import src.parrilla.*
+describe "la parrilla cambia de fuego y con el su imagen"{
+    
+    const sonidoParrilla = game.sound("cocinando_carne.mp3")
+    
+    test "la parrilla esta apagada y luego esta baja"{
+        parrilla.fuego(apagado)
+        5.times({i => parrilla.avivar()})
+        assert.equals("parrilla_bajo_0.png", parrilla.image())
+    }
+
+    test "la parrilla esta baja y luego esta medio"{
+        parrilla.fuego(bajo)
+        5.times({i => parrilla.avivar()})
+        assert.equals("parrilla_medio_0.png", parrilla.image())
+    }
+
+    test "la parrilla esta medio y luego esta fuerte"{
+        parrilla.fuego(medio)
+        5.times({i => parrilla.avivar()})
+        assert.equals("parrilla_alto_0.png", parrilla.image())
+    }
+
+    test "la parrilla esta en fuerte y pasa a apagado"{
+        parrilla.fuego(fuerte)
+        3.times({i => parrilla.apagarPoco()})
+        assert.equals("parrilla_apagada.png", parrilla.image())
+    }
+
+    test "si avivo la parrilla en fuerte no aumenta el esfuerzo" {
+        parrilla.fuego(fuerte)
+        3.times({i => parrilla.avivar()})
+        assert.equals(0, parrilla.barraEsfuerzo().esfuerzo())
+    }
+
+    test "si la parrila esta apagada y coloco una carne no hace sonido"{
+        parrilla.fuego(apagado)
+        parrilla.fuego().aplicar(sonidoParrilla)
+        assert.that(not sonidoParrilla.played())
+    }
+
+    test "si la parrila esta medio y coloco una carne hace sonido"{
+        parrilla.fuego(medio)
+        parrilla.fuego().aplicar(sonidoParrilla)
+        assert.that(sonidoParrilla.played())
+
+    }
+}
+
