@@ -13,7 +13,7 @@ object parrilla inherits Chad {
   var property fuego = apagado
   var property carneActual = noCarne 
 
-  override method reiniciar() {
+  method reiniciar() {
     carneActual = noCarne
     fuego = apagado
     self.apagar()
@@ -90,6 +90,8 @@ object parrilla inherits Chad {
       sonidoPlacer.stop()
     }
   }
+
+  method muestraItemFrame() = false
 }
 
 

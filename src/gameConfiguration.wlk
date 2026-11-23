@@ -71,6 +71,14 @@ object iconoAplauso inherits Chad {
 class Nivel { 
   var property tiempoTranscurrido = 0
   
+  //los ticks del nivel 
+  const reloj = game.tick(1000, { self.avanzarReloj() }, false)
+  const agregarPedidosLista = game.tick(self.frecuenciaPedidos(), { self.agregarPedidoAListaDePedidos() }, false)
+  const cocinarCarne = game.tick(1000, { parrilla.asar() }, true)
+  const bajarFuego = game.tick(self.tiempoCambioFuego(), { parrilla.apagarPoco() }, false)
+  const tiempoAnimaciones = game.tick(300, { animaciones.aumentarContador() }, true)
+
+  method ticksDelNivel() = [reloj, agregarPedidosLista, cocinarCarne, bajarFuego, tiempoAnimaciones]
 
   method arrancarNivel(){
     self.prepararEstadoInicial()
@@ -102,6 +110,8 @@ class Nivel {
     cartel.mostrarCartel(aplausos, self.cantidadPuntosParaPasar())
     menuPrincipal.apagar()
     parrilla.apagar()
+    self.ticksDelNivel().forEach({ tick => tick.stop() })
+    listadoPedidos.pararPedidos()
   }
 
   method pedidosIniciales() = 2
@@ -144,20 +154,16 @@ class Nivel {
     }
   }
   
-  method configurarNivel(){ 
-    game.tick(1000,{
+  method configurarNivel(){
+    reloj.start()
+  }
 
-    //Deja de aumentar el tiempo si se termino el juego
-    if (!self.terminoElJuego()) {
-      //aumenta en un segundo el tiempo restante
-      self.aumentarTiempo()
-    
-      if(self.terminoElJuego()){
-        self.terminarNivel()
-        //deberia mandarle un mensaje a algun cartel que en base a los aplausos del asador decida si gano o perdio 
-      }
-      }
-    }, false).start()
+  //cada segundo suma tiempo y se verifica que termino el juego
+  method avanzarReloj(){
+    self.aumentarTiempo()
+    if(self.terminoElJuego()){
+      self.terminarNivel()
+    }
   }
   //Como estaba antes saltaba terminar el juego siempre que el tiempo NO sea 0, ahora lo arregle
   method terminoElJuego() = self.tiempoRestante() == 0
@@ -165,7 +171,7 @@ class Nivel {
   //configura la velocidad con la que los pedidos se agregan a la lista
   method configurarFrecuenciaPedidos(){
     self.pedidosIniciales().times({i => self.agregarPedidoAListaDePedidos()})
-    game.tick(self.frecuenciaPedidos(),{ if (!self.terminoElJuego()) self.agregarPedidoAListaDePedidos() },false).start()
+    agregarPedidosLista.start()
   }
 
   method agregarVisuales(){
@@ -212,16 +218,16 @@ class Nivel {
   
   //le dice a la parrilla que cocine la carne cada 1 segundo 
   method configurarParrilla(){
-    game.tick(1000, { if (!self.terminoElJuego()) parrilla.asar() }, true).start()
+    cocinarCarne.start()
   }
 
   //cada x segundos le dice a la parrilla que se apague un poco, va al fuego anterior
   method configurarFuego() {
-    game.tick( self.tiempoCambioFuego(), { if (!self.terminoElJuego()) parrilla.apagarPoco() },false).start()
+    bajarFuego.start()
   }
 
   method configurarAnimacion(){
-    game.tick(300,{ if (!self.terminoElJuego()) animaciones.aumentarContador() },true).start()
+    tiempoAnimaciones.start()
   }
 
   method sumarPuntos(puntos){
@@ -303,7 +309,7 @@ object cartel inherits Chad {
     sonido.play()
   }
 
-  override method reiniciar(){
+  method reiniciar(){
     if(sonidoCarntelDerrota.played()){
       sonidoCarntelDerrota.stop()
     }

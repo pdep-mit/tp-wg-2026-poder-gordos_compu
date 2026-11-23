@@ -58,6 +58,11 @@ class ElementoLista inherits Chad{
       carne.desaparecer()
       sonidoEntrga.play()
     }   
+
+    method matarPedido() {
+      self.terminarTimer()
+      self.registrarTiempo()
+    }
     
 }
 
@@ -82,8 +87,12 @@ object listadoPedidos inherits Chad{
     pedidos.remove(pedido)
   }
   
-  override method reiniciar() {
+  method reiniciar() {
     pedidos.clear()
+  }
+
+  method pararPedidos(){ 
+    pedidos.forEach({pedido => pedido.matarPedido()})
   }
 }
 

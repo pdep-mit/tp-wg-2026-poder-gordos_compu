@@ -24,13 +24,13 @@ object asador inherits Chad {
   var property carga = sinCarga
   var property direccion = haciaAbajo  
   
-  override method reiniciar() {
+  method reiniciar() {
     position = game.at(1,1)
     self.direccion(haciaAbajo)
     carga = sinCarga
   }
   
-  override method muestraItemFrame() = true
+  method muestraItemFrame() = true
 
   method image() = "asador_" + direccion.toString() + ".png"  
 
