@@ -40,7 +40,7 @@ describe "El parrillero se mueve y mueve los objetos de un lugar a otro"{
   4.times({i => movimiento.mover(asador,haciaLaDerecha)})
   movimiento.mover(asador, haciaArriba)
 
-  asador.agarrar()
+  asador.manipular()
 
   assert.equals(asador, unAsado.contenedor())
   }

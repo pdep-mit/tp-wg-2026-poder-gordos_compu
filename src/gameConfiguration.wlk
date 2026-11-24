@@ -219,16 +219,13 @@ class Nivel {
     keyboard.left().onPressDo({ if (!self.terminoElJuego()) { asador.direccion(haciaLaIzquierda) movimiento.mover(asador, haciaLaIzquierda) } })
     keyboard.right().onPressDo({ if (!self.terminoElJuego()) { asador.direccion(haciaLaDerecha) movimiento.mover(asador, haciaLaDerecha) } })
     
-    //acciones del asador agarrar y soltar (ahora puede poner una carne con la q y no le deja poner una carne si esta fuera de la pantalla)
-    keyboard.e().onPressDo({ if (!self.terminoElJuego()) asador.agarrar() })
-    keyboard.q().onPressDo({ if (!self.terminoElJuego()) asador.soltar() })
+    //acciones del asador agarrar y soltar 
+    keyboard.e().onPressDo({ if (!self.terminoElJuego()) asador.manipular() })
 
 
-    //acion del asador para avivar el fuego
-    keyboard.a().onPressDo({ if (!self.terminoElJuego()) asador.avivarFuego() })
+    //acion del asador para que el asador use lo que tenga en frente
+    keyboard.a().onPressDo({ if (!self.terminoElJuego()) asador.usar() })
     
-    //accion del asador para cortar una carne
-    keyboard.c().onPressDo({ if (!self.terminoElJuego()) asador.cortar() })
 
     //accion para reiniciar nivel cuando termine
     keyboard.r().onPressDo({ if (self.terminoElJuego()) self.reiniciarNivel() })

@@ -62,7 +62,7 @@ object parrilla inherits Chad {
     self.apagar()
   }
 
-  override method avivar() { 
+  method avivar() { 
     fuego.avivarCon(barraEsfuerzo)
   }
 
@@ -92,6 +92,10 @@ object parrilla inherits Chad {
   }
 
   method muestraItemFrame() = false
+
+  override method usar(){
+    self.avivar()
+  }
 }
 
 

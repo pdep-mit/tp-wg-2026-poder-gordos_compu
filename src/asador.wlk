@@ -9,7 +9,7 @@ object sinCarga {
   method ponerseEn(carga){}
   method dejarEn(piso){}
   method apoyar(){}
-  method agarrarCarga(parrilero){
+  method serManipuladaPor(parrilero){
     parrilero.agarrarLoDeEnfrente()
   }
   method entregarA(mesaDeEntrega){}
@@ -51,8 +51,8 @@ object asador inherits Chad {
     self.loQueTengoEnFrente().recibir(carga)
   }
 
-  method agarrar() {
-    carga.agarrarCarga(self)
+  method manipular() {
+    carga.serManipuladaPor(self)
   }
 
   method tomar(nuevaCarga){
@@ -79,11 +79,7 @@ object asador inherits Chad {
     carga = sinCarga
   }
 
-  method avivarFuego() {    
-    self.loQueTengoEnFrente().avivar()
-  }  
-
-  override method cortar(){
-    self.loQueTengoEnFrente().cortar()
+  override method usar(){
+    self.loQueTengoEnFrente().usar()
   }
 }

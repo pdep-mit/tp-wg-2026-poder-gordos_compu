@@ -53,8 +53,9 @@ class ElementoAgarrable inherits Chad {
     parrillero.tomar(self)
   }
   
-  //no hace nada pq tendrias que solar primero lo que tenes para poder agarrar una nueva carne
-  method agarrarCarga(parrillero){}
+  method serManipuladaPor(parrillero){
+    parrillero.soltar()
+  }
 
   method entregarA(mesaDeEntrega){
     self.error("esto no se puede entregar")

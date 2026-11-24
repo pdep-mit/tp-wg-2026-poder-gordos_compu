@@ -16,7 +16,6 @@ class ElementoAuxiliar inherits Chad{
     method image() = "imagenInvisible.png" 
     override method esSolido() = duenio.esSolido()
     override method recibir(carga){ duenio.recibir(carga)}
-    override method avivar(){duenio.avivar()}
     override method dejarAgarrarPor(parrillero){ duenio.dejarAgarrarPor(parrillero)}
-    override method cortar(){ duenio.cortar()}
+    override method usar(){ duenio.usar() }
 }

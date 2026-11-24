@@ -6,12 +6,10 @@ class Chad {
 
     method recibir(carga){}
 
-    method avivar(){}
-
     method esSolido() = false 
 
     method dejarAgarrarPor(parrillero){}
 
-    method cortar(){}
+    method usar(){}
 
 }

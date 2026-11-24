@@ -31,7 +31,7 @@ object tablaDeCortar inherits Chad {
 
     method loQueTengoEnsima() = game.getObjectsIn(self.position()).filter({ obj => obj != self })
         
-    override method cortar() {
+    method cortar() {
         if (not self.tablaLibre()) {
         self.loQueTengoEnsima().first().intentarCortarseEn(self)
         }
@@ -61,5 +61,9 @@ object tablaDeCortar inherits Chad {
 
     method esforzar(){ 
         barraEsfuerzo.esforzar()
+    }
+
+    override method usar(){
+        self.cortar()
     }
 }
