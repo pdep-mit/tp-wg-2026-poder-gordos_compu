@@ -29,27 +29,27 @@ object tablaDeCortar inherits Chad {
         carga.dejarEn(self) 
     }
 
-    method loQueTengoEnsima() = game.getObjectsIn(self.position()).filter({ obj => obj != self })
+    method loQueTengoEncima() = game.getObjectsIn(self.position()).filter({ obj => obj != self })
         
     method cortar() {
         if (not self.tablaLibre()) {
-        self.loQueTengoEnsima().first().intentarCortarseEn(self)
+        self.loQueTengoEncima().first().intentarCortarseEn(self)
         }
     }
 
     method terminoElEsfuerzo() {
-     self.loQueTengoEnsima().first().serCortada(self)
+     self.loQueTengoEncima().first().serCortada(self)
     }
 
     method posicionBarra() = self.position().down(1)
 
     override method dejarAgarrarPor(parrillero){
         if(!self.tablaLibre()){
-            self.loQueTengoEnsima().first().dejarAgarrarPor(parrillero)
+            self.loQueTengoEncima().first().dejarAgarrarPor(parrillero)
         }
     }
 
-    method tablaLibre() = self.loQueTengoEnsima().isEmpty()
+    method tablaLibre() = self.loQueTengoEncima().isEmpty()
 
     method reiniciarEsfuerzo() {
         barraEsfuerzo.reiniciar()
