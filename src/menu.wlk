@@ -1,6 +1,7 @@
+import pantallas.*
 import wollok.game.*
-import src.nivel_1.*
-import src.gameConfiguration.*
+import nivel_1.*
+import gameConfiguration.*
 
 object visualMenu {
     method position() = game.at(0, 0)
@@ -12,24 +13,18 @@ object menuPrincipal {
     const musicaMenu = game.sound("sonido_menu.mp3")
     
     method iniciar() {
+        pantalla.estadoActual(enMenu)
         game.addVisual(visualMenu)
         musicaMenu.play()
         musicaMenu.shouldLoop(true)
-
-        keyboard.enter().onPressDo {
-            self.empezarJuego()
-        }
     }
 
     method empezarJuego() {
-        if (game.hasVisual(visualMenu)) {
-            musicaMenu.stop()
-            game.removeVisual(visualMenu)
-            nivel1.arrancarNivel() 
-            self.prender()
-            keyboard.m().onPressDo({ self.pausar() })
-            keyboard.u().onPressDo({ self.reaunudar() })
-        }
+        musicaMenu.stop()
+        game.removeVisual(visualMenu)
+        nivel1.arrancarNivel() 
+        self.prender()
+        pantalla.estadoActual(jugando)
     }
     
     method prender(){

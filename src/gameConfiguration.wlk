@@ -21,6 +21,7 @@ import eventos.*
 import animaciones.*
 import azar.* 
 import src.nivel_1.*
+import pantallas.*
 
 
 object config {
@@ -89,7 +90,6 @@ class Nivel {
     config.nivelActual(self)
     self.agregarVisuales()
     //self.configurarColisiones()
-    self.configurarAcciones()
     self.configurarFrecuenciaPedidos()
     self.configurarNivel()
     self.configurarParrilla()
@@ -113,6 +113,7 @@ class Nivel {
 
   method reiniciarNivel() {
     game.clear()
+    pantalla.configurarTeclado()
     menuPrincipal.iniciar()
   }
 
@@ -129,6 +130,7 @@ class Nivel {
     self.ticksDelNivel().forEach({ tick => tick.stop() })
     listadoPedidos.pararPedidos()
     eventoActual.terminarEvento()
+    pantalla.estadoActual(nivelTerminado)
   }
 
   method pedidosIniciales() = 2
@@ -207,28 +209,6 @@ class Nivel {
     game.addVisual(iconoAplauso)
     //agregar aca todo lo que sea visual y que tenga que estar visible 
     //sea la parrilla, el asador, etc. 
-  }
-
-
-  // aca estan las acciones que puede hacer el asador, cualquier accion hecha con una tecla por el asador deberia estar aca
-  method configurarAcciones(){
-    
-    //movimiento 
-    keyboard.up().onPressDo({ if (!self.terminoElJuego()) { asador.direccion(haciaArriba) movimiento.mover(asador, haciaArriba) } })
-    keyboard.down().onPressDo({ if (!self.terminoElJuego()) { asador.direccion(haciaAbajo) movimiento.mover(asador, haciaAbajo) } })
-    keyboard.left().onPressDo({ if (!self.terminoElJuego()) { asador.direccion(haciaLaIzquierda) movimiento.mover(asador, haciaLaIzquierda) } })
-    keyboard.right().onPressDo({ if (!self.terminoElJuego()) { asador.direccion(haciaLaDerecha) movimiento.mover(asador, haciaLaDerecha) } })
-    
-    //acciones del asador agarrar y soltar 
-    keyboard.e().onPressDo({ if (!self.terminoElJuego()) asador.manipular() })
-
-
-    //acion del asador para que el asador use lo que tenga en frente
-    keyboard.a().onPressDo({ if (!self.terminoElJuego()) asador.usar() })
-    
-
-    //accion para reiniciar nivel cuando termine
-    keyboard.r().onPressDo({ if (self.terminoElJuego()) self.reiniciarNivel() })
   }
   
   //le dice a la parrilla que cocine la carne cada 1 segundo 

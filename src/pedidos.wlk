@@ -103,7 +103,7 @@ object ningunPedido{
 
   method elegirSonido() = listaSonidos.get(azar.numeroEntre(0,1))
    
-   method cumplirComanda(carne){
+  method cumplirComanda(carne){
     config.nivelActual().restarPuntos(10)
     carne.desaparecer()
     self.reproducirSonido()

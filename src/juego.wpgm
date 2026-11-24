@@ -2,9 +2,10 @@ import wollok.game.*
 import nivel_1.*
 import src.gameConfiguration.*
 import menu.*
-
+import pantallas.*
 program NombreDeJuego {
 	config.configurarJuego()
+	pantalla.configurarTeclado()
 	menuPrincipal.iniciar()
 	game.start()
 } 
