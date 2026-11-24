@@ -15,6 +15,7 @@ import pedidos.*
 import mesaDeEntrega.*
 import dispenser.*
 import platos.*
+import eventos.*
 
 //dependencia utils
 import animaciones.*
@@ -71,6 +72,9 @@ object iconoAplauso inherits Chad {
 class Nivel { 
   var property tiempoTranscurrido = 0
   
+  //el evento actual del nivel
+  var eventoActual = despejado
+
   //los ticks del nivel 
   const reloj = game.tick(1000, { self.avanzarReloj() }, false)
   const agregarPedidosLista = game.tick(self.frecuenciaPedidos(), { self.agregarPedidoAListaDePedidos() }, false)
@@ -91,9 +95,21 @@ class Nivel {
     self.configurarParrilla()
     self.configurarFuego()
     self.configurarAnimacion()
+    self.programarEvento()
   }
 
   method objetosNivel() = [asador, parrilla, tablaDeCortar, listadoPedidos, cartel]
+
+  method eventosPosibles() = [despejado]
+
+  method programarEvento() {
+    const momentoDeArranque = azar.numeroEntre(40, 95) * 1000
+    eventoActual = self.eventosPosibles().anyOne()
+
+    game.schedule(momentoDeArranque - 4000, {eventoActual.anunciarEvento()})
+    game.schedule(momentoDeArranque, {eventoActual.empezarEvento()})
+    game.schedule(eventoActual.momentoDeFin(momentoDeArranque), {eventoActual.terminarEvento()})
+  }
 
   method reiniciarNivel() {
     game.clear()
@@ -112,6 +128,7 @@ class Nivel {
     parrilla.apagar()
     self.ticksDelNivel().forEach({ tick => tick.stop() })
     listadoPedidos.pararPedidos()
+    eventoActual.terminarEvento()
   }
 
   method pedidosIniciales() = 2
@@ -182,6 +199,7 @@ class Nivel {
     parrilla.agregarVisuales()
     game.addVisual(barraDePedidos)
     mesaEntrega.agregarVisuales()
+    game.addVisual(molinete)
     game.addVisual(asador)
     game.addVisual(listadoPedidos)
     game.addVisual(cronometro)

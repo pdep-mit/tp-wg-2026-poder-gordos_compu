@@ -1,3 +1,4 @@
+import eventos.*
 import platos.*
 import pedidos.*
 import gameConfiguration.*
@@ -14,4 +15,7 @@ object nivel1 inherits Nivel {
 
     //aca van todos los pedidos posibles para el nivel uno primero declarados por fuera
     override method listaPedidosPosibles() = [platoAsado, platoChori]
+
+    //aca van los eventos posibles
+    override method eventosPosibles() = [viento]
 }

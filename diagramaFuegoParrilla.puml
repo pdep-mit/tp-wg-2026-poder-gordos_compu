@@ -10,7 +10,7 @@ object parrilla <<object>>{
     +remover(carne)
 }
 
-interface Fuego{
+class Fuego{
     +calor()
     +imagenParrilla()
     +siguiente()
