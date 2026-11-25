@@ -23,16 +23,18 @@ object asador inherits Chad {
   var property position = game.at(1,1)
   var property carga = sinCarga
   var property direccion = haciaAbajo  
-  
+  var property skin = gordoParrillero 
+
   method reiniciar() {
     position = game.at(1,1)
     self.direccion(haciaAbajo)
     carga = sinCarga
+    skin = gordoParrillero
   }
   
   method muestraItemFrame() = true
 
-  method image() = "asador_" + direccion.toString() + ".png"  
+  method image() = skin.image(direccion) 
 
   // la celda que tiene justo adelante, según para dónde mira
   method celdaDeEnfrente() = direccion.siguiente(position)
@@ -81,5 +83,29 @@ object asador inherits Chad {
 
   override method usar(){
     self.loQueTengoEnFrente().usar()
+  }
+
+  method cambiarDeSkin(){
+    skin = skin.otra()
+  }
+
+  method anunciarSkin(){ skin.anunciarSkin() } 
+}
+
+object gordoParrillero {
+  method image(direccion) = "asador_" + direccion.toString() + ".png" 
+
+  method otra() = enandoDeBoca
+
+  method anunciarSkin(){}
+}
+
+object enandoDeBoca {
+  method image(direccion) = "asador_bostero_" + direccion.toString() + ".png" 
+
+  method otra() = gordoParrillero
+
+  method anunciarSkin(){
+    game.say(asador, "boca bocaaaa que grande bocaaa")
   }
 }

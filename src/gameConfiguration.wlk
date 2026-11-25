@@ -35,7 +35,7 @@ object config {
   }
 
   method configurarVentana(){
-		game.title("Grupo: GordosCompu | Nombre de jueguito")
+		game.title("Grupo: GordosCompu | EL GRAN ASADOR")
 		game.height(self.alturaMaxima())
 		game.width(self.anchoMaximo())
     game.cellSize(48) //tamanio de las celdas 

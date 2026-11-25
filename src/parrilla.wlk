@@ -99,8 +99,6 @@ object parrilla inherits Chad {
     self.avivar()
   }
 
-  method esfuerzoRequerido() = esfuerzoRequerido
-
   method restablecerEsfuerzo(){
     esfuerzoRequerido = 4
   }

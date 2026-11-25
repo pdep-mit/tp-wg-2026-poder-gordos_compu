@@ -16,6 +16,8 @@ class EstadoDePantalla{
     method alApretarD(){}
     method alApretar1(){}
     method alApretar2(){}
+    //esto es re bostero bocaaa bocaaa 
+    method alApretarB(){}
 }
 
 object jugando inherits EstadoDePantalla {
@@ -27,6 +29,8 @@ object jugando inherits EstadoDePantalla {
     override method alUsar() { asador.usar() }
     override method alApretarM() { menuPrincipal.pausar() }
     override method alApretarU() { menuPrincipal.reaunudar() }
+    override method alApretarB() { asador.cambiarDeSkin()
+        asador.anunciarSkin()}
 }
 
 object pantalla {
@@ -47,6 +51,7 @@ object pantalla {
         keyboard.d().onPressDo({ estadoActual.alApretarD() })
         keyboard.num1().onPressDo({ estadoActual.alApretar1() })
         keyboard.num2().onPressDo({ estadoActual.alApretar2() })
+        keyboard.b().onPressDo({ estadoActual.alApretarB() })
     }
 }
 
