@@ -99,7 +99,7 @@ object enControles inherits EstadoDePantalla {
 
 object nivelTerminado inherits EstadoDePantalla{
     
-    override method alApretarR(){ config.nivelActual().terminarNivel() }
+    override method alApretarR(){ config.nivelActual().reiniciarNivel() }
 }
 
 object selectorDificultad inherits EstadoDePantalla{
