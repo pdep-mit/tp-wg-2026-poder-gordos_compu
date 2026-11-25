@@ -69,7 +69,9 @@ object controles {
 }
 
 object dificultad{
-    method image() = "dificultad_normal.png"
+    var property dificultadElegida = dificultadNormal
+    
+    method image() = dificultadElegida.image()
     method position() = game.at(0,0)
 }
 
@@ -91,9 +93,19 @@ object selectorDificultad inherits EstadoDePantalla{
 
     override method alApretar1(){
         config.nivelActual(nivel1Facil)
+        dificultad.dificultadElegida(dificultadNormal)
     }
 
     override method alApretar2(){
         config.nivelActual(nivel1Dificil)
+        dificultad.dificultadElegida(dificultadDificil)
     }
+}
+
+object dificultadNormal {
+  method image() = "dificultad_normal.png"
+}
+
+object dificultadDificil {
+  method image() = "dificultad_dificil.png"
 }
