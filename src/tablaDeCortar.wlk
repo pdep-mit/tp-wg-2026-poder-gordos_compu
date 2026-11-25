@@ -66,4 +66,6 @@ object tablaDeCortar inherits Chad {
     override method usar(){
         self.cortar()
     }
+
+    method esfuerzoRequerido() = 4
 }

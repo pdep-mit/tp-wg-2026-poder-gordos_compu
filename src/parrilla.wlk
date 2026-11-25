@@ -12,12 +12,14 @@ object parrilla inherits Chad {
   const sonidoPlacer = game.sound("cocinando_carne.mp3") 
   var property fuego = apagado
   var property carneActual = noCarne 
+  var property esfuerzoRequerido = 4 
 
   method reiniciar() {
     carneActual = noCarne
     fuego = apagado
     self.apagar()
     self.reiniciarEsfuerzo()
+    self.restablecerEsfuerzo()
     }
 
   method agregarVisuales(){
@@ -96,6 +98,13 @@ object parrilla inherits Chad {
   override method usar(){
     self.avivar()
   }
+
+  method esfuerzoRequerido() = esfuerzoRequerido
+
+  method restablecerEsfuerzo(){
+    esfuerzoRequerido = 4
+  }
+
 }
 
 

@@ -84,11 +84,11 @@ class BarraEsfuerzo inherits Chad{
     var property esfuerzo = 0 
 
     method position() = duenio.posicionBarra()
-    method image() = "barra_esfuerzo_" + esfuerzo + ".png"
+    method image() = "barra_esfuerzo_" + (esfuerzo * 4).div(duenio.esfuerzoRequerido()) + ".png"
 
     method esforzar(){
         esfuerzo += 1
-        if(esfuerzo > 4){
+        if(esfuerzo > duenio.esfuerzoRequerido()){
             self.completar()
         }
     }

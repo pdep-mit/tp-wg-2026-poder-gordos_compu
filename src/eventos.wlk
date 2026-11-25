@@ -33,6 +33,7 @@ class Viento{
         self.agregarNubes()
         self.emepzarSonido()
         tiempoBajadaFuego.start()
+        parrilla.esfuerzoRequerido(self.cantEsfuerzoParaAvivar())
     }
 
     method terminarEvento(){
@@ -40,6 +41,7 @@ class Viento{
         self.apagarSonido()
         self.sacarNubes()
         molinete.frenar()
+        parrilla.restablecerEsfuerzo()
     }
 
     method agregarNubes(){
@@ -71,14 +73,20 @@ class Viento{
     method anunciarEvento() {
         game.say(asador, "tiene pinta que se viene una ventisca...")
     }
+
+    method cantEsfuerzoParaAvivar()
 }
 
 object vientoFacil inherits Viento{
     override method tiempoBajadaFuego() = 5000 
+
+    override method cantEsfuerzoParaAvivar() = 6 
 }
 
 object vientoDificil inherits Viento {
     override method tiempoBajadaFuego() = 2000
+
+    override method cantEsfuerzoParaAvivar() = 8
 }
 
 class Nube{
