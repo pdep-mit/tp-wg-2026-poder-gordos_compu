@@ -1,3 +1,4 @@
+import src.nivel_1.*
 import src.gameConfiguration.*
 import wollok.game.*
 import asador.*
@@ -12,6 +13,9 @@ class EstadoDePantalla{
     method alUsar(){}
     method alApretarM(){}
     method alApretarU(){}
+    method alApretarD(){}
+    method alApretar1(){}
+    method alApretar2(){}
 }
 
 object jugando inherits EstadoDePantalla {
@@ -40,6 +44,9 @@ object pantalla {
         keyboard.r().onPressDo({ estadoActual.alApretarR() })
         keyboard.m().onPressDo({ estadoActual.alApretarM() })
         keyboard.u().onPressDo({ estadoActual.alApretarU() })
+        keyboard.d().onPressDo({ estadoActual.alApretarD() })
+        keyboard.num1().onPressDo({ estadoActual.alApretar1() })
+        keyboard.num2().onPressDo({ estadoActual.alApretar2() })
     }
 }
 
@@ -49,10 +56,20 @@ object enMenu inherits EstadoDePantalla{
     override method alApretarT(){ 
         game.addVisual(controles)
         pantalla.estadoActual(enControles) }
+
+    override method alApretarD(){
+        game.addVisual(dificultad)
+        pantalla.estadoActual(selectorDificultad)
+    }
 }
 
 object controles {
     method image() = "controles.png"
+    method position() = game.at(0,0)
+}
+
+object dificultad{
+    method image() = "dificultad_normal.png"
     method position() = game.at(0,0)
 }
 
@@ -64,4 +81,19 @@ object enControles inherits EstadoDePantalla {
 
 object nivelTerminado inherits EstadoDePantalla{
     override method alApretarR(){config.nivelActual().reiniciarNivel()}
+}
+
+object selectorDificultad inherits EstadoDePantalla{
+    override method alApretarD(){
+        game.removeVisual(dificultad)
+        pantalla.estadoActual(enMenu)
+    }
+
+    override method alApretar1(){
+        config.nivelActual(nivel1Facil)
+    }
+
+    override method alApretar2(){
+        config.nivelActual(nivel1Dificil)
+    }
 }

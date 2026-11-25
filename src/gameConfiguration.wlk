@@ -25,7 +25,7 @@ import pantallas.*
 
 
 object config {
-  var property nivelActual = nivel1 
+  var property nivelActual = nivel1Facil 
   
   method alturaMaxima() = 12 
   method anchoMaximo() = 20

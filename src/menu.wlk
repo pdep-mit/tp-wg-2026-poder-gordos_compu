@@ -11,7 +11,7 @@ object visualMenu {
 object menuPrincipal {
     const musicaFondo = game.sound("musica_fondo.mp3")
     const musicaMenu = game.sound("sonido_menu.mp3")
-    
+
     method iniciar() {
         pantalla.estadoActual(enMenu)
         game.addVisual(visualMenu)
@@ -22,7 +22,7 @@ object menuPrincipal {
     method empezarJuego() {
         musicaMenu.stop()
         game.removeVisual(visualMenu)
-        nivel1.arrancarNivel() 
+        config.nivelActual().arrancarNivel() 
         self.prender()
         pantalla.estadoActual(jugando)
     }

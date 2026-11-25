@@ -17,7 +17,7 @@ object lluvia{
     //ver -> capaz que afecta a la carne de alguna forma 
 }
 
-object viento{
+class Viento{
     const sonidoViento = game.sound("sonido_viento.mp3")
     const tiempoBajadaFuego = game.tick(self.tiempoBajadaFuego(), {parrilla.apagarPoco()} ,false)
     const nubeIzquierda = new Nube(position = game.at(0,9))
@@ -27,7 +27,7 @@ object viento{
     const nubes = [nubeIzquierda, nubeMedio, nubeDoble, nubeMedioDerecha, nubeMedioDerechaX2]
 
     //el tiempo que tarda el viento en bajar el fuego de la parrilla
-    method tiempoBajadaFuego() = 5000
+    method tiempoBajadaFuego()
 
     method empezarEvento(){
         self.agregarNubes()
@@ -71,6 +71,14 @@ object viento{
     method anunciarEvento() {
         game.say(asador, "tiene pinta que se viene una ventisca...")
     }
+}
+
+object vientoFacil inherits Viento{
+    override method tiempoBajadaFuego() = 5000 
+}
+
+object vientoDificil inherits Viento {
+    override method tiempoBajadaFuego() = 2000
 }
 
 class Nube{
