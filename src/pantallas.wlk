@@ -16,6 +16,7 @@ class EstadoDePantalla{
     method alApretarD(){}
     method alApretar1(){}
     method alApretar2(){}
+    method alApretarDelete(){}
     //esto es re bostero bocaaa bocaaa 
     method alApretarB(){}
 }
@@ -31,6 +32,11 @@ object jugando inherits EstadoDePantalla {
     override method alApretarU() { menuPrincipal.reaunudar() }
     override method alApretarB() { asador.cambiarDeSkin()
         asador.anunciarSkin()}
+    override method alApretarDelete(){ 
+        config.nivelActual().matarNivel()
+        config.nivelActual().reiniciarNivel()
+
+    }
 }
 
 object pantalla {
@@ -52,6 +58,7 @@ object pantalla {
         keyboard.num1().onPressDo({ estadoActual.alApretar1() })
         keyboard.num2().onPressDo({ estadoActual.alApretar2() })
         keyboard.b().onPressDo({ estadoActual.alApretarB() })
+        keyboard.backspace().onPressDo({ estadoActual.alApretarDelete() })
     }
 }
 
@@ -78,6 +85,10 @@ object dificultad{
     
     method image() = dificultadElegida.image()
     method position() = game.at(0,0)
+
+    method elegirDificultad(direccion){
+
+    }
 }
 
 object enControles inherits EstadoDePantalla {
@@ -87,7 +98,8 @@ object enControles inherits EstadoDePantalla {
 }
 
 object nivelTerminado inherits EstadoDePantalla{
-    override method alApretarR(){config.nivelActual().reiniciarNivel()}
+    
+    override method alApretarR(){ config.nivelActual().terminarNivel() }
 }
 
 object selectorDificultad inherits EstadoDePantalla{
@@ -104,6 +116,10 @@ object selectorDificultad inherits EstadoDePantalla{
     override method alApretar2(){
         config.nivelActual(nivel1Dificil)
         dificultad.dificultadElegida(dificultadDificil)
+    }
+
+    override method alMover(direccion){
+        direccion.elegirDificultad()
     }
 }
 

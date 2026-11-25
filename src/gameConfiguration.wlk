@@ -125,12 +125,16 @@ class Nivel {
 
   method terminarNivel(){
     cartel.mostrarCartel(aplausos, self.cantidadPuntosParaPasar())
+    self.matarNivel()
+    pantalla.estadoActual(nivelTerminado)
+  }
+
+  method matarNivel(){
     menuPrincipal.apagar()
     parrilla.apagar()
     self.ticksDelNivel().forEach({ tick => tick.stop() })
     listadoPedidos.pararPedidos()
     eventoActual.terminarEvento()
-    pantalla.estadoActual(nivelTerminado)
   }
 
   method pedidosIniciales() = 2
