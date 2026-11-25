@@ -1,3 +1,4 @@
+import src.superClaseChad.*
 import eventos.*
 import platos.*
 import pedidos.*
@@ -18,6 +19,11 @@ object nivel1Facil inherits Nivel {
 
     //aca van los eventos posibles
     override method eventosPosibles() = [vientoFacil]
+
+    override method agregarVisuales(){
+        super()
+        game.addVisual(puntosRequeridosFacil)
+    }
 }
 
 object nivel1Dificil inherits Nivel{
@@ -34,4 +40,20 @@ object nivel1Dificil inherits Nivel{
 
     //aca van los eventos posibles
     override method eventosPosibles() = [vientoDificil]
+
+    override method agregarVisuales(){
+        super()
+        game.addVisual(puntosRequeridosDificil)
+    }
+
+}
+
+object puntosRequeridosFacil inherits Chad {
+    method image() = "puntos_requeridos_150.png"
+    method position() = game.at(18,10)
+}
+
+object puntosRequeridosDificil inherits Chad {
+    method image() = "puntos_requeridos_220.png"
+    method position() = game.at(18,10)
 }
